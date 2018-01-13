@@ -20,7 +20,7 @@ class CustomCursorPagination(CursorPagination):
 	            'next': self.get_next_link(),
 	            'previous': self.get_previous_link()
 	        },
-	        'results': data[0]
+	        'snippet': data[0]
 	    })
 
 class PostList(generics.ListAPIView):
