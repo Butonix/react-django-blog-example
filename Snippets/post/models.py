@@ -21,6 +21,9 @@ class Post(models.Model):
 	slug = models.SlugField(max_length= 185, unique = True)
 	archive = models.CharField(max_length =7, default='')
 
+	class Meta:
+		ordering = ['posted_on']
+
 	def __str__(self):
 		return self.title 
 
@@ -37,3 +40,4 @@ class Post(models.Model):
 		if not self.slug:
 			self.slug = self._get_unique_slug()
 		super().save()
+

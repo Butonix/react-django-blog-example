@@ -4,16 +4,35 @@ from django.db.models import Q
 
 
 from rest_framework import generics
+from rest_framework.pagination import CursorPagination, PageNumberPagination
+from rest_framework.response import Response
+
 from django.http import Http404
+
+
+class CustomCursorPagination(CursorPagination):
+	ordering= 'posted_on'
+	page_size=1
+	page_size_query_param='page_size'
+	def get_paginated_response(self, data):
+	    return Response({
+	        'links': {
+	            'next': self.get_next_link(),
+	            'previous': self.get_previous_link()
+	        },
+	        'results': data[0]
+	    })
 
 class PostList(generics.ListAPIView):
 	queryset = Post.objects.all()
 	serializer_class = PostSerializer 
 
-class PostDetail(generics.RetrieveAPIView):
+class PostDetail(generics.ListAPIView):
 	queryset = Post.objects.all()
 	serializer_class = PostSerializer 
 	lookup_field = 'slug'
+	pagination_class = CustomCursorPagination
+
 
 class PostListArchive(generics.ListAPIView):
 	lookup_field = 'archive'
