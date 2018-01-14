@@ -17,15 +17,30 @@ class PostList(generics.ListAPIView):
 	queryset = Post.objects.all()
 	serializer_class = PostSerializer 
 
+# The slug API endpoint is used so I can make a get request
+# based on the url pathname with react router
 class PostDetailSlug(generics.RetrieveAPIView):
 	queryset=Post.objects.all()
 	serializer_class = PostSerializer 
 	lookup_field = 'slug'
 
+	def retrieve(self, request, *args, **kwargs):
+		instance = self.get_object()
+		serializer = self.get_serializer(instance)
+		return Response({'snippet': serializer.data, 'total_post_count':Post.objects.count()})
+
+
+# The PK API endpoint is used so I can navigate previous/next Post
+# Inside a PostDetail
 class PostDetailPk(generics.RetrieveAPIView):
 	queryset=Post.objects.all()
 	serializer_class = PostSerializer 
 	lookup_field = 'pk'
+
+	def retrieve(self, request, *args, **kwargs):
+		instance = self.get_object()
+		serializer = self.get_serializer(instance)
+		return Response({'snippet': serializer.data, 'total_post_count':Post.objects.count()})
 
 
 
