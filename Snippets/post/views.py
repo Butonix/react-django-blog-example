@@ -27,7 +27,7 @@ class PostDetailSlug(generics.RetrieveAPIView):
 	def retrieve(self, request, *args, **kwargs):
 		instance = self.get_object()
 		serializer = self.get_serializer(instance)
-		return Response({'snippet': serializer.data, 'total_post_count':Post.objects.count()})
+		return Response({'result': serializer.data, 'total_post_count':Post.objects.count()})
 
 
 # The PK API endpoint is used so I can navigate previous/next Post
@@ -40,7 +40,7 @@ class PostDetailPk(generics.RetrieveAPIView):
 	def retrieve(self, request, *args, **kwargs):
 		instance = self.get_object()
 		serializer = self.get_serializer(instance)
-		return Response({'snippet': serializer.data, 'total_post_count':Post.objects.count()})
+		return Response({'result': serializer.data, 'total_post_count':Post.objects.count()})
 
 
 
