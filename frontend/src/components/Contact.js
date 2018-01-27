@@ -1,77 +1,65 @@
 import React, { Component } from "react";
-import { Field, reduxForm, SubmissionError, reset } from "redux-form";
-import {
-  renderField,
-  renderTextArea
-} from "../customFormFields/reduxFormFields";
+import { withFormik } from "formik";
+import Yup from "yup";
 import PropTypes from "prop-types";
-
 import Recaptcha from "react-recaptcha";
 
-class Contact extends Component {
-  constructor() {
-    super();
-    this.verifyCallback = this.verifyCallback.bind(this);
-  }
-  verifyCallback(response) {
-    console.log(response);
-  }
-  submit({
-    first_name = "",
-    last_name = "",
-    email = "",
-    website = "",
-    message = "",
-    captcha = ""
-  }) {
-    let error = {};
-    let isError = false;
-    let { submitContactForm, contact_form, dispatch } = this.props;
-    if (first_name.trim() === "") {
-      error.first_name = "Required Field";
-      isError = true;
-    }
-    if (last_name.trim() === "") {
-      error.last_name = "Required Field";
-      isError = true;
-    }
-    if (email.trim() === "") {
-      error.email = "Required Field";
-      isError = true;
-    }
-    if (message.trim() === "") {
-      error.message = "Required Field";
-      isError = true;
-    }
+import { withStyles } from "material-ui/styles";
+import TextField from "material-ui/TextField";
+import Button from "material-ui/Button";
 
-    if (isError) {
-      throw new SubmissionError(error);
-    } else {
-      submitContactForm({
-        first_name,
-        last_name,
-        email,
-        website,
-        message,
-        captcha: contact_form.captcha
-      })
-        .then(() => dispatch(reset("contactForm")))
-        .then(() => this.recaptchaInstance.reset())
-        .then(() => window.scrollTo(0, 0));
-    }
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    textAlign: "center"
+  },
+  textField: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: "2em",
+    width: "60%"
+  },
+  button: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    width: "10%"
   }
+});
 
+class ContactForm extends Component {
+  onloadCallback = () => null;
+  handleSubmitAndCaptcha(
+    event,
+    { first_name, last_name, email, website, message } = this.props.values
+  ) {
+    event.preventDefault();
+    console.log("submitting");
+    this.props
+      .submitContactForm({ first_name, last_name, email, website, message })
+      .then(response => console.log("RESPONSE-", response))
+      .then(() => this.props.resetForm())
+      .then(() => this.props.setSubmitting(false))
+      .then(() => this.recaptchaInstance.reset());
+  }
   render() {
-    let { contact_form, handleSubmit } = this.props;
-    function onloadCallback() {
-      return null;
-    }
+    const {
+      values,
+      touched,
+      errors,
+      dirty,
+      isSubmitting,
+      handleChange,
+      handleBlur,
+      handleReset,
+      classes,
+      contact_form
+    } = this.props;
 
     return (
-      <div className="container">
-        <h3 className="text-center mt-2 mb-4">
-          Contact Me by filling the form
-        </h3>
+      <span className={classes.container}>
+        <h3 style={{ textAlign: "center" }}>Contact Form</h3>
         {this.props.contact_form.err ? (
           <div className="alert alert-danger" role="alert">
             <strong>{contact_form.err.message}</strong>
@@ -82,65 +70,140 @@ class Contact extends Component {
             <strong>{contact_form.message}</strong>
           </div>
         ) : null}
-        <form onSubmit={handleSubmit(values => this.submit(values))}>
-          <Field
-            htmlFor="first_name"
+        <form onSubmit={e => this.handleSubmitAndCaptcha(e)}>
+          <TextField
             name="first_name"
-            component={renderField}
+            placeholder="Enter your First Name"
             type="text"
-            id="first_name"
+            value={values.first_name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.first_name && touched.first_name}
+            helperText={
+              errors.first_name && touched.first_name && errors.first_name
+            }
             label="First Name"
-            autoF="autofocus"
+            className={classes.textField}
+            required
           />
 
-          <Field
-            htmlFor="last_name"
+          <TextField
             name="last_name"
-            component={renderField}
+            placeholder="Enter your Last Name"
             type="text"
-            id="last_name"
+            value={values.last_name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.last_name && touched.last_name}
+            helperText={
+              errors.last_name && touched.last_name && errors.last_name
+            }
             label="Last Name"
+            className={classes.textField}
+            required
           />
-
-          <Field
-            htmlFor="email"
+          <TextField
             name="email"
-            component={renderField}
-            type="email"
-            id="email"
-            label="Email"
+            placeholder="Enter your Email"
+            type="text"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.email && touched.email}
+            helperText={errors.email && touched.email && errors.email}
+            label="Email Address"
+            className={classes.textField}
+            required
           />
-
-          <Field
-            htmlFor="website"
+          <TextField
             name="website"
-            component={renderField}
+            placeholder="Enter your Website"
             type="url"
-            id="website"
-            label="Website"
-          />
-          <Field
-            htmlFor="message"
-            name="message"
-            component={renderTextArea}
-            id="message"
-            label="Message"
-          />
-          <Recaptcha
-            sitekey="6Le7xT4UAAAAAOuGdLd4TcqpXDRDZMIxvTn0CEYB"
-            render="explicit"
-            theme="dark"
-            onloadCallback={onloadCallback}
-            verifyCallback={this.verifyCallback}
-            ref={e => (this.recaptchaInstance = e)}
+            value={values.website}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.website && touched.website}
+            helperText={errors.website && touched.website && errors.website}
+            label="Your Website"
+            className={classes.textField}
           />
 
-          <input type="submit" className="btn btn-primary" value="Submit" />
+          <TextField
+            name="message"
+            multiline={true}
+            rows={6}
+            value={values.message}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.message && touched.message}
+            helperText={errors.message && touched.message && errors.message}
+            label="Your Message"
+            className={classes.textField}
+            required
+          />
+          <span
+            style={{
+              margin: "0 auto",
+              marginTop: "1em",
+              marginBottom: "1em",
+              textAlign: "center",
+              display: "block",
+              width: "304px"
+            }}
+          >
+            <Recaptcha
+              sitekey="6Le7xT4UAAAAAOuGdLd4TcqpXDRDZMIxvTn0CEYB"
+              render="explicit"
+              theme="dark"
+              onloadCallback={this.onloadCallback}
+              verifyCallback={this.verifyCallback}
+              ref={e => (this.recaptchaInstance = e)}
+            />
+          </span>
+          <Button
+            raised
+            className={classes.button}
+            type="button"
+            onClick={handleReset}
+            disabled={!dirty || isSubmitting}
+          >
+            Reset
+          </Button>
+          <Button
+            raised
+            className={classes.button}
+            type="submit"
+            disabled={isSubmitting}
+          >
+            Submit
+          </Button>
         </form>
-      </div>
+      </span>
     );
   }
 }
+
+const EnhancedForm = withFormik({
+  mapPropsToValues: () => ({
+    first_name: "",
+    last_name: "",
+    email: "",
+    website: "",
+    message: ""
+  }),
+  validationSchema: Yup.object().shape({
+    first_name: Yup.string().required("First Name is required"),
+    last_name: Yup.string().required("Last Name is required"),
+    email: Yup.string()
+      .email("Invalid Email Address")
+      .required("Email is required"),
+    website: Yup.string().url("Invalid Url"),
+    message: Yup.string().required("Message is a required field")
+  }),
+  displayName: "ContactForm" //hlps with react devtools
+})(ContactForm);
+
+export const Contact = withStyles(styles)(EnhancedForm);
 
 Contact.propTypes = {
   submitContactForm: PropTypes.func.isRequired,
@@ -151,7 +214,3 @@ Contact.propTypes = {
     message: PropTypes.string
   }).isRequired
 };
-
-export default reduxForm({
-  form: "contactForm"
-})(Contact);

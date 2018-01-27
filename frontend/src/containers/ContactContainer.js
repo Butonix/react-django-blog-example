@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 
 import { submitContactForm } from "../actions/contactFormActions";
 // import Contact from "../components/Contact";
-import { ContactFormik } from "../components/ContactFormik";
+import { Contact } from "../components/Contact";
 
 const mapStateToProps = state => ({ contact_form: state.contact_form });
 const mapDispatchToProps = dispatch => {
@@ -12,4 +12,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactFormik);
+export default connect(mapStateToProps, mapDispatchToProps)(Contact);

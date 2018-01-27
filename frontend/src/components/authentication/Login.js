@@ -1,84 +1,138 @@
 import React, { Component } from "react";
-import { Field, reduxForm, SubmissionError } from "redux-form";
+import { withFormik } from "formik";
+import Yup from "yup";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import { renderField } from "../../customFormFields/reduxFormFields";
+import { withStyles } from "material-ui/styles";
+import TextField from "material-ui/TextField";
+import Button from "material-ui/Button";
 
-class Login extends Component {
-  submit(
-    { username = "", password = "" },
-    history = this.props.history,
-    dispatch = this.props.dispatch
-  ) {
-    let error = {};
-    let isError = false;
-
-    if (username.trim() === "") {
-      error.username = "Required Field";
-      isError = true;
-    }
-    if (password.trim() === "") {
-      error.password = "Required Field";
-      isError = true;
-    }
-
-    if (isError) {
-      throw new SubmissionError(error);
-    } else {
-      return this.props.loginAction({ username, password }).then(data => {
-        if (data.username || data.password || data.non_field_errors) {
-          throw new SubmissionError({ username: data.non_field_errors });
-        } else {
-          return this.props.authenticateAction(data, history, dispatch);
-        }
-      });
-    }
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    textAlign: "center"
+  },
+  textField: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: "2em",
+    width: "60%"
+  },
+  button: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "30px",
+    width: "10%"
   }
+});
 
+class MyInnerLoginForm extends Component {
   render() {
-    const { handleSubmit } = this.props;
+    const {
+      values,
+      touched,
+      errors,
+      dirty,
+      isSubmitting,
+      handleChange,
+      handleBlur,
+      handleSubmit,
+      handleReset,
+      classes
+    } = this.props;
 
     return (
-      <div className="container">
-        <h3 className="text-center mt-2 mb-4">You can log in below</h3>
-        <form onSubmit={handleSubmit(values => this.submit(values))}>
-          <Field
-            htmlFor="username"
+      <span className={classes.container}>
+        <h3 style={{ textAlign: "center" }}>Login Form</h3>
+        <form onSubmit={handleSubmit}>
+          <TextField
             name="username"
-            component={renderField}
-            type="text"
-            id="username"
             label="Username"
-            autoF="autofocus"
+            placeholder="Enter your username"
+            type="text"
+            value={values.username}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={classes.textField}
+            error={errors.username && touched.username}
+            helperText={errors.username && touched.username && errors.username}
           />
-          <Field
-            htmlFor="password"
+
+          <TextField
             name="password"
-            component={renderField}
-            type="password"
-            id="password"
             label="Password"
+            placeholder="Enter your password"
+            type="password"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={classes.textField}
+            error={errors.password && touched.password}
+            helperText={errors.password && touched.password && errors.password}
           />
-          <button type="submit" className="btn btn-primary">
+          <br />
+          <Button
+            raised
+            className={classes.button}
+            type="button"
+            onClick={handleReset}
+            disabled={!dirty || isSubmitting}
+          >
+            Reset
+          </Button>
+          <Button
+            raised
+            className={classes.button}
+            type="submit"
+            disabled={isSubmitting}
+          >
             Submit
-          </button>{" "}
+          </Button>
         </form>
         <span>Do not have an account?</span>{" "}
         <Link to="/register">Register</Link>
-      </div>
+      </span>
     );
   }
 }
 
+const EnhancedForm = withFormik({
+  mapPropsToValues: () => ({
+    username: "",
+    password: ""
+  }),
+  validationSchema: Yup.object().shape({
+    username: Yup.string().required("Username is required"),
+    password: Yup.string()
+      .min(6, "The password must be at least 6 characters")
+      .required("Password is required")
+  }),
+  handleSubmit: (
+    { username, password },
+    { props, setSubmitting, setErrors }
+  ) => {
+    console.log("submitting LoginF");
+    props
+      .loginAction({ username, password })
+      .then(response => {
+        if (response.non_field_errors) {
+          setErrors({ password: response.non_field_errors[0] });
+        } else {
+          props.authenticateAction(response, props.history, props.dispatch);
+        }
+      })
+      .then(() => setSubmitting(false));
+  },
+  displayName: "LoginForm" //hlps with react devtools
+})(MyInnerLoginForm);
+
+export const Login = withStyles(styles)(EnhancedForm);
+
 Login.propTypes = {
   history: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
   loginAction: PropTypes.func.isRequired,
-  authenticateAction: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  authenticateAction: PropTypes.func.isRequired
 };
-
-export default reduxForm({
-  form: "loginForm"
-})(Login);
