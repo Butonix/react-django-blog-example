@@ -1,0 +1,47 @@
+/* NAVBAR  */
+.active {
+	color: #fff;
+}
+
+.nav-item a:hover {
+	color: white !important;
+	cursor: pointer;
+}
+
+.dropdown-menu a:hover {
+	color: white !important;
+	background: #292b2c;
+	cursor: pointer;
+}
+
+.dropdown-item.active {
+	background-color: #434444;
+}
+
+.fa {
+	opacity: 0.2;
+}
+
+.pagination-right :hover {
+	color: #000;
+	cursor: pointer;
+	opacity: 0.6;
+}
+
+.pagination-left :hover {
+	color: #000;
+	cursor: pointer;
+	opacity: 0.6;
+}
+
+.pagination-right {
+	position: fixed;
+	bottom: 30%;
+	right: 0;
+}
+
+.pagination-left {
+	position: fixed;
+	bottom: 30%;
+	left: 0;
+}
