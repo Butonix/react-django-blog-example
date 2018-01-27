@@ -31,6 +31,10 @@ const styles = theme => ({
 
 class ContactForm extends Component {
   onloadCallback = () => null;
+  verifyCallback = response => {
+    this.g_recaptcha_response = response;
+    console.log(response);
+  };
   handleSubmitAndCaptcha(
     event,
     { first_name, last_name, email, website, message } = this.props.values
@@ -38,7 +42,14 @@ class ContactForm extends Component {
     event.preventDefault();
     console.log("submitting");
     this.props
-      .submitContactForm({ first_name, last_name, email, website, message })
+      .submitContactForm({
+        first_name,
+        last_name,
+        email,
+        website,
+        message,
+        g_recaptcha_response: this.g_recaptcha_response
+      })
       .then(response => console.log("RESPONSE-", response))
       .then(() => this.props.resetForm())
       .then(() => this.props.setSubmitting(false))
