@@ -41,6 +41,7 @@ class ContactForm extends Component {
       .then(response => console.log("RESPONSE-", response))
       .then(() => this.props.resetForm())
       .then(() => this.props.setSubmitting(false))
+      .then(() => window.scrollTo(0, 0))
       .then(() => this.recaptchaInstance.reset());
   }
   render() {

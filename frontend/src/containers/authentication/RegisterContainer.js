@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import { registerAction } from "../../actions/authActions";
-import { RegisterF } from "../../components/authentication/RegisterF";
+import { Register } from "../../components/authentication/Register";
 
 function mapStateToProps(state) {
   return {
@@ -15,4 +15,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterF);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
