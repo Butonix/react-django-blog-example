@@ -11,7 +11,7 @@ let msg = "Thank you for submitting the form, I will contact you shortly.";
 function contactFormReducer(state = initialState, action) {
   switch (action.type) {
     case types.SUBMITTING_CONTACT_FORM:
-      return { ...state, isSubmitting: true, err: null };
+      return { ...state, isSubmitting: true, err: null, message: null };
     case types.SUBMIT_CONTACT_FORM_SUCCESS:
       return {
         ...state,

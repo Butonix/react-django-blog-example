@@ -117,7 +117,7 @@ class ContactForm extends Component {
           <TextField
             name="message"
             multiline={true}
-            rows={10}
+            rows={6}
             label="Your Message"
             value={values.message}
             onChange={handleChange}
@@ -187,14 +187,15 @@ const EnhancedForm = withFormik({
   }),
   handleSubmit: (
     { first_name, last_name, email, website, message },
-    { props, setSubmitting }
+    { props, setSubmitting, SetErrors, resetForm }
   ) => {
     console.log("submitting");
     props
       .submitContactForm({ first_name, last_name, email, website, message })
       .then(response => console.log("RESPONSE>", response))
-      .then(() => setSubmitting(false))
-      .then(() => this.recaptchaInstance.reset());
+      .then(() => resetForm())
+      .then(() => setSubmitting(false));
+    //.then(() => this.recaptchaInstance.reset());
   },
   displayName: "ContactForm" //hlps with react devtools
 })(ContactForm);
