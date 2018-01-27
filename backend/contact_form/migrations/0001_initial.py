@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=254)),
                 ('website', models.CharField(blank=True, max_length=230, null=True)),
                 ('message', models.TextField()),
-                ('captcha', models.TextField(validators=[contact_form.models.captcha_validator])),
+                ('captcha', models.TextField()),
             ],
         ),
     ]
