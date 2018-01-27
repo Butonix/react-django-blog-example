@@ -18,6 +18,7 @@ const styles = theme => ({
   textField: {
     marginLeft: "auto",
     marginRight: "auto",
+    marginBottom: "2em",
     width: "60%"
   },
   button: {
@@ -29,7 +30,19 @@ const styles = theme => ({
 
 class ContactForm extends Component {
   onloadCallback = () => null;
-
+  handleSubmitAndCaptcha(
+    event,
+    { first_name, last_name, email, website, message } = this.props.values
+  ) {
+    event.preventDefault();
+    console.log("submitting");
+    this.props
+      .submitContactForm({ first_name, last_name, email, website, message })
+      .then(response => console.log("RESPONSE>", response))
+      .then(() => this.props.resetForm())
+      .then(() => this.props.setSubmitting(false))
+      .then(() => this.recaptchaInstance.reset());
+  }
   render() {
     const {
       values,
@@ -41,8 +54,9 @@ class ContactForm extends Component {
       handleBlur,
       handleSubmit,
       handleReset,
+      resetForm,
+      setSubmitting,
       classes,
-      submitContactForm,
       contact_form
     } = this.props;
 
@@ -59,72 +73,76 @@ class ContactForm extends Component {
             <strong>{contact_form.message}</strong>
           </div>
         ) : null}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={e => this.handleSubmitAndCaptcha(e)}>
           <TextField
             name="first_name"
-            label="First Name"
             placeholder="Enter your First Name"
             type="text"
             value={values.first_name}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={classes.textField}
             error={errors.first_name && touched.first_name}
             helperText={
               errors.first_name && touched.first_name && errors.first_name
             }
+            label="First Name"
+            className={classes.textField}
+            required
           />
 
           <TextField
             name="last_name"
-            label="Last Name"
             placeholder="Enter your Last Name"
             type="text"
             value={values.last_name}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={classes.textField}
             error={errors.last_name && touched.last_name}
             helperText={
               errors.last_name && touched.last_name && errors.last_name
             }
+            label="Last Name"
+            className={classes.textField}
+            required
           />
           <TextField
             name="email"
-            label="Email Address"
             placeholder="Enter your Email"
             type="text"
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={classes.textField}
             error={errors.email && touched.email}
             helperText={errors.email && touched.email && errors.email}
+            label="Email Address"
+            className={classes.textField}
+            required
           />
           <TextField
             name="website"
-            label="Your Website"
             placeholder="Enter your Website"
             type="url"
             value={values.website}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={classes.textField}
             error={errors.website && touched.website}
             helperText={errors.website && touched.website && errors.website}
+            label="Your Website"
+            className={classes.textField}
           />
 
           <TextField
             name="message"
             multiline={true}
             rows={6}
-            label="Your Message"
             value={values.message}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={classes.textField}
             error={errors.message && touched.message}
             helperText={errors.message && touched.message && errors.message}
+            label="Your Message"
+            className={classes.textField}
+            required
           />
           <span
             style={{
@@ -185,18 +203,18 @@ const EnhancedForm = withFormik({
     website: Yup.string().url("Invalid Url"),
     message: Yup.string().required("Message is a required field")
   }),
-  handleSubmit: (
-    { first_name, last_name, email, website, message },
-    { props, setSubmitting, SetErrors, resetForm }
-  ) => {
-    console.log("submitting");
-    props
-      .submitContactForm({ first_name, last_name, email, website, message })
-      .then(response => console.log("RESPONSE>", response))
-      .then(() => resetForm())
-      .then(() => setSubmitting(false));
-    //.then(() => this.recaptchaInstance.reset());
-  },
+  // handleSubmit: (
+  //   { first_name, last_name, email, website, message },
+  //   { props, setSubmitting, SetErrors, resetForm }
+  // ) => {
+  //   console.log("submitting");
+  //   props
+  //     .submitContactForm({ first_name, last_name, email, website, message })
+  //     .then(response => console.log("RESPONSE>", response))
+  //     .then(() => resetForm())
+  //     .then(() => setSubmitting(false))
+  //     .then(() => props.recaptchaInstance.reset());
+  // },
   displayName: "ContactForm" //hlps with react devtools
 })(ContactForm);
 
