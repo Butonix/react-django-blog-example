@@ -8,12 +8,12 @@ import rootReducer from "./reducers/";
 import jwt from "./customMiddleware/jwtMiddleware";
 
 export const store = createStore(
-	rootReducer,
-	composeWithDevTools(applyMiddleware(jwt, thunk, logger))
+  rootReducer,
+  composeWithDevTools(applyMiddleware(jwt, thunk, logger))
 );
 
-let user = localStorage.getItem("username");
+let auth_token = localStorage.getItem("token");
 
-if (user) {
-	store.dispatch({ type: "AUTHENTICATED" });
+if (auth_token) {
+  store.dispatch({ type: "AUTHENTICATED" });
 }

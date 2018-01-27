@@ -50,29 +50,29 @@ class InnerLoginForm extends Component {
         <h3 style={{ textAlign: "center" }}>Login Form</h3>
         <form onSubmit={handleSubmit}>
           <TextField
-            name="username"
-            label="Username"
-            placeholder="Enter your username"
+            name="email"
+            placeholder="Enter your Email"
             type="text"
-            value={values.username}
+            value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
+            error={errors.email && touched.email}
+            helperText={errors.email && touched.email && errors.email}
+            label="Email Address"
             className={classes.textField}
-            error={errors.username && touched.username}
-            helperText={errors.username && touched.username && errors.username}
           />
 
           <TextField
             name="password"
-            label="Password"
             placeholder="Enter your password"
             type="password"
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={classes.textField}
             error={errors.password && touched.password}
             helperText={errors.password && touched.password && errors.password}
+            label="Password"
+            className={classes.textField}
           />
           <br />
           <Button
@@ -102,26 +102,27 @@ class InnerLoginForm extends Component {
 
 const EnhancedForm = withFormik({
   mapPropsToValues: () => ({
-    username: "",
+    email: "",
     password: ""
   }),
   validationSchema: Yup.object().shape({
-    username: Yup.string().required("Username is required"),
+    email: Yup.string()
+      .email("Invalid Email Address")
+      .required("Email is required"),
     password: Yup.string()
       .min(6, "The password must be at least 6 characters")
       .required("Password is required")
   }),
-  handleSubmit: (
-    { username, password },
-    { props, setSubmitting, setErrors }
-  ) => {
+  handleSubmit: ({ email, password }, { props, setSubmitting, setErrors }) => {
     console.log("submitting LoginF");
     props
-      .loginAction({ username, password })
+      .loginAction({ email, password })
       .then(response => {
         if (response.non_field_errors) {
+          console.log(response);
           setErrors({ password: response.non_field_errors[0] });
         } else {
+          console.log(response);
           props.authenticateAction(response, props.history, props.dispatch);
         }
       })

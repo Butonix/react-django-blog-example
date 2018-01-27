@@ -139,6 +139,16 @@ REST_FRAMEWORK = {
     )
 }
 
+
+#Used for the Email login at http://127.0.0.1:8000/auth/login/
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
 #Enables django-rest-auth to use JWT instead of regular tokens.
 REST_USE_JWT = True
 
@@ -158,3 +168,9 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_UNIQUE_EMAIL = True
+#ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
