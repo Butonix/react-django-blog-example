@@ -11,8 +11,6 @@ const submitContactFormFail = err => ({
   err
 });
 
-const storeCaptcha = val => ({ type: types.STORE_CAPTCHA, val });
-
 function submitContactForm(data) {
   return async function(dispatch) {
     try {
@@ -38,4 +36,4 @@ function submitContactForm(data) {
   };
 }
 
-export { submitContactForm, storeCaptcha };
+export { submitContactForm };
