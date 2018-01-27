@@ -156,3 +156,5 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
     'localhost:3001'
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
