@@ -7,7 +7,6 @@ class ContactForm(models.Model):
 	email = models.EmailField()
 	website = models.CharField(max_length= 230, blank = True, null=True)
 	message = models.TextField()
-	captcha = models.TextField(blank=True, null=True)
 	timestamp = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
 	def __str__(self):
