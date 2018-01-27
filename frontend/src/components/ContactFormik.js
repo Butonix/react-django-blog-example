@@ -23,7 +23,6 @@ const styles = theme => ({
   button: {
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: "30px",
     width: "10%"
   }
 });
@@ -127,15 +126,25 @@ class ContactForm extends Component {
             error={errors.message && touched.message}
             helperText={errors.message && touched.message && errors.message}
           />
-          <Recaptcha
-            sitekey="6Le7xT4UAAAAAOuGdLd4TcqpXDRDZMIxvTn0CEYB"
-            render="explicit"
-            theme="dark"
-            onloadCallback={this.onloadCallback}
-            verifyCallback={this.verifyCallback}
-            ref={e => (this.recaptchaInstance = e)}
-          />
-          <br />
+          <span
+            style={{
+              margin: "0 auto",
+              marginTop: "1em",
+              marginBottom: "1em",
+              textAlign: "center",
+              display: "block",
+              width: "304px"
+            }}
+          >
+            <Recaptcha
+              sitekey="6Le7xT4UAAAAAOuGdLd4TcqpXDRDZMIxvTn0CEYB"
+              render="explicit"
+              theme="dark"
+              onloadCallback={this.onloadCallback}
+              verifyCallback={this.verifyCallback}
+              ref={e => (this.recaptchaInstance = e)}
+            />
+          </span>
           <Button
             raised
             className={classes.button}
