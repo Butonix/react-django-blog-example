@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withFormik } from "formik";
 import Yup from "yup";
+import PropTypes from "prop-types";
 import Recaptcha from "react-recaptcha";
 
 import { withStyles } from "material-ui/styles";
@@ -28,6 +29,8 @@ const styles = theme => ({
 });
 
 class ContactForm extends Component {
+  onloadCallback = () => null;
+
   render() {
     const {
       values,
@@ -39,13 +42,24 @@ class ContactForm extends Component {
       handleBlur,
       handleSubmit,
       handleReset,
-      classes
+      classes,
+      submitContactForm,
+      contact_form
     } = this.props;
 
     return (
       <span className={classes.container}>
         <h3 style={{ textAlign: "center" }}>Contact Form</h3>
-
+        {this.props.contact_form.err ? (
+          <div className="alert alert-danger" role="alert">
+            <strong>{contact_form.err.message}</strong>
+          </div>
+        ) : null}
+        {this.props.contact_form.message ? (
+          <div className="alert alert-success" role="alert">
+            <strong>{contact_form.message}</strong>
+          </div>
+        ) : null}
         <form onSubmit={handleSubmit}>
           <TextField
             name="first_name"
@@ -113,6 +127,14 @@ class ContactForm extends Component {
             error={errors.message && touched.message}
             helperText={errors.message && touched.message && errors.message}
           />
+          <Recaptcha
+            sitekey="6Le7xT4UAAAAAOuGdLd4TcqpXDRDZMIxvTn0CEYB"
+            render="explicit"
+            theme="dark"
+            onloadCallback={this.onloadCallback}
+            verifyCallback={this.verifyCallback}
+            ref={e => (this.recaptchaInstance = e)}
+          />
           <br />
           <Button
             raised
@@ -154,11 +176,28 @@ const EnhancedForm = withFormik({
     website: Yup.string().url("Invalid Url"),
     message: Yup.string().required("Message is a required field")
   }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    console.log("submitting", values);
-    setSubmitting(false);
+  handleSubmit: (
+    { first_name, last_name, email, website, message },
+    { props, setSubmitting }
+  ) => {
+    console.log("submitting");
+    props
+      .submitContactForm({ first_name, last_name, email, website, message })
+      .then(response => console.log("RESPONSE>", response))
+      .then(() => setSubmitting(false))
+      .then(() => this.recaptchaInstance.reset());
   },
   displayName: "ContactForm" //hlps with react devtools
 })(ContactForm);
 
-const ContactFormik = withStyles(styles)(EnhancedForm);
+export const ContactFormik = withStyles(styles)(EnhancedForm);
+
+ContactFormik.propTypes = {
+  submitContactForm: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  contact_form: PropTypes.shape({
+    err: PropTypes.objectOf(PropTypes.string),
+    isSubmitting: PropTypes.bool.isRequired,
+    message: PropTypes.string
+  }).isRequired
+};
