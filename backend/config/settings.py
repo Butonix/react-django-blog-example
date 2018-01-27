@@ -1,19 +1,20 @@
 import os
 import datetime
+from dotenv import load_dotenv
+from os.path import join, dirname
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y65()cf#!8c1q0@*8s%n^qu@u_6+be4uo9$x4=uf($tq=o&r_b'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -146,7 +147,7 @@ SITE_ID = 1
 
 
 """
-    TESTING ONLY SETTINGS 
+    TESTING ONLY SETTINGS
                             """
 
 ALLOWED_HOSTS = ['testserver', 'localhost', '127.0.0.1','google.com', 'google']
@@ -155,5 +156,3 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
     'localhost:3001'
 )
-
-

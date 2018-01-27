@@ -24,6 +24,7 @@ const styles = theme => ({
   button: {
     marginLeft: "auto",
     marginRight: "auto",
+    marginBottom: "6em",
     width: "10%"
   }
 });
@@ -145,7 +146,7 @@ class ContactForm extends Component {
           <span
             style={{
               margin: "0 auto",
-              marginTop: "1em",
+
               marginBottom: "1em",
               textAlign: "center",
               display: "block",
