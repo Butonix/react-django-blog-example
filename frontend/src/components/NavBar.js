@@ -20,16 +20,6 @@ class Navbar extends Component {
   navbarLinks() {
     if (this.props.authenticated) {
       return [
-        <li key="secret" className="nav-item">
-          <NavLink
-            to="/secret"
-            className="nav-link"
-            activeClassName="active"
-            exact
-          >
-            Secret
-          </NavLink>
-        </li>,
         <li
           key="signout"
           onClick={() => this.props.logoutAction()}
@@ -93,6 +83,23 @@ class Navbar extends Component {
     }
   }
 
+  userIsAuthenticated() {
+    if (this.props.authenticated || this.props.goog_auth.isAuthenticated) {
+      return [
+        <li key="secret" className="nav-item">
+          <NavLink
+            to="/secret"
+            className="nav-link"
+            activeClassName="active"
+            exact
+          >
+            Secret
+          </NavLink>
+        </li>
+      ];
+    }
+  }
+
   render() {
     console.log("NAVBAR PROPS", this.props);
     return (
@@ -127,6 +134,7 @@ class Navbar extends Component {
           {this.navbarLinks()}
           {this.userIsAuthenticatedGoogle()}
           {this.userIsNotAuthenticated()}
+          {this.userIsAuthenticated()}
         </ul>
         <ul className="navbar-nav ml-auto">
           <li key="search-app" className="nav-item">
