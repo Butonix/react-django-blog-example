@@ -141,10 +141,10 @@ REST_USE_JWT = True
 
 SITE_ID = 1
 # configure the JWTs to expire after 1 hour, and allow users to refresh near-expiration tokens
+# HEADER PREFIX FOR JWT_AUTH is Authorization: `JWT token`
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=60),
     'JWT_ALLOW_REFRESH': True,
-    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 }
 
 # Make JWT Auth the default authentication mechanism for Django
@@ -160,8 +160,6 @@ REST_FRAMEWORK = {
         # django-rest-social-oauth2
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
         'rest_framework_social_oauth2.authentication.SocialAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-
     )
 }
 

@@ -3,7 +3,7 @@ import { unauthenticateAction } from "../actions/authActions";
 import jwtDecode from "jwt-decode";
 // Imports for google login
 import URLSearchParams from "url-search-params";
-//import { push } from "react-router-redux";
+import { push } from "react-router-redux";
 import {
   django_client_id,
   django_client_secret,
@@ -21,7 +21,7 @@ function refreshAuthToken({ dispatch, getState }) {
         const emailLoginToken = localStorage.getItem("token");
         console.log("seconds remaining: ===", timeLeft);
         if (tokenExpiration && timeLeft < 0) {
-          console.log("LESS THAN 0");
+          dispatch(push("/"));
           return dispatch(unauthenticateAction(dispatch));
         }
         if (tokenExpiration && timeLeft < 255) {

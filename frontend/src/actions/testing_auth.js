@@ -11,12 +11,16 @@ function requestDogs() {
       let token_conv =
         (await localStorage.getItem("goog_access_token_conv")) ||
         localStorage.getItem("token");
+      let headers = (await localStorage.getItem("goog_access_token_conv"))
+        ? { Accept: "application/json", Authorization: `Bearer ${token_conv}` }
+        : {
+            Accept: "application/json",
+            Authorization: `JWT ${token_conv}`
+          };
+      console.log(token_conv);
       let response = await fetch(`${url}/testing/`, {
         method: "GET",
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${token_conv}`
-        }
+        headers: headers
       });
       if (!response.ok) {
         throw new Error("Authorized Request Failed");
