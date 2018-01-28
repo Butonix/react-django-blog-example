@@ -18,7 +18,7 @@ const GoogleLoginButton = props => {
   return (
     <GoogleLogin
       clientId="254472747355-6umtrkcedqn00tg7ec17l705ftttam0r.apps.googleusercontent.com"
-      buttonText="Login with Google"
+      buttonText="Google Login"
       onSuccess={responseGoogleSuccess}
       onFailure={responseGoogleFailure}
       className="loginBtn loginBtn--google"
