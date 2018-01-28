@@ -1,4 +1,5 @@
 import URLSearchParams from "url-search-params";
+import * as types from "../types/actionTypes";
 
 export const url = "http://127.0.0.1:8000";
 
@@ -10,7 +11,7 @@ export const django_client_secret =
   "Z9l7541YZY6ZpZ4W2XOxQ9WoVuiHWswmIpFOaql4WU6nsV1oC5bkX9kmyBgu6eiVU8kKfLEQlQJNRnm2kvMGDeI17DKb8rwU00SNqO7dhFbiaWkKwWhOIqFuYp6siiGu";
 
 const isAuthenticating = () => ({
-  type: "GOOG_IS_AUTHENTICATING"
+  type: types.GOOG_IS_AUTHENTICATING
 });
 
 function convertGoogTokenSuccess(json) {
@@ -20,7 +21,7 @@ function convertGoogTokenSuccess(json) {
   localStorage.setItem("goog_access_token_expires_in", expiryDate);
   localStorage.setItem("goog_refresh_token_conv", json.refresh_token);
   return {
-    type: "CONVERT_GOOG_TOKEN_SUCCESS",
+    type: types.CONVERT_GOOG_TOKEN_SUCCESS,
     goog_token: json
   };
 }
@@ -33,13 +34,13 @@ function googleLogoutAction() {
     localStorage.removeItem("goog_name");
     localStorage.removeItem("goog_email");
     localStorage.removeItem("goog_refresh_token_conv");
-    dispatch({ type: "GOOGLE_LOGOUT" });
+    dispatch({ type: types.GOOGLE_LOGOUT });
     return Promise.resolve();
   };
 }
 
 const convertGoogTokenFailure = err => ({
-  type: "CONVERT_GOOG_TOKEN_FAILURE",
+  type: types.CONVERT_GOOG_TOKEN_FAILURE,
   err
 });
 

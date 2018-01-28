@@ -1,3 +1,5 @@
+import * as types from "../types/actionTypes";
+
 const initialState = {
   err: null,
   isAuthenticated: false,
@@ -7,7 +9,7 @@ const initialState = {
 
 function googleInfoReducer(state = initialState, action) {
   switch (action.type) {
-    case "GOOG_IS_AUTHENTICATING":
+    case types.GOOG_IS_AUTHENTICATING:
       return {
         ...state,
         isAuthenticating: true,
@@ -15,7 +17,7 @@ function googleInfoReducer(state = initialState, action) {
         isAuthenticated: false,
         token_data: {}
       };
-    case "CONVERT_GOOG_TOKEN_SUCCESS":
+    case types.CONVERT_GOOG_TOKEN_SUCCESS:
       return {
         ...state,
         err: null,
@@ -23,14 +25,14 @@ function googleInfoReducer(state = initialState, action) {
         isAuthenticating: false,
         token_data: action.goog_token
       };
-    case "CONVERT_GOOG_TOKEN_FAILURE":
+    case types.CONVERT_GOOG_TOKEN_FAILURE:
       return {
         ...state,
         err: action.err,
         isAuthenticated: false,
         isAuthenticating: false
       };
-    case "GOOGLE_LOGOUT":
+    case types.GOOGLE_LOGOUT:
       return {
         ...initialState
       };

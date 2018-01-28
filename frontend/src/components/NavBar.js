@@ -46,7 +46,7 @@ class Navbar extends Component {
             aria-expanded="false"
             key="account"
           >
-            Account
+            Login
           </a>
           <div
             className="dropdown-menu"
