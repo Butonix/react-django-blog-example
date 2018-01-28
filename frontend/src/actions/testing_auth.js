@@ -11,7 +11,6 @@ function requestDogs() {
       let token_conv =
         (await localStorage.getItem("goog_access_token_conv")) ||
         localStorage.getItem("token");
-      console.log(token_conv);
       let response = await fetch(`${url}/testing/`, {
         method: "GET",
         headers: {

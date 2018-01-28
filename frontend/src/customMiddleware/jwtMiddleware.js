@@ -15,28 +15,23 @@ function jwt({ dispatch, getState }) {
   return next => action => {
     if (typeof action === "function") {
       if (localStorage.getItem("token") && localStorage.length > 0) {
-        var tokenExpiration = jwtDecode(localStorage.getItem("token")).exp;
-        console.log("Decoded token time", tokenExpiration);
-        const timeLeft = tokenExpiration - new Date().getTime() / 1000;
+        const tokenExpiration = jwtDecode(localStorage.getItem("token")).exp;
+        const currentTime = Math.round(new Date().getTime() / 1000);
+        const timeLeft = tokenExpiration - currentTime;
+        const emailLoginToken = localStorage.getItem("token");
         console.log("seconds remaining: ===", timeLeft);
-        if (
-          tokenExpiration &&
-          tokenExpiration - new Date().getTime() / 1000 < 0
-        ) {
+        if (tokenExpiration && timeLeft < 0) {
           console.log("LESS THAN 0");
           return dispatch(unauthenticateAction(dispatch));
         }
-        if (
-          tokenExpiration &&
-          tokenExpiration - new Date().getTime() / 1000 < 900
-        ) {
+        if (tokenExpiration && timeLeft < 255) {
           return fetch(`${url}/refresh-token/`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: localStorage.getItem("token")
+              Authorization: emailLoginToken
             },
-            body: JSON.stringify({ token: localStorage.getItem("token") })
+            body: JSON.stringify({ token: emailLoginToken })
           })
             .then(response => response.json())
             .then(json => localStorage.setItem("token", json.token))
@@ -51,8 +46,8 @@ function jwt({ dispatch, getState }) {
           "goog_access_token_expires_in"
         );
         // get the current unix epoch time in seconds
-        const currentTime = Math.round(new Date().getTime() / 1000);
-        const timeLeftGoog = googTokenExpirationTime - currentTime;
+        const currentTimeGoog = Math.round(new Date().getTime() / 1000);
+        const timeLeftGoog = googTokenExpirationTime - currentTimeGoog;
         console.log("token time left =======>", timeLeftGoog);
         // check if the token is expired, if so log the user out
         if (googTokenExpirationTime && timeLeftGoog <= 0) {

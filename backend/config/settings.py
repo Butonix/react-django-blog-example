@@ -133,10 +133,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+"""
+    Enables django-rest-auth to use JWT instead of regular tokens.
+
+"""
+REST_USE_JWT = True
+
+SITE_ID = 1
 # configure the JWTs to expire after 1 hour, and allow users to refresh near-expiration tokens
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
-    'JWT_ALLOW_REFRESH': True
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=60),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 }
 
 # Make JWT Auth the default authentication mechanism for Django
@@ -169,17 +177,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
-
-"""
-    Enables django-rest-auth to use JWT instead of regular tokens.
-    Also note that header_prefix should be Bearer, defaults to JWT..
-"""
-REST_USE_JWT = True
-JWT_AUTH = {
-    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
-}
-
-SITE_ID = 1
 
 
 """
