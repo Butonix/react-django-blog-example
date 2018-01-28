@@ -17,7 +17,7 @@ class Navbar extends Component {
       ];
     }
   }
-  navbarLinks() {
+  userIsAuthenticatedEmail() {
     if (this.props.authenticated) {
       return [
         <li
@@ -101,7 +101,6 @@ class Navbar extends Component {
   }
 
   render() {
-    console.log("NAVBAR PROPS", this.props);
     return (
       <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
         <ul className="navbar-nav mr-auto">
@@ -130,11 +129,10 @@ class Navbar extends Component {
               Contact
             </NavLink>
           </li>
-
-          {this.navbarLinks()}
-          {this.userIsAuthenticatedGoogle()}
           {this.userIsNotAuthenticated()}
           {this.userIsAuthenticated()}
+          {this.userIsAuthenticatedEmail()}
+          {this.userIsAuthenticatedGoogle()}
         </ul>
         <ul className="navbar-nav ml-auto">
           <li key="search-app" className="nav-item">
