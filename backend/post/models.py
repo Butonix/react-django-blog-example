@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 from category.models import Category
 
 class Post(models.Model):
-	author = models.ForeignKey(User, 
+	author = models.ForeignKey(User,
 		on_delete = models.CASCADE,
 		related_name='posts'
 	)
-	category = models.ForeignKey(Category, 
+	category = models.ForeignKey(Category,
 		on_delete = models.CASCADE,
 		related_name='posts')
 	title = models.CharField(max_length = 155)
@@ -22,22 +22,21 @@ class Post(models.Model):
 	archive = models.CharField(max_length =7, default='')
 
 	class Meta:
-		ordering = ['posted_on']
+		ordering = ['-posted_on']
 
 	def __str__(self):
-		return self.title 
+		return self.title
 
 	def _get_unique_slug(self):
 		slug = slugify(self.title)
-		unique_slug = slug 
+		unique_slug = slug
 		num = 1
 		while Post.objects.filter(slug = unique_slug).exists():
 			unique_slug = '{}-{}'.format(slug,num)
-			num+=1 
+			num+=1
 		return unique_slug
 
 	def save(self, *args, **kwargs):
 		if not self.slug:
 			self.slug = self._get_unique_slug()
 		super().save()
-
