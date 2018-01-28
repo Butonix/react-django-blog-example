@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import "../index.css";
 import SearchModal from "./reusableComponents/SearchModal";
 import GoogleLoginButton from "../containers/GoogleAuth/GoogleLoginButtonContainer.js";
+import GoogleLogoutButton from "../containers/GoogleAuth/GoogleLogoutButtonContainer.js";
 
 class Navbar extends Component {
   navbarLinks() {

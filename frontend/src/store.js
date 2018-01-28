@@ -12,8 +12,14 @@ export const store = createStore(
   composeWithDevTools(applyMiddleware(jwt, thunk, logger))
 );
 
+//Email login
 let auth_token = localStorage.getItem("token");
-
 if (auth_token) {
   store.dispatch({ type: "AUTHENTICATED" });
+}
+
+//Google login
+let goog_auth_token = localStorage.getItem("goog_access_token_conv");
+if (goog_auth_token && goog_auth_token.length > 1) {
+  store.dispatch({ type: "GOOG_AUTHENTICATE_ACTION" });
 }
