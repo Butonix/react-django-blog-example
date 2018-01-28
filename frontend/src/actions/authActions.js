@@ -43,12 +43,6 @@ function loginAction(data) {
   };
 }
 
-function refreshTokenIfExpiring() {
-  return async function(dispatch) {
-    return dispatch({ type: types.TESTING_TOKEN_REFRESH });
-  };
-}
-
 function logoutAction() {
   return async function(dispatch) {
     try {
@@ -71,6 +65,5 @@ export {
   loginAction,
   authenticateAction,
   logoutAction,
-  refreshTokenIfExpiring,
   unauthenticateAction
 };

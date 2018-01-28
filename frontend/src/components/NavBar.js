@@ -28,11 +28,6 @@ class Navbar extends Component {
           <NavLink to="/signout" className="nav-link">
             Log out
           </NavLink>
-        </li>,
-        <li key="refresh" className="nav-item">
-          <NavLink to="/refresh" className="nav-link">
-            Refresh Expiring Token
-          </NavLink>
         </li>
       ];
     }

@@ -22,7 +22,6 @@ import ScrollToTop from "./components/reusableComponents/ScrollToTop";
 import Register from "./containers/authentication/RegisterContainer";
 import Login from "./containers/authentication/LoginContainer";
 import NavBar from "./containers/NavBarContainer";
-import TestTokenRefresh from "./containers/authentication/TestTokenRefreshContainer";
 import Http404Page from "./components/reusableComponents/Http404Page";
 import {
   PrivateRoute,
@@ -36,12 +35,6 @@ ReactDOM.render(
         <NavBar />
         <ScrollToTop>
           <Switch>
-            <PrivateRoute
-              exact
-              path="/refresh"
-              component={TestTokenRefresh}
-              histo
-            />
             <Route exact path="/" component={HomePage} />
             <PrivateRoute exact path="/secret" component={SecretPage} />
             <Route exact path="/signout" render={() => <Redirect to="/" />} />
