@@ -17,7 +17,6 @@ import PostArchive from "./containers/posts/PostArchiveContainer";
 import FilterPosts from "./containers/posts/FilterPostsContainer";
 import About from "./containers/author/AboutContainer";
 import Contact from "./containers/ContactContainer";
-import SecretPage from "./components/reusableComponents/SecretPage";
 import ScrollToTop from "./components/reusableComponents/ScrollToTop";
 import Register from "./containers/authentication/RegisterContainer";
 import Login from "./containers/authentication/LoginContainer";
@@ -28,6 +27,9 @@ import {
   AuthenticatedRoute
 } from "./customRoutes/ProtectedRoutes";
 
+//testing purposes
+import DogList from "./containers/Secret/DogListContainer.js";
+
 ReactDOM.render(
   <Provider store={store}>
     <Router>
@@ -36,7 +38,7 @@ ReactDOM.render(
         <ScrollToTop>
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <PrivateRoute exact path="/secret" component={SecretPage} />
+            <PrivateRoute exact path="/secret" component={DogList} />
             <Route exact path="/signout" render={() => <Redirect to="/" />} />
             <AuthenticatedRoute exact path="/register" component={Register} />
             <AuthenticatedRoute exact path="/login" component={Login} />

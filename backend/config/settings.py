@@ -152,7 +152,7 @@ REST_FRAMEWORK = {
         # django-rest-social-oauth2
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
         'rest_framework_social_oauth2.authentication.SocialAuthentication',
-#       'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
 
     )
 }
@@ -172,8 +172,12 @@ AUTHENTICATION_BACKENDS = (
 
 """
     Enables django-rest-auth to use JWT instead of regular tokens.
+    Also note that header_prefix should be Bearer, defaults to JWT..
 """
 REST_USE_JWT = True
+JWT_AUTH = {
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+}
 
 SITE_ID = 1
 

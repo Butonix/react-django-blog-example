@@ -42,8 +42,8 @@ function jwt({ dispatch, getState }) {
             .then(json => localStorage.setItem("token", json.token))
             .then(() => next(action));
         }
-      } //check if the user has google_access_token
-      if (
+        return next(action);
+      } else if (
         localStorage.getItem("goog_access_token_conv") &&
         localStorage.length > 0
       ) {
@@ -88,6 +88,7 @@ function jwt({ dispatch, getState }) {
             .then(json => dispatch(convertGoogTokenSuccess(json)))
             .then(() => next(action));
         }
+        return next(action);
       } else {
         return next(action);
       }
