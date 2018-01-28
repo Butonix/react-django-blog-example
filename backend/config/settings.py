@@ -9,7 +9,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
+
 SECRET_KEY = os.environ.get("SECRET_KEY")
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -148,31 +151,35 @@ REST_FRAMEWORK = {
         # django-rest-social-oauth2
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
         'rest_framework_social_oauth2.authentication.SocialAuthentication',
+#       'rest_framework.authentication.SessionAuthentication',
+
     )
 }
 
 
 # Used for the Email login at http://127.0.0.1:8000/auth/login/
 AUTHENTICATION_BACKENDS = (
-    # Needed to login by username in Django admin, regardless of `allauth`
-    "django.contrib.auth.backends.ModelBackend",
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    "allauth.account.auth_backends.AuthenticationBackend",
-    # `django-social-oauth2` specific methods, such as facebook/google login
-    'rest_framework_social_oauth2.backends.DjangoOAuth2',
+    "django.contrib.auth.backends.ModelBackend", # Needed to login by username in Django admin, regardless of `allauth`
+    "allauth.account.auth_backends.AuthenticationBackend", # `allauth` specific authentication methods, such as login by e-mail
+    'rest_framework_social_oauth2.backends.DjangoOAuth2', # `django-social-oauth2` specific methods, such as facebook/google login
+    'social_core.backends.google.GoogleOAuth2',  # for Google authentication
+    #'social_core.backends.facebook.FacebookOAuth2',  # for Facebook authentication
 
 )
 
-# Enables django-rest-auth to use JWT instead of regular tokens.
+
+
+"""
+    Enables django-rest-auth to use JWT instead of regular tokens.
+"""
 REST_USE_JWT = True
 
 SITE_ID = 1
 
 
 """
-    TESTING ONLY SETTINGS
-                            """
+    Cors Header issues settings
+"""
 
 ALLOWED_HOSTS = ['testserver', 'localhost',
                  '127.0.0.1', 'google.com', 'google']
@@ -182,15 +189,36 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:3001'
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# DJANGO ALL AUTH SETTINGS FOR EMAIL LOGIN
+"""
+    DJANGO ALL AUTH SETTINGS FOR EMAIL LOGIN
+"""
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # temporary fix of a package issue
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 #ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 
-# GOOGLE RECAPTCHA SETTINGS
+"""
+    GOOGLE RECAPTCHA SETTINGS
+"""
 GR_CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'
 GR_CAPTCHA_SECRET_KEY = os.environ.get('GR_CAPTCHA_SECRET_KEY')
+
+
+"""
+    Google Authentication settings
+"""
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get(
+    "SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
+
+
+"""
+    DJANGO OAUTH TOOLKIT EXPIRATION SECONDS  - DEFAULT IS 36000 WHICH IS 10 hours
+    (converted access token from a social login backend expiration time)
+"""
+OAUTH2_PROVIDER = {
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 36000,
+}
