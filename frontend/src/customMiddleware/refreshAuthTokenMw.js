@@ -20,11 +20,11 @@ function refreshAuthToken({ dispatch, getState }) {
         const timeLeft = tokenExpiration - currentTime;
         const emailLoginToken = localStorage.getItem("token");
         console.log("seconds remaining: ===", timeLeft);
-        if (tokenExpiration && timeLeft < 0) {
+        if (tokenExpiration && timeLeft <= 0) {
           dispatch(push("/"));
           return dispatch(unauthenticateAction(dispatch));
         }
-        if (tokenExpiration && timeLeft < 255) {
+        if (tokenExpiration && timeLeft <= 1800) {
           return fetch(`${url}/refresh-token/`, {
             method: "POST",
             headers: {
@@ -58,7 +58,7 @@ function refreshAuthToken({ dispatch, getState }) {
           localStorage.removeItem("goog_avatar_url");
           localStorage.removeItem("goog_name");
           localStorage.removeItem("goog_email");
-          //dispatch(push("/"));
+          dispatch(push("/"));
           return dispatch({ type: "GOOGLE_LOGOUT" });
         }
         // check if the token is going to expire in less than 30mins - refresh it

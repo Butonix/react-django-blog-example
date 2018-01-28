@@ -141,9 +141,9 @@ REST_USE_JWT = True
 
 SITE_ID = 1
 # configure the JWTs to expire after 1 hour, and allow users to refresh near-expiration tokens
-# HEADER PREFIX FOR JWT_AUTH is Authorization: `JWT token`
+# HEADER PREFIX FOR JWT_AUTH is Authorization: `JWT YOUR_TOKEN`
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=60),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
     'JWT_ALLOW_REFRESH': True,
 }
 
