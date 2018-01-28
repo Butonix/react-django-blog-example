@@ -11,7 +11,7 @@ import contactFormReducer from "./contactFormReducer";
 import postArchiveReducer from "./postArchiveReducer";
 import filterPostsReducer from "./filterPostsReducer";
 import googleInfoReducer from "./googleAuthReducer";
-
+import fetchCreatecommentReducer from "./fetchCreateCommentReducer";
 //Auth testing purposes
 import dogReducer from "./dogReducer";
 
@@ -27,6 +27,7 @@ const rootReducer = combineReducers({
   post_archive: postArchiveReducer,
   posts_filtered: filterPostsReducer,
   goog_auth: googleInfoReducer,
+  comments: fetchCreatecommentReducer,
   //testing purposes
   dogs: dogReducer
 });

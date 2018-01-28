@@ -7,6 +7,9 @@ import LoadingSpinner from "../reusableComponents/LoadingSpinner";
 import PostArchiveHtmlStyled from "../../components/reusableComponents/PostArchiveHtmlStyled";
 import CategoryHtmlStyled from "../../components/reusableComponents/CategoryHtmlStyled";
 
+// COMMENTS
+import CommentList from "../../containers/Comments/CommentListContainer.js";
+
 class PostDetail extends Component {
   componentDidMount() {
     return this.props.fetchPostSlug(this.props.match.params.slug);
@@ -119,6 +122,7 @@ class PostDetail extends Component {
             </div>
           </span>
         )}
+        <CommentList />
         <div id="disqus_thread" />
       </div>
     );
