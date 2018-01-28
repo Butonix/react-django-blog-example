@@ -14,7 +14,8 @@ class CommentList(ListCreateAPIView):
 
     def perform_create(self, serializer):
         user = self.request.user
-        serializer.save(user=user)
+        post = request.data['post']
+        serializer.save(user=user, post=post)
 
 class CommentDetail(RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
@@ -29,7 +30,8 @@ class CommentReplyList(ListCreateAPIView):
 
     def perform_create(self, serializer):
         user = self.request.user
-        serializer.save(user=user)
+        post = request.data['post']
+        serializer.save(user=user, post=post)
 
 class CommentReplyDetail(RetrieveUpdateDestroyAPIView):
     queryset = CommentReply.objects.all()

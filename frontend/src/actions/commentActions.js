@@ -15,16 +15,18 @@ function fetchComments() {
     try {
       let token_conv =
         (await localStorage.getItem("goog_access_token_conv")) ||
-        localStorage.getItem("github_access_token_conv");
+        localStorage.getItem("token");
       console.log("TOKEN_CONV", token_conv);
-      let headers = (await token_conv)
-        ? {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token_conv}`
-          }
-        : {
-            "Content-Type": "application/json"
-          };
+      let headers =
+        (await token_conv) && token_conv.length > 35
+          ? {
+              "Content-Type": "application/json",
+              Authorization: `JWT ${token_conv}`
+            }
+          : {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token_conv}`
+            };
       dispatch(isFetchingComments());
       let response = await fetch(`${url}/comments/`, {
         method: "GET",

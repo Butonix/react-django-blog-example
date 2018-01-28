@@ -7,6 +7,7 @@ class CommentReplies(serializers.RelatedField):
     def to_representation(self, value):
         return {
         'id': value.id,
+        'post': value.id,
         'user': value.user.username,
         'text': value.text,
         'posted_on': value.posted_on,
@@ -16,6 +17,7 @@ class CommentReplies(serializers.RelatedField):
 #Methods defined inside ModelSerializer have access to their own context
 #You can access context with self.context['request'].user
 class CommentSerializer(serializers.ModelSerializer):
+    post = serializers.ReadOnlyField(source='post.id')
     user = serializers.ReadOnlyField(source='user.username')
     comment_replies = CommentReplies(many=True, read_only=True)
     current_user = serializers.SerializerMethodField(method_name='_current_user')
@@ -28,13 +30,14 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('id', 'user', 'text', 'posted_on', 'updated_on',
+        fields = ('id','post', 'user', 'text', 'posted_on', 'updated_on',
         'comment_replies', 'current_user')
 
 class CommentReplySerializer(serializers.ModelSerializer):
+    post = serializers.ReadOnlyField(source='post.id')
     user = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
         model= CommentReply
-        fields = ('id', 'comment', 'user', 'text',  'posted_on',
+        fields = ('id', 'post', 'comment', 'user', 'text',  'posted_on',
         'updated_on')
