@@ -10,18 +10,20 @@ import profileReducer from "./profileReducer";
 import contactFormReducer from "./contactFormReducer";
 import postArchiveReducer from "./postArchiveReducer";
 import filterPostsReducer from "./filterPostsReducer";
+import googleInfoReducer from "./googleAuthReducer";
 
 const rootReducer = combineReducers({
-	form: formReducer,
-	auth: authReducer,
-	posts: postListReducer,
-	post: postDetailReducer,
-	newsletter: newsletterReducer,
-	category_posts: categoryListReducer,
-	user_profile: profileReducer,
-	contact_form: contactFormReducer,
-	post_archive: postArchiveReducer,
-	posts_filtered: filterPostsReducer
+  form: formReducer,
+  auth: authReducer,
+  posts: postListReducer,
+  post: postDetailReducer,
+  newsletter: newsletterReducer,
+  category_posts: categoryListReducer,
+  user_profile: profileReducer,
+  contact_form: contactFormReducer,
+  post_archive: postArchiveReducer,
+  posts_filtered: filterPostsReducer,
+  goog_auth: googleInfoReducer
 });
 
 export default rootReducer;
