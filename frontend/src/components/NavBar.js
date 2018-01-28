@@ -8,6 +8,15 @@ import GoogleLoginButton from "../containers/GoogleAuth/GoogleLoginButtonContain
 import GoogleLogoutButton from "../containers/GoogleAuth/GoogleLogoutButtonContainer.js";
 
 class Navbar extends Component {
+  userIsAuthenticatedGoogle() {
+    if (this.props.goog_auth.isAuthenticated) {
+      return [
+        <li className="nav-item" key="goog-logout-btn">
+          <GoogleLogoutButton history={this.props.history} />
+        </li>
+      ];
+    }
+  }
   navbarLinks() {
     if (this.props.authenticated) {
       return [
@@ -37,49 +46,55 @@ class Navbar extends Component {
         </li>
       ];
     }
-    return [
-      <li className="nav-item dropdown" key="dropdown-li">
-        <a
-          className="nav-link dropdown-toggle"
-          href="http://localhost3000.com"
-          id="navbarDropdownMenuLink"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          key="account"
-        >
-          Account
-        </a>
-        <div
-          className="dropdown-menu"
-          aria-labelledby="navbarDropdownMenuLink"
-          key="account-div"
-        >
-          <GoogleLoginButton />
-          <NavLink
-            to="/login"
-            className="dropdown-item"
-            key="log-in"
-            activeClassName="active"
-            exact
+  }
+
+  userIsNotAuthenticated() {
+    if (!this.props.authenticated && !this.props.goog_auth.isAuthenticated) {
+      return [
+        <li className="nav-item dropdown" key="dropdown-li">
+          <a
+            className="nav-link dropdown-toggle"
+            href="http://localhost3000.com"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            key="account"
           >
-            Site Log in
-          </NavLink>
-          <NavLink
-            to="/register"
-            className="dropdown-item"
-            key="sign-up"
-            activeClassName="active"
-            exact
+            Account
+          </a>
+          <div
+            className="dropdown-menu"
+            aria-labelledby="navbarDropdownMenuLink"
+            key="account-div"
           >
-            Register
-          </NavLink>
-        </div>
-      </li>
-    ];
+            <GoogleLoginButton />
+            <NavLink
+              to="/login"
+              className="dropdown-item"
+              key="log-in"
+              activeClassName="active"
+              exact
+            >
+              Site Log in
+            </NavLink>
+            <NavLink
+              to="/register"
+              className="dropdown-item"
+              key="sign-up"
+              activeClassName="active"
+              exact
+            >
+              Register
+            </NavLink>
+          </div>
+        </li>
+      ];
+    }
   }
 
   render() {
+    console.log("NAVBAR PROPS", this.props);
     return (
       <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
         <ul className="navbar-nav mr-auto">
@@ -110,6 +125,8 @@ class Navbar extends Component {
           </li>
 
           {this.navbarLinks()}
+          {this.userIsAuthenticatedGoogle()}
+          {this.userIsNotAuthenticated()}
         </ul>
         <ul className="navbar-nav ml-auto">
           <li key="search-app" className="nav-item">
