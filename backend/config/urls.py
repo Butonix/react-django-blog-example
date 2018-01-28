@@ -11,6 +11,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^refresh-token/$', refresh_jwt_token),
     url(r'^registration/', include('rest_auth.registration.urls')),
+    #^sauth/ is social login -django-rest-framework-social-oauth2
+    url(r'^sauth/', include('rest_framework_social_oauth2.urls')),
+    #^auth/ is django rest auth login
     url(r'^auth/', include('rest_auth.urls')),
     url(r"^newsletter/", include('newsletter.urls')),
     url(r"^category/", include('category.urls')),

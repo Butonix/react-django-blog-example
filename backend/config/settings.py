@@ -26,12 +26,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    # django-rest-auth
     'rest_auth',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'rest_auth.registration',
+    # django-rest-socialOauth2
+    'oauth2_provider',
+    'social_django',
+    'rest_framework_social_oauth2',
     'corsheaders',
+    # Own-apps
     'post',
     'newsletter',
     'category',
@@ -64,6 +70,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -121,46 +129,53 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#configure the JWTs to expire after 1 hour, and allow users to refresh near-expiration tokens
+# configure the JWTs to expire after 1 hour, and allow users to refresh near-expiration tokens
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
     'JWT_ALLOW_REFRESH': True
 }
 
-#Make JWT Auth the default authentication mechanism for Django
-#Basic Authentication is only suitable for testing.
+# Make JWT Auth the default authentication mechanism for Django
+# Basic Authentication is only suitable for testing.
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': (
     #     'rest_framework.permissions.IsAuthenticated',
     # ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        # django-rest-auth
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        # django-rest-social-oauth2
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',
     )
 }
 
 
-#Used for the Email login at http://127.0.0.1:8000/auth/login/
+# Used for the Email login at http://127.0.0.1:8000/auth/login/
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
 
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
+    # `django-social-oauth2` specific methods, such as facebook/google login
+    'rest_framework_social_oauth2.backends.DjangoOAuth2',
+
 )
 
-#Enables django-rest-auth to use JWT instead of regular tokens.
+# Enables django-rest-auth to use JWT instead of regular tokens.
 REST_USE_JWT = True
 
 SITE_ID = 1
-
 
 
 """
     TESTING ONLY SETTINGS
                             """
 
-ALLOWED_HOSTS = ['testserver', 'localhost', '127.0.0.1','google.com', 'google']
+ALLOWED_HOSTS = ['testserver', 'localhost',
+                 '127.0.0.1', 'google.com', 'google']
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
@@ -169,13 +184,13 @@ CORS_ORIGIN_WHITELIST = (
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-#DJANGO ALL AUTH SETTINGS FOR EMAIL LOGIN
-ACCOUNT_EMAIL_REQUIRED=True
+# DJANGO ALL AUTH SETTINGS FOR EMAIL LOGIN
+ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 #ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 
-#GOOGLE RECAPTCHA SETTINGS
+# GOOGLE RECAPTCHA SETTINGS
 GR_CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'
 GR_CAPTCHA_SECRET_KEY = os.environ.get('GR_CAPTCHA_SECRET_KEY')
