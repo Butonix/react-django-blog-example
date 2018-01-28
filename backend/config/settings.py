@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'category',
     'user_profile',
     'contact_form',
-    'comment'
+    'comment',
+    'authenticated_test_endpoint'
 ]
 
 MIDDLEWARE = [
