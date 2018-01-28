@@ -2,12 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
+import { ConnectedRouter } from "react-router-redux";
+import { history } from "./store";
 
 import { store } from "./store";
 import HomePage from "./containers/posts/HomePageContainer";
@@ -32,7 +29,7 @@ import DogList from "./containers/Secret/DogListContainer.js";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <ConnectedRouter history={history}>
       <div>
         <NavBar />
         <ScrollToTop>
@@ -60,7 +57,7 @@ ReactDOM.render(
           </Switch>
         </ScrollToTop>
       </div>
-    </Router>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
 );

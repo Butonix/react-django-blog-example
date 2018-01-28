@@ -11,7 +11,7 @@ import {
   convertGoogTokenSuccess
 } from "../actions/googleAuthActions";
 
-function jwt({ dispatch, getState }) {
+function refreshAuthToken({ dispatch, getState }) {
   return next => action => {
     if (typeof action === "function") {
       if (localStorage.getItem("token") && localStorage.length > 0) {
@@ -93,4 +93,4 @@ function jwt({ dispatch, getState }) {
   };
 }
 
-export default jwt;
+export default refreshAuthToken;

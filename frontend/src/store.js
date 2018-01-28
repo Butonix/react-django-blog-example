@@ -5,11 +5,19 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 
 import rootReducer from "./reducers/";
-import jwt from "./customMiddleware/jwtMiddleware";
+import refreshAuthToken from "./customMiddleware/refreshAuthTokenMw";
+
+import createHistory from "history/createBrowserHistory";
+import { routerMiddleware } from "react-router-redux";
+
+export const history = createHistory();
+const reduxRouterMiddleware = routerMiddleware(history);
 
 export const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(jwt, thunk, logger))
+  composeWithDevTools(
+    applyMiddleware(reduxRouterMiddleware, refreshAuthToken, thunk, logger)
+  )
 );
 
 //Email login
