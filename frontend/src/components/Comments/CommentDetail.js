@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import moment from "moment";
 
 import "./detail-styles.css";
@@ -6,7 +6,7 @@ import Form from "./Form";
 import EditForm from "./EditForm";
 //import CommentReply from "../../containers/Comments/CommentReplyContainer.js";
 
-class CommentDetail extends React.Component {
+class CommentDetail extends Component {
   constructor(props) {
     super(props);
     this.toggleTextForm = this.toggleTextForm.bind(this);
@@ -25,11 +25,14 @@ class CommentDetail extends React.Component {
     return this.setState({ toggleEditForm: !this.state.toggleEditForm });
   }
 
-  deleteCommentAndFetch(commentId) {
-    this.props.deleteComment(commentId).then(() => this.props.fetchComments());
+  deleteCommentAndFetch(postId, commentId) {
+    this.props
+      .deleteCommentForPost(postId, commentId)
+      .then(() => this.props.fetchCommentsForPost(postId));
   }
 
   render() {
+    console.log("____COMMENTDETAIL", this.props);
     return (
       <div>
         <div className="row">
@@ -74,7 +77,9 @@ class CommentDetail extends React.Component {
                 }}
               >
                 <button
-                  onClick={() => this.deleteCommentAndFetch(this.props.id)}
+                  onClick={() =>
+                    this.deleteCommentAndFetch(this.props.postId, this.props.id)
+                  }
                 >
                   <i className="fa fa-trash" aria-hidden="true" />Delete
                 </button>
@@ -90,7 +95,7 @@ class CommentDetail extends React.Component {
                   <EditForm
                     prevText={this.props.text}
                     fetchComments={this.props.fetchComments}
-                    editComment={this.props.editComment}
+                    editCommentForPost={this.props.editComment}
                     commentId={this.props.id}
                     toggleEditForm={this.toggleEditForm}
                     editFormState={this.state.toggleEditForm}
@@ -102,7 +107,7 @@ class CommentDetail extends React.Component {
               style={{ display: this.state.toggleTextForm ? "block" : "none" }}
             >
               <Form
-                fetchComments={this.props.fetchComments}
+                fetchCommentsForPost={this.props.fetchComments}
                 createCommentReply={this.props.createCommentReply}
                 commentId={this.props.id}
                 toggleTextForm={this.toggleTextForm}

@@ -1,5 +1,6 @@
 const url = "http://127.0.0.1:8000";
 
+// COMMENT LIST ACTIONS
 const isFetchingCommentsForPost = () => ({
   type: "IS_FETCHING_COMMENTS_FOR_POST"
 });
@@ -86,7 +87,54 @@ function createCommentForPost(postId, commentText) {
     }
   };
 }
+//COMMENT DETAIL ACTIONS
+function deleteCommentForPost(postId, commentId) {
+  return async function(dispatch) {
+    //dispatch(isDeletingCommentReply());
+    try {
+      token_conv = await token_conv;
+      headers = await headers;
+      let response = await fetch(`${url}/${postId}/comments/${commentId}/`, {
+        method: "DELETE",
+        headers: headers
+      });
+      if (!response.ok) {
+        throw new Error("Could not delete the requested commentreply.");
+      }
+      return response;
+    } catch (err) {
+      console.log(err);
+      //return dispatch(deleteCommentReplyFailure(err));
+    }
+  };
+}
 
+function editCommentForPost(postId, commentId, commentText) {
+  return async function(dispatch) {
+    try {
+      token_conv = await token_conv;
+      headers = await headers;
+
+      let response = await fetch(`${url}/${postId}/comments/${commentId}/`, {
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify({
+          text: commentText
+        })
+      });
+      if (!response.ok) {
+        throw new Error("Could not delete the requested commentreply.");
+      }
+      let responseJson = await response.json();
+      return responseJson;
+    } catch (err) {
+      console.log(err);
+      //return dispatch(deleteCommentReplyFailure(err));
+    }
+  };
+}
+
+// COMMENTREPLY LIST ACTIONS
 function createCommentReply(commentId, commentText) {
   return async function(dispatch) {
     try {
@@ -148,60 +196,6 @@ function deleteCommentReply(commentReplyId) {
   };
 }
 
-function deleteComment(commentId) {
-  return async function(dispatch) {
-    //dispatch(isDeletingCommentReply());
-    try {
-      let token_conv =
-        (await localStorage.getItem("goog_access_token_conv")) ||
-        localStorage.getItem("github_access_token_conv");
-      let response = await fetch(`${url}/comments/${commentId}/`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token_conv}`
-        }
-      });
-      if (!response.ok) {
-        throw new Error("Could not delete the requested commentreply.");
-      }
-      return response;
-    } catch (err) {
-      console.log(err);
-      //return dispatch(deleteCommentReplyFailure(err));
-    }
-  };
-}
-
-function editComment(commentId, commentText) {
-  return async function(dispatch) {
-    try {
-      let token_conv =
-        (await localStorage.getItem("goog_access_token_conv")) ||
-        localStorage.getItem("github_access_token_conv");
-
-      let response = await fetch(`${url}/comments/${commentId}/`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token_conv}`
-        },
-        body: JSON.stringify({
-          text: commentText
-        })
-      });
-      if (!response.ok) {
-        throw new Error("Could not delete the requested commentreply.");
-      }
-      let responseJson = await response.json();
-      return responseJson;
-    } catch (err) {
-      console.log(err);
-      //return dispatch(deleteCommentReplyFailure(err));
-    }
-  };
-}
-
 function editCommentReply(commentReplyId, commentReplyText) {
   return async function(dispatch) {
     try {
@@ -236,7 +230,7 @@ export {
   createCommentForPost,
   createCommentReply,
   deleteCommentReply,
-  deleteComment,
-  editComment,
+  deleteCommentForPost,
+  editCommentForPost,
   editCommentReply
 };

@@ -21,7 +21,6 @@ class CommentList extends Component {
     }
   }
   render() {
-    console.log("______CL____", this.props);
     return (
       <span>
         {this.props.comments.err && (
@@ -42,7 +41,11 @@ class CommentList extends Component {
         </div>
         <ul>
           {this.props.comments.commentArr.map(comment => (
-            <CommentDetail key={comment.id} {...comment} />
+            <CommentDetail
+              key={comment.id}
+              {...comment}
+              postId={this.props.postId}
+            />
           ))}
         </ul>
       </span>
