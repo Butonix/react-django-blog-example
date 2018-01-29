@@ -205,20 +205,30 @@ const deleteCommentReplyFailure = err => ({
   err
 });
 
-function deleteCommentReply(commentReplyId) {
+function deleteCommentReply(postId, commentId, commentReplyId) {
   return async function(dispatch) {
     dispatch(isDeletingCommentReply());
     try {
-      let token_conv =
-        (await localStorage.getItem("goog_access_token_conv")) ||
-        localStorage.getItem("github_access_token_conv");
-      let response = await fetch(`${url}/commentreplies/${commentReplyId}/`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token_conv}`
+      let token_conv = await (localStorage.getItem("goog_access_token_conv") ||
+        localStorage.getItem("token"));
+      console.log("TOKEN_CONV", token_conv);
+      let headers =
+        (await token_conv) && token_conv.length > 35
+          ? {
+              "Content-Type": "application/json",
+              Authorization: `JWT ${token_conv}`
+            }
+          : {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token_conv}`
+            };
+      let response = await fetch(
+        `${url}/${postId}/comments/${commentId}/commentreplies/${commentReplyId}/`,
+        {
+          method: "DELETE",
+          headers: headers
         }
-      });
+      );
       if (!response.ok) {
         throw new Error("Could not delete the requested commentreply.");
       }

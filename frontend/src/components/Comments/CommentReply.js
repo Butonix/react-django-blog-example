@@ -25,10 +25,10 @@ class CommentReply extends Component {
     });
   }
 
-  deleteReplyAndFetch(commentReplyId) {
+  deleteReplyAndFetch(postId, commentId, commentReplyId) {
     this.props
-      .deleteCommentReply(commentReplyId)
-      .then(() => this.props.fetchComments());
+      .deleteCommentReply(postId, commentId, commentReplyId)
+      .then(() => this.props.fetchCommentsForPost(postId));
   }
 
   render() {
@@ -78,7 +78,15 @@ class CommentReply extends Component {
                     : "none"
               }}
             >
-              <button onClick={() => this.deleteReplyAndFetch(this.props.id)}>
+              <button
+                onClick={() =>
+                  this.deleteReplyAndFetch(
+                    this.props.postId,
+                    this.props.commentId,
+                    this.props.id
+                  )
+                }
+              >
                 <i className="fa fa-trash" aria-hidden="true" />Delete
               </button>
               <button onClick={this.toggleEditFormReply}>
