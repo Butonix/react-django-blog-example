@@ -79,7 +79,11 @@ class Form extends PureComponent {
       }
       if (this.props.toggleTextFormReply) {
         this.props
-          .createCommentReply(this.props.commentId, this.state.text)
+          .createCommentReply(
+            this.props.postId,
+            this.props.commentId,
+            this.state.text
+          )
           .then(() => this.props.toggleTextFormReply())
           .then(() => this.props.fetchCommentsForPost(this.props.postId));
       }

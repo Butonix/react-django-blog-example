@@ -114,6 +114,7 @@ class CommentReply extends Component {
               postId={this.props.postId}
               toggleTextFormReply={this.toggleTextFormReply}
               isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
+              isAuthenticatedEmail={this.props.isAuthenticatedEmail}
               stateTextFormReply={this.state.toggleTextFormReply}
             />
           </span>

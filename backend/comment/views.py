@@ -49,6 +49,8 @@ class CommentReplyList(ListCreateAPIView):
         return CommentReply.objects.filter(post=post_obj).filter(comment=comment_obj)
 
 class CommentReplyDetail(RetrieveUpdateDestroyAPIView):
-    queryset = CommentReply.objects.all()
     serializer_class = CommentReplySerializer
     permission_classes = (IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
+
+    def get_object(self):
+        return CommentReply.objects.get(pk=self.kwargs['pk'])
