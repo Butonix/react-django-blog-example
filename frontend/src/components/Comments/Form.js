@@ -104,7 +104,7 @@ class Form extends PureComponent {
           error={!!this.state.textError}
           helperText={this.state.textError}
         />
-        {this.props.isAuthenticatedGoogle ? (
+        {this.props.isAuthenticatedGoogle || this.props.isAuthenticatedEmail ? (
           <Button
             raised
             className={classes.button}

@@ -37,6 +37,7 @@ class CommentList extends Component {
             fetchCommentsForPost={this.props.fetchCommentsForPost}
             postId={this.props.postId}
             isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
+            isAuthenticatedEmail={this.props.isAuthenticatedEmail}
           />
         </div>
         <ul>

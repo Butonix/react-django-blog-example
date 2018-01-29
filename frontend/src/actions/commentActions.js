@@ -66,13 +66,10 @@ function createCommentForPost(postId, commentText) {
   return async function(dispatch) {
     try {
       token_conv = await token_conv;
+      headers = await headers;
       let response = await fetch(`${url}/${postId}/comments/`, {
         method: "POST",
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${token_conv}`,
-          "Content-Type": "application/json"
-        },
+        headers: headers,
         body: JSON.stringify({
           text: commentText
         })
