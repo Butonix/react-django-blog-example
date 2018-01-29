@@ -35,7 +35,7 @@ function fetchCommentsForPost(postId) {
       // if the user is not logged in headers is empty
       headers = (await token_conv) === null ? {} : headers;
       dispatch(isFetchingCommentsForPost());
-      let response = await fetch(`${url}/${postId}/comments/`, {
+      let response = await fetch(`${url}/posts/${postId}/comments/`, {
         method: "GET",
         headers: headers
       });
@@ -71,7 +71,7 @@ function createCommentForPost(postId, commentText) {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token_conv}`
             };
-      let response = await fetch(`${url}/${postId}/comments/`, {
+      let response = await fetch(`${url}/posts/${postId}/comments/`, {
         method: "POST",
         headers: headers,
         body: JSON.stringify({
@@ -108,10 +108,13 @@ function deleteCommentForPost(postId, commentId) {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token_conv}`
             };
-      let response = await fetch(`${url}/${postId}/comments/${commentId}/`, {
-        method: "DELETE",
-        headers: headers
-      });
+      let response = await fetch(
+        `${url}/posts/${postId}/comments/${commentId}/`,
+        {
+          method: "DELETE",
+          headers: headers
+        }
+      );
       if (!response.ok) {
         throw new Error("Could not delete the requested comment.");
       }
@@ -139,13 +142,16 @@ function editCommentForPost(postId, commentId, commentText) {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token_conv}`
             };
-      let response = await fetch(`${url}/${postId}/comments/${commentId}/`, {
-        method: "PATCH",
-        headers: headers,
-        body: JSON.stringify({
-          text: commentText
-        })
-      });
+      let response = await fetch(
+        `${url}/posts/${postId}/comments/${commentId}/`,
+        {
+          method: "PATCH",
+          headers: headers,
+          body: JSON.stringify({
+            text: commentText
+          })
+        }
+      );
       if (!response.ok) {
         throw new Error("Could not delete the requested commentreply.");
       }
@@ -176,7 +182,7 @@ function createCommentReply(postId, commentId, commentText) {
               Authorization: `Bearer ${token_conv}`
             };
       let response = await fetch(
-        `${url}/${postId}/comments/${commentId}/commentreplies/`,
+        `${url}/posts/${postId}/comments/${commentId}/commentreplies/`,
         {
           method: "POST",
           headers: headers,
@@ -223,7 +229,7 @@ function deleteCommentReply(postId, commentId, commentReplyId) {
               Authorization: `Bearer ${token_conv}`
             };
       let response = await fetch(
-        `${url}/${postId}/comments/${commentId}/commentreplies/${commentReplyId}/`,
+        `${url}/posts/${postId}/comments/${commentId}/commentreplies/${commentReplyId}/`,
         {
           method: "DELETE",
           headers: headers
@@ -256,7 +262,7 @@ function editCommentReply(postId, commentId, commentReplyId, commentReplyText) {
               Authorization: `Bearer ${token_conv}`
             };
       let response = await fetch(
-        `${url}/${postId}/comments/${commentId}/commentreplies/${commentReplyId}/`,
+        `${url}/posts/${postId}/comments/${commentId}/commentreplies/${commentReplyId}/`,
         {
           method: "PATCH",
           headers: headers,

@@ -10,6 +10,7 @@ import queryString from "query-string";
 
 class FilterPosts extends Component {
   componentDidMount() {
+    console.log("FILTER POST ______________ ", this.props);
     let { location, history, filterPosts } = this.props;
     if (location.search === "?q=") {
       return history.push("/");
