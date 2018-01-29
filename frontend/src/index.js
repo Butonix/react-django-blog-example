@@ -10,7 +10,6 @@ import { store } from "./store";
 import HomePage from "./containers/posts/HomePageContainer";
 import PostDetail from "./containers/posts/PostDetailContainer";
 import CategoryList from "./containers/posts/CategoryListContainer";
-import PostArchive from "./containers/posts/PostArchiveContainer";
 import FilterPosts from "./containers/posts/FilterPostsContainer";
 import About from "./containers/author/AboutContainer";
 import Contact from "./containers/ContactContainer";
@@ -45,11 +44,6 @@ ReactDOM.render(
               component={CategoryList}
             />
             <Route exact path="/users/:username" component={About} />
-            <Route
-              exact
-              path="/archive/:archive_date"
-              component={PostArchive}
-            />
             <Route exact path="/contact" component={Contact} />
             <Route path="/posts/*" component={FilterPosts} />
             <Route exact path="/:slug" component={PostDetail} />
