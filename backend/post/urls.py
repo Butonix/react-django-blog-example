@@ -15,9 +15,7 @@ urlpatterns = [
         comment_views.CommentReplyList.as_view(), name='commentreply-list'),
     url(r"^(?P<post_pk>[0-9]{1,6})/comments/(?P<comment_pk>[0-9]+)/commentreplies/(?P<pk>[0-9]+)/$",
         comment_views.CommentReplyDetail.as_view(), name='commentreply-detail'),
-    url(r"^posts/((?P<query>[-\w]+)/)?$",
-        views.PostListFilter.as_view(), name='post-list-filter'),
-    url(r"^(?P<archive>[-0-9]{7})/$",
+    url(r"^(?P<archive>[-0-9]{7})/$",               #have to fix with query params
         views.PostListArchive.as_view(), name='post-list-archive'),
     url(r"^(?P<slug>[-\w]+)/$",
         views.PostDetailSlug.as_view(), name="post-detail-slug"),

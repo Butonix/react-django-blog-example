@@ -19,7 +19,7 @@ urlpatterns = [
     url(r"^users/", include('user_profile.urls')),
     url(r"^contact/", include('contact_form.urls')),
     url(r"^testing/", include("authenticated_test_endpoint.urls")),
-    url(r"^", include('post.urls', namespace='blog')),
+    url(r"^posts/", include('post.urls', namespace='blog')),
 ]
 
 #Browsable API login

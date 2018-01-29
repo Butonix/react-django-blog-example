@@ -16,9 +16,43 @@ class PostList(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+    #if there is a queryparam in the request filter based on it
+    #else return all posts
+    def get_queryset(self):
+        query_param = self.request.query_params.get('q', None)
+        if query_param is not None:
+            queryset = Post.objects.filter(
+                Q(title__icontains=query_param) |
+                Q(category__name__icontains=query_param) |
+                Q(author__username__icontains=query_param)
+            )
+            if queryset.count() > 0:
+                return queryset
+            else:
+                return Post.objects.all()
+        return Post.objects.all()
+
+
+class PostListFilter(generics.ListAPIView):
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        query_param = self.request.query_params.get('query', None)
+        if query_param is not None:
+            queryset = Post.objects.filter(
+                Q(title__icontains=query_param) |
+                Q(category__name__icontains=query_param) |
+                Q(author__username__icontains=query_param)
+            )
+            if queryset.count() > 0:
+                return queryset
+            else:
+                return Post.objects.all()
+        return Post.objects.all()
+
+
 # The slug API endpoint is used so I can make a get request
 # based on the url pathname with react router
-
 
 class PostDetailSlug(generics.RetrieveAPIView):
     queryset = Post.objects.all()
@@ -56,23 +90,23 @@ class PostListArchive(generics.ListAPIView):
             raise Http404
 
 
-class PostListFilter(generics.ListAPIView):
-    serializer_class = PostSerializer
-    """
-	Optionally restricts the returned purchases to a given parameter
-	by filtering against a `content`, `title`, `author`, `category`, 
-	"""
-
-    def get_queryset(self):
-        query_param = self.kwargs['query']
-        if query_param:
-            queryset = Post.objects.filter(
-                Q(title__icontains=query_param) |
-                Q(category__name__icontains=query_param) |
-                Q(author__username__icontains=query_param)
-            )
-            if queryset.count() > 0:
-                return queryset
-            else:
-                return Post.objects.all()
-        return Post.objects.all()
+# class PostListFilter(generics.ListAPIView):
+#     serializer_class = PostSerializer
+#     """
+# 	Optionally restricts the returned posts to a given parameter
+# 	by filtering against a `content`, `title`, `author`, `category`,
+# 	"""
+#
+#     def get_queryset(self):
+#         query_param = self.kwargs['query']
+#         if query_param:
+#             queryset = Post.objects.filter(
+#                 Q(title__icontains=query_param) |
+#                 Q(category__name__icontains=query_param) |
+#                 Q(author__username__icontains=query_param)
+#             )
+#             if queryset.count() > 0:
+#                 return queryset
+#             else:
+#                 return Post.objects.all()
+#         return Post.objects.all()
