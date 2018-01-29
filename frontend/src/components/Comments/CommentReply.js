@@ -100,8 +100,10 @@ class CommentReply extends Component {
               >
                 <EditForm
                   prevText={this.props.text}
-                  fetchComments={this.props.fetchComments}
+                  fetchCommentsForPost={this.props.fetchCommentsForPost}
                   editCommentReply={this.props.editCommentReply}
+                  commentId={this.props.commentId}
+                  postId={this.props.postId}
                   commentReplyId={this.props.id}
                   toggleEditFormReply={this.toggleEditFormReply}
                   stateEditFormReply={this.state.toggleEditFormReply}

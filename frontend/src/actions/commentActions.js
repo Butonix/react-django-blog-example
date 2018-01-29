@@ -239,23 +239,32 @@ function deleteCommentReply(postId, commentId, commentReplyId) {
   };
 }
 
-function editCommentReply(commentReplyId, commentReplyText) {
+function editCommentReply(postId, commentId, commentReplyId, commentReplyText) {
   return async function(dispatch) {
     try {
-      let token_conv =
-        (await localStorage.getItem("goog_access_token_conv")) ||
-        localStorage.getItem("github_access_token_conv");
-
-      let response = await fetch(`${url}/commentreplies/${commentReplyId}/`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token_conv}`
-        },
-        body: JSON.stringify({
-          text: commentReplyText
-        })
-      });
+      let token_conv = await (localStorage.getItem("goog_access_token_conv") ||
+        localStorage.getItem("token"));
+      console.log("TOKEN_CONV", token_conv);
+      let headers =
+        (await token_conv) && token_conv.length > 35
+          ? {
+              "Content-Type": "application/json",
+              Authorization: `JWT ${token_conv}`
+            }
+          : {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token_conv}`
+            };
+      let response = await fetch(
+        `${url}/${postId}/comments/${commentId}/commentreplies/${commentReplyId}/`,
+        {
+          method: "PATCH",
+          headers: headers,
+          body: JSON.stringify({
+            text: commentReplyText
+          })
+        }
+      );
       if (!response.ok) {
         throw new Error("Could not delete the requested commentreply.");
       }

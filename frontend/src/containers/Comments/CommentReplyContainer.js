@@ -18,8 +18,10 @@ const mapDispatchToProps = dispatch => ({
   fetchCommentsForPost: postId => dispatch(fetchCommentsForPost(postId)),
   deleteCommentReply: (postId, commentId, commentReplyId) =>
     dispatch(deleteCommentReply(postId, commentId, commentReplyId)),
-  editCommentReply: (commentReplyId, commentReplyText) =>
-    dispatch(editCommentReply(commentReplyId, commentReplyText))
+  editCommentReply: (postId, commentId, commentReplyId, commentReplyText) =>
+    dispatch(
+      editCommentReply(postId, commentId, commentReplyId, commentReplyText)
+    )
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentReply);
