@@ -34,7 +34,6 @@ class PostDetail extends Component {
     let category_upper_case =
       result.category &&
       result.category.charAt(0).toUpperCase() + result.category.slice(1);
-
     return (
       <div className="container mt-4">
         {isFetching ? (

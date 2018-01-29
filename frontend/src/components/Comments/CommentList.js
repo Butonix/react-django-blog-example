@@ -4,15 +4,24 @@ import Form from "./Form";
 
 class CommentList extends Component {
   componentDidMount() {
-    return this.props.fetchComments(this.props.postId);
+    if (this.props.postId) {
+      return this.props.fetchComments(this.props.postId);
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.isAuthenticatedGoogle !== this.props.isAuthenticatedGoogle) {
+    if (
+      prevProps.isAuthenticatedGoogle !== this.props.isAuthenticatedGoogle &&
+      this.props.postId
+    ) {
+      return this.props.fetchComments(this.props.postId);
+    }
+    if (prevProps.postId !== this.props.postId) {
       return this.props.fetchComments(this.props.postId);
     }
   }
   render() {
+    console.log("______CL____", this.props);
     return (
       <span>
         {this.props.comments.err && (

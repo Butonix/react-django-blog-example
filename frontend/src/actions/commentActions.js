@@ -17,6 +17,9 @@ function fetchComments(postId) {
         (await localStorage.getItem("goog_access_token_conv")) ||
         localStorage.getItem("token");
       console.log("TOKEN_CONV", token_conv);
+      // sending a request with the users token
+      // so we can display edit and delete icons next to the comment
+      // if the user is the owner of the comment
       let headers =
         (await token_conv) && token_conv.length > 35
           ? {
@@ -27,6 +30,8 @@ function fetchComments(postId) {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token_conv}`
             };
+      // if the user is not logged in headers is empty
+      headers = (await token_conv) === null ? {} : headers;
       dispatch(isFetchingComments());
       let response = await fetch(`${url}/${postId}/comments/`, {
         method: "GET",
