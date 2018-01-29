@@ -12,9 +12,7 @@ class CommentDetail extends Component {
     this.toggleTextForm = this.toggleTextForm.bind(this);
     this.toggleEditForm = this.toggleEditForm.bind(this);
   }
-  // componentDidUpdte(prevProps, prevState) {
-  //
-  // }
+
   state = {
     toggleTextForm: false,
     toggleEditForm: false
@@ -99,9 +97,10 @@ class CommentDetail extends Component {
                 >
                   <EditForm
                     prevText={this.props.text}
-                    fetchComments={this.props.fetchComments}
-                    editCommentForPost={this.props.editComment}
+                    fetchCommentsForPost={this.props.fetchCommentsForPost}
+                    editCommentForPost={this.props.editCommentForPost}
                     commentId={this.props.id}
+                    postId={this.props.postId}
                     toggleEditForm={this.toggleEditForm}
                     editFormState={this.state.toggleEditForm}
                   />

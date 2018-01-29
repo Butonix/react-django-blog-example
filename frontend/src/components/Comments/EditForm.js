@@ -34,6 +34,10 @@ class EditForm extends PureComponent {
     if (this.props.toggleEditForm || this.props.toggleEditFormReply) {
       this.textInput.focus();
     }
+    if (prevProps.prevText !== this.props.prevText) {
+      console.log("update state because new prevText");
+      this.setState({ text: this.props.prevText });
+    }
   }
 
   change(e) {
@@ -64,9 +68,13 @@ class EditForm extends PureComponent {
       console.log("POSTING to server");
       if (!this.props.editCommentReply) {
         this.props
-          .editComment(this.props.commentId, this.state.text)
+          .editCommentForPost(
+            this.props.postId,
+            this.props.commentId,
+            this.state.text
+          )
           .then(() => this.props.toggleEditForm())
-          .then(() => this.props.fetchComments());
+          .then(() => this.props.fetchCommentsForPost(this.props.postId));
       } else {
         this.props
           .editCommentReply(this.props.commentReplyId, this.state.text)
