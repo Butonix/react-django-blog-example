@@ -4,7 +4,7 @@ import moment from "moment";
 import "./detail-styles.css";
 import Form from "./Form";
 import EditForm from "./EditForm";
-//import CommentReply from "../../containers/Comments/CommentReplyContainer.js";
+import CommentReply from "../../containers/Comments/CommentReplyContainer";
 
 class CommentDetail extends Component {
   constructor(props) {
@@ -111,28 +111,31 @@ class CommentDetail extends Component {
               style={{ display: this.state.toggleTextForm ? "block" : "none" }}
             >
               <Form
-                fetchCommentsForPost={this.props.fetchComments}
+                fetchCommentsForPost={this.props.fetchCommentsForPost}
                 createCommentReply={this.props.createCommentReply}
                 commentId={this.props.id}
+                postId={this.props.postId}
                 toggleTextForm={this.toggleTextForm}
                 isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
+                isAuthenticatedEmail={this.props.isAuthenticatedEmail}
                 textFormState={this.state.toggleTextForm}
               />
             </span>
           </div>
         </div>
+        {this.props.comment_replies &&
+          this.props.comment_replies.map(reply => {
+            return (
+              <CommentReply
+                key={reply.id}
+                {...reply}
+                commentId={this.props.id}
+                postId={this.props.postId}
+                current_user={this.props.current_user}
+              />
+            );
+          })}
       </div>
-      // {this.props.comment_replies &&
-      //   this.props.comment_replies.map(reply => {
-      //     return (
-      //       <CommentReply
-      //         key={reply.id}
-      //         {...reply}
-      //         commentId={this.props.id}
-      //         current_user={this.props.current_user}
-      //       />
-      //     );
-      //   })}
     );
   }
 }

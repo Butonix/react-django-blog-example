@@ -13,8 +13,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createCommentReply: (commentId, commentText) =>
-    dispatch(createCommentReply(commentId, commentText)),
+  createCommentReply: (postId, commentId, commentText) =>
+    dispatch(createCommentReply(postId, commentId, commentText)),
   fetchCommentsForPost: postId => dispatch(fetchCommentsForPost(postId)),
   deleteCommentForPost: (postId, commentId) =>
     dispatch(deleteCommentForPost(postId, commentId)),

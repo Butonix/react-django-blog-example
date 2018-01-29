@@ -159,24 +159,32 @@ function editCommentForPost(postId, commentId, commentText) {
 }
 
 // COMMENTREPLY LIST ACTIONS
-function createCommentReply(commentId, commentText) {
+function createCommentReply(postId, commentId, commentText) {
   return async function(dispatch) {
     try {
-      let token_conv =
-        (await localStorage.getItem("goog_access_token_conv")) ||
-        localStorage.getItem("github_access_token_conv");
-      let response = await fetch(`${url}/commentreplies/`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${token_conv}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          comment: commentId,
-          text: commentText
-        })
-      });
+      let token_conv = await (localStorage.getItem("goog_access_token_conv") ||
+        localStorage.getItem("token"));
+      console.log("TOKEN_CONV", token_conv);
+      let headers =
+        (await token_conv) && token_conv.length > 35
+          ? {
+              "Content-Type": "application/json",
+              Authorization: `JWT ${token_conv}`
+            }
+          : {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token_conv}`
+            };
+      let response = await fetch(
+        `${url}/${postId}/comments/${commentId}/commentreplies/`,
+        {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify({
+            text: commentText
+          })
+        }
+      );
       if (!response.ok) {
         throw new Error(
           "Authorization is required to post a comment, please log in."
@@ -190,6 +198,7 @@ function createCommentReply(commentId, commentText) {
   };
 }
 
+//COMMENTREPLY DETAIL ACTIONS
 const isDeletingCommentReply = () => ({ type: "IS_DELETING_COMMENT_REPLY" });
 const deleteCommentReplyFailure = err => ({
   type: "DELETE_COMMENT_REPLY_FAILURE",
