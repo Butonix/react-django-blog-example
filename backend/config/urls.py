@@ -21,5 +21,4 @@ urlpatterns = [
     url(r"^contact/", include('contact_form.urls')),
     url(r"^testing/", include("authenticated_test_endpoint.urls")),
     url(r"^", include('post.urls', namespace='blog')),
-    url(r"^postdetail/", include('comment.urls', namespace='comments'))
 ]

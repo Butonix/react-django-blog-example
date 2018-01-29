@@ -122,7 +122,7 @@ class PostDetail extends Component {
             </div>
           </span>
         )}
-        <CommentList />
+        <CommentList postId={result.id} />
         <div id="disqus_thread" />
       </div>
     );

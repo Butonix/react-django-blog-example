@@ -4,12 +4,12 @@ import Form from "./Form";
 
 class CommentList extends Component {
   componentDidMount() {
-    return this.props.fetchComments();
+    return this.props.fetchComments(this.props.postId);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.isAuthenticatedGoogle !== this.props.isAuthenticatedGoogle) {
-      return this.props.fetchComments();
+      return this.props.fetchComments(this.props.postId);
     }
   }
   render() {

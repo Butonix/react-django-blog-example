@@ -1,4 +1,4 @@
-const url = "http://127.0.0.1:8000/postdetail";
+const url = "http://127.0.0.1:8000";
 
 const isFetchingComments = () => ({ type: "IS_FETCHING_COMMENTS" });
 const fetchCommentsSuccess = commentArr => ({
@@ -10,7 +10,7 @@ const fetchCommentsFailure = err => ({
   err
 });
 
-function fetchComments() {
+function fetchComments(postId) {
   return async function(dispatch) {
     try {
       let token_conv =
@@ -28,7 +28,7 @@ function fetchComments() {
               Authorization: `Bearer ${token_conv}`
             };
       dispatch(isFetchingComments());
-      let response = await fetch(`${url}/comments/`, {
+      let response = await fetch(`${url}/${postId}/comments/`, {
         method: "GET",
         headers: headers
       });
