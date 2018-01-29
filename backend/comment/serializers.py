@@ -34,8 +34,9 @@ class CommentSerializer(serializers.ModelSerializer):
         'comment_replies', 'current_user')
 
 class CommentReplySerializer(serializers.ModelSerializer):
-    post = serializers.ReadOnlyField(source='post.id')
+    post = serializers.ReadOnlyField(source='post.title')
     user = serializers.ReadOnlyField(source='user.username')
+    comment = serializers.ReadOnlyField(source='comment.id')
 
     class Meta:
         model= CommentReply
