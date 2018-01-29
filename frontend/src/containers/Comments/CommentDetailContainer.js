@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import {
   createCommentReply,
-  fetchComments,
+  fetchCommentsForPost,
   deleteComment,
   editComment
 } from "../../actions/commentActions";
@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   createCommentReply: (commentId, commentText) =>
     dispatch(createCommentReply(commentId, commentText)),
-  fetchComments: postId => dispatch(fetchComments(postId)),
+  fetchCommentsForPost: postId => dispatch(fetchCommentsForPost(postId)),
   deleteComment: commentId => dispatch(deleteComment(commentId)),
   editComment: (commentId, commentText) =>
     dispatch(editComment(commentId, commentText))

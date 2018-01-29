@@ -5,7 +5,7 @@ import Form from "./Form";
 class CommentList extends Component {
   componentDidMount() {
     if (this.props.postId) {
-      return this.props.fetchComments(this.props.postId);
+      return this.props.fetchCommentsForPost(this.props.postId);
     }
   }
 
@@ -14,10 +14,10 @@ class CommentList extends Component {
       prevProps.isAuthenticatedGoogle !== this.props.isAuthenticatedGoogle &&
       this.props.postId
     ) {
-      return this.props.fetchComments(this.props.postId);
+      return this.props.fetchCommentsForPost(this.props.postId);
     }
     if (prevProps.postId !== this.props.postId) {
-      return this.props.fetchComments(this.props.postId);
+      return this.props.fetchCommentsForPost(this.props.postId);
     }
   }
   render() {
@@ -33,8 +33,9 @@ class CommentList extends Component {
           <h5 className="card-header">Leave a Comment:</h5>
           <div className="card-body" />
           <Form
-            createComment={this.props.createComment}
-            fetchComments={this.props.fetchComments}
+            createCommentForPost={this.props.createCommentForPost}
+            fetchCommentsForPost={this.props.fetchCommentsForPost}
+            postId={this.props.postId}
             isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
           />
         </div>

@@ -63,20 +63,20 @@ class Form extends PureComponent {
       console.log("POSTING to server");
       if (!this.props.createCommentReply) {
         this.props
-          .createComment(this.state.text)
-          .then(() => this.props.fetchComments());
+          .createCommentForPost(this.props.postId, this.state.text)
+          .then(() => this.props.fetchCommentsForPost(this.props.postId));
       }
       if (this.props.toggleTextForm) {
         this.props
           .createCommentReply(this.props.commentId, this.state.text)
           .then(() => this.props.toggleTextForm())
-          .then(() => this.props.fetchComments());
+          .then(() => this.props.fetchCommentsForPost(this.props.postId));
       }
       if (this.props.toggleTextFormReply) {
         this.props
           .createCommentReply(this.props.commentId, this.state.text)
           .then(() => this.props.toggleTextFormReply())
-          .then(() => this.props.fetchComments());
+          .then(() => this.props.fetchCommentsForPost(this.props.postId));
       }
       //now clear form.
       this.setState({

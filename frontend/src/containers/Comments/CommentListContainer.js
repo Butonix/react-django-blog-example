@@ -1,7 +1,10 @@
 import { connect } from "react-redux";
 
 import CommentList from "../../components/Comments/CommentList";
-import { fetchComments, createComment } from "../../actions/commentActions";
+import {
+  fetchCommentsForPost,
+  createCommentForPost
+} from "../../actions/commentActions";
 
 const mapStateToProps = state => ({
   comments: state.comments,
@@ -9,8 +12,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchComments: postId => dispatch(fetchComments(postId)),
-  createComment: commentText => dispatch(createComment(commentText))
+  fetchCommentsForPost: postId => dispatch(fetchCommentsForPost(postId)),
+  createCommentForPost: (postId, commentText) =>
+    dispatch(createCommentForPost(postId, commentText))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentList);

@@ -1,38 +1,47 @@
 const url = "http://127.0.0.1:8000";
 
-const isFetchingComments = () => ({ type: "IS_FETCHING_COMMENTS" });
-const fetchCommentsSuccess = commentArr => ({
-  type: "FETCH_COMMENTS_SUCCESS",
+const isFetchingCommentsForPost = () => ({
+  type: "IS_FETCHING_COMMENTS_FOR_POST"
+});
+const fetchCommentsForPostSuccess = commentArr => ({
+  type: "FETCH_COMMENTS_FOR_POST_SUCCESS",
   commentArr
 });
-const fetchCommentsFailure = err => ({
-  type: "FETCH_COMMENTS_FAILURE",
+const fetchCommentsForPostFailure = err => ({
+  type: "FETCH_COMMENTS_FOR_POST_FAILURE",
   err
 });
 
-function fetchComments(postId) {
+//Either get the google access token for Oauth2
+//Or get the email login JWT token
+let token_conv =
+  localStorage.getItem("goog_access_token_conv") ||
+  localStorage.getItem("token");
+
+// Check which token the user has in order to log them in
+// because the header prefixes can't be the same
+// for dj_rest_JWT and soc_Oauth2 authorization
+let headers =
+  token_conv && token_conv.length > 35
+    ? {
+        "Content-Type": "application/json",
+        Authorization: `JWT ${token_conv}`
+      }
+    : {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token_conv}`
+      };
+
+function fetchCommentsForPost(postId) {
   return async function(dispatch) {
     try {
-      let token_conv =
-        (await localStorage.getItem("goog_access_token_conv")) ||
-        localStorage.getItem("token");
       console.log("TOKEN_CONV", token_conv);
       // sending a request with the users token
       // so we can display edit and delete icons next to the comment
       // if the user is the owner of the comment
-      let headers =
-        (await token_conv) && token_conv.length > 35
-          ? {
-              "Content-Type": "application/json",
-              Authorization: `JWT ${token_conv}`
-            }
-          : {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token_conv}`
-            };
       // if the user is not logged in headers is empty
       headers = (await token_conv) === null ? {} : headers;
-      dispatch(isFetchingComments());
+      dispatch(isFetchingCommentsForPost());
       let response = await fetch(`${url}/${postId}/comments/`, {
         method: "GET",
         headers: headers
@@ -41,9 +50,9 @@ function fetchComments(postId) {
         throw new Error("Unable to fetch the comments.");
       }
       let responseJson = await response.json();
-      return dispatch(fetchCommentsSuccess(responseJson));
+      return dispatch(fetchCommentsForPostSuccess(responseJson));
     } catch (err) {
-      return dispatch(fetchCommentsFailure(err));
+      return dispatch(fetchCommentsForPostFailure(err));
     }
   };
 }
@@ -53,13 +62,11 @@ const createCommentFailure = err => ({
   err
 });
 
-function createComment(commentText) {
+function createCommentForPost(postId, commentText) {
   return async function(dispatch) {
     try {
-      let token_conv =
-        (await localStorage.getItem("goog_access_token_conv")) ||
-        localStorage.getItem("github_access_token_conv");
-      let response = await fetch(`${url}/comments/`, {
+      token_conv = await token_conv;
+      let response = await fetch(`${url}/${postId}/comments/`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -228,8 +235,8 @@ function editCommentReply(commentReplyId, commentReplyText) {
 }
 
 export {
-  fetchComments,
-  createComment,
+  fetchCommentsForPost,
+  createCommentForPost,
   createCommentReply,
   deleteCommentReply,
   deleteComment,

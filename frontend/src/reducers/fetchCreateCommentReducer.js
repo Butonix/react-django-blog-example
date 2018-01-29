@@ -6,15 +6,15 @@ const initialState = {
 
 function fetchCreatecommentReducer(state = initialState, action) {
   switch (action.type) {
-    case "IS_FETCHING_COMMENTS":
+    case "IS_FETCHING_COMMENTS_FOR_POST":
       return { ...state, err: null, isFetchingComments: true };
-    case "FETCH_COMMENTS_SUCCESS":
+    case "FETCH_COMMENTS_FOR_POST_SUCCESS":
       return {
         ...state,
         commentArr: action.commentArr,
         isFetchingComments: false
       };
-    case "FETCH_COMMENTS_FAILURE":
+    case "FETCH_COMMENTS_FOR_POST_FAILURE":
       return { ...state, err: action.err, isFetchingComments: false };
     case "CREATE_COMMENT_FAILURE":
       return { ...state, err: action.err };
