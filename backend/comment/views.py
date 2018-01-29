@@ -20,6 +20,7 @@ class CommentList(ListCreateAPIView):
         serializer.save(user=user, post=post)
 
     def get_queryset(self):
+        print("USER CURRENT", self.request.user.username)
         post_obj = Post.objects.get(pk=self.kwargs['pk'])
         return Comment.objects.filter(post=post_obj)
 

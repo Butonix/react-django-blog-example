@@ -12,6 +12,9 @@ class CommentDetail extends Component {
     this.toggleTextForm = this.toggleTextForm.bind(this);
     this.toggleEditForm = this.toggleEditForm.bind(this);
   }
+  // componentDidUpdte(prevProps, prevState) {
+  //
+  // }
   state = {
     toggleTextForm: false,
     toggleEditForm: false
@@ -71,7 +74,9 @@ class CommentDetail extends Component {
               <span
                 style={{
                   display:
-                    this.props.current_user === this.props.user
+                    this.props.current_user === this.props.user &&
+                    (this.props.isAuthenticatedGoogle ||
+                      this.props.isAuthenticatedEmail)
                       ? "inline-block"
                       : "none"
                 }}

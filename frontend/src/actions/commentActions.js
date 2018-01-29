@@ -13,30 +13,22 @@ const fetchCommentsForPostFailure = err => ({
   err
 });
 
-//Either get the google access token for Oauth2
-//Or get the email login JWT token
-let token_conv =
-  localStorage.getItem("goog_access_token_conv") ||
-  localStorage.getItem("token");
-
-// Check which token the user has in order to log them in
-// because the header prefixes can't be the same
-// for dj_rest_JWT and soc_Oauth2 authorization
-let headers =
-  token_conv && token_conv.length > 35
-    ? {
-        "Content-Type": "application/json",
-        Authorization: `JWT ${token_conv}`
-      }
-    : {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token_conv}`
-      };
-
 function fetchCommentsForPost(postId) {
   return async function(dispatch) {
     try {
+      let token_conv = await (localStorage.getItem("goog_access_token_conv") ||
+        localStorage.getItem("token"));
       console.log("TOKEN_CONV", token_conv);
+      let headers =
+        (await token_conv) && token_conv.length > 35
+          ? {
+              "Content-Type": "application/json",
+              Authorization: `JWT ${token_conv}`
+            }
+          : {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token_conv}`
+            };
       // sending a request with the users token
       // so we can display edit and delete icons next to the comment
       // if the user is the owner of the comment
@@ -66,8 +58,19 @@ const createCommentFailure = err => ({
 function createCommentForPost(postId, commentText) {
   return async function(dispatch) {
     try {
-      token_conv = await token_conv;
-      headers = await headers;
+      let token_conv = await (localStorage.getItem("goog_access_token_conv") ||
+        localStorage.getItem("token"));
+      console.log("TOKEN_CONV", token_conv);
+      let headers =
+        (await token_conv) && token_conv.length > 35
+          ? {
+              "Content-Type": "application/json",
+              Authorization: `JWT ${token_conv}`
+            }
+          : {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token_conv}`
+            };
       let response = await fetch(`${url}/${postId}/comments/`, {
         method: "POST",
         headers: headers,
@@ -92,14 +95,25 @@ function deleteCommentForPost(postId, commentId) {
   return async function(dispatch) {
     //dispatch(isDeletingCommentReply());
     try {
-      token_conv = await token_conv;
-      headers = await headers;
+      let token_conv = await (localStorage.getItem("goog_access_token_conv") ||
+        localStorage.getItem("token"));
+      console.log("TOKEN_CONV", token_conv);
+      let headers =
+        (await token_conv) && token_conv.length > 35
+          ? {
+              "Content-Type": "application/json",
+              Authorization: `JWT ${token_conv}`
+            }
+          : {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token_conv}`
+            };
       let response = await fetch(`${url}/${postId}/comments/${commentId}/`, {
         method: "DELETE",
         headers: headers
       });
       if (!response.ok) {
-        throw new Error("Could not delete the requested commentreply.");
+        throw new Error("Could not delete the requested comment.");
       }
       return response;
     } catch (err) {
@@ -112,9 +126,19 @@ function deleteCommentForPost(postId, commentId) {
 function editCommentForPost(postId, commentId, commentText) {
   return async function(dispatch) {
     try {
-      token_conv = await token_conv;
-      headers = await headers;
-
+      let token_conv = await (localStorage.getItem("goog_access_token_conv") ||
+        localStorage.getItem("token"));
+      console.log("TOKEN_CONV", token_conv);
+      let headers =
+        (await token_conv) && token_conv.length > 35
+          ? {
+              "Content-Type": "application/json",
+              Authorization: `JWT ${token_conv}`
+            }
+          : {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token_conv}`
+            };
       let response = await fetch(`${url}/${postId}/comments/${commentId}/`, {
         method: "PATCH",
         headers: headers,
