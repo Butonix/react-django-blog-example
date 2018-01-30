@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.17.1",
     "formik": "^0.10.5",
     "gapi-client": "0.0.3",
     "history": "^4.7.2",
@@ -21,7 +20,6 @@
     "react-scripts": "1.0.17",
     "reactstrap": "^5.0.0-alpha.4",
     "redux": "^3.7.2",
-    "redux-form": "^7.2.0",
     "redux-thunk": "^2.2.0",
     "styled-components": "^2.4.0",
     "url-search-params": "^0.10.0",
