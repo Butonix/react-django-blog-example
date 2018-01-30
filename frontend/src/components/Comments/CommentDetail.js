@@ -33,7 +33,6 @@ class CommentDetail extends Component {
   }
 
   render() {
-    console.log("____COMMENTDETAIL", this.props);
     return (
       <div>
         <div className="row">

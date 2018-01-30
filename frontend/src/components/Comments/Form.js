@@ -36,7 +36,6 @@ class Form extends PureComponent {
   }
 
   change(e) {
-    console.log(this.state.text);
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -65,7 +64,16 @@ class Form extends PureComponent {
       if (!this.props.createCommentReply) {
         this.props
           .createCommentForPost(this.props.postId, this.state.text)
-          .then(() => this.props.fetchCommentsForPost(this.props.postId));
+          //.then(resp => console.log("FORMJS___+++_____", resp))
+          .then(resp => {
+            if (resp.err) {
+              return Promise.reject();
+            }
+          })
+          .then(() => this.props.fetchCommentsForPost(this.props.postId))
+          .catch(() => {
+            return;
+          });
       }
       if (this.props.toggleTextForm) {
         this.props

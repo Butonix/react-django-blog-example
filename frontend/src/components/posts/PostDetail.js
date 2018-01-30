@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import PropTypes from "prop-types";
 
-import { push } from "react-router-redux";
-
 import LoadingSpinner from "../reusableComponents/LoadingSpinner";
 import PostArchiveHtmlStyled from "../../components/reusableComponents/PostArchiveHtmlStyled";
 import CategoryHtmlStyled from "../../components/reusableComponents/CategoryHtmlStyled";
@@ -27,7 +25,6 @@ class PostDetail extends Component {
 
   createMarkup = content => ({ __html: content });
   render() {
-    console.log("POST DETAIL------->", this.props);
     let { err, isFetching } = this.props.post;
     let { result, total_post_count } = this.props.post.snippet;
 
