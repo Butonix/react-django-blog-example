@@ -46,10 +46,13 @@
   left: 0;
 }
 
-/*Google Buttons */
+/* modal */
 
-body {
-  padding: 2em;
+/*Google Buttons */
+.modal-scrollbar {
+  modal-open {
+    overflow-y: auto;
+  }
 }
 
 /* Shared */

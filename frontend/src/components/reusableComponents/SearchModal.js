@@ -37,6 +37,7 @@ class SearchModal extends Component {
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
+          style={{}}
           className={this.props.className}
         >
           <ModalHeader toggle={this.toggle}>Search for a Post</ModalHeader>

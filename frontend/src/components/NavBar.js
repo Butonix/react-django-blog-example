@@ -131,7 +131,7 @@ class Navbar extends Component {
         </ul>
         <ul className="navbar-nav ml-auto">
           <li key="search-app" className="nav-item">
-            <SearchModal buttonLabel="Search..." />
+            <SearchModal className="modal-scrollbar" buttonLabel="Search..." />
           </li>
         </ul>
       </nav>
