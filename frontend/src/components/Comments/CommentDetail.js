@@ -27,12 +27,13 @@ class CommentDetail extends Component {
   }
 
   deleteCommentAndFetch(postId, commentId) {
-    this.props
-      .deleteCommentForPost(postId, commentId)
-      .then(() => this.props.fetchCommentsForPost(postId));
+    this.props.deleteCommentForPost(postId, commentId).then(() => {
+      !this.props.err && this.props.fetchCommentsForPost(postId);
+    });
   }
 
   render() {
+    console.log("COMMENT DETAIL PROPS", this.props);
     return (
       <div>
         <div className="row">

@@ -4,7 +4,7 @@ const initialState = {
   err: null
 };
 
-function fetchCreatecommentReducer(state = initialState, action) {
+function commentListReducer(state = initialState, action) {
   switch (action.type) {
     case "IS_FETCHING_COMMENTS_FOR_POST":
       return { ...state, err: null, isFetchingComments: true };
@@ -17,7 +17,7 @@ function fetchCreatecommentReducer(state = initialState, action) {
     case "FETCH_COMMENTS_FOR_POST_FAILURE":
       return { ...state, err: action.err, isFetchingComments: false };
     case "CREATE_COMMENT_FAILURE":
-      return { ...state, err: action.err };
+      return { ...state, err: action.err, isFetchingComments: false };
     case "GOOGLE_LOGOUT":
       let commentArray = state.commentArr.map(commentObj =>
         Object.assign({}, commentObj, { current_user: "" })
@@ -31,7 +31,7 @@ function fetchCreatecommentReducer(state = initialState, action) {
   }
 }
 
-export default fetchCreatecommentReducer;
+export default commentListReducer;
 
 //my page was scrolling to top on fetch bacause i had commentArr: [], in my IS_FETCHING_COMMENTS
 //action

@@ -30,7 +30,6 @@ class Form extends PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.createCommentReply) {
-      console.log("FOCUSING FORM");
       this.textInput.focus();
     }
   }
@@ -64,7 +63,6 @@ class Form extends PureComponent {
       if (!this.props.createCommentReply) {
         this.props
           .createCommentForPost(this.props.postId, this.state.text)
-          //.then(resp => console.log("FORMJS___+++_____", resp))
           .then(resp => {
             if (resp.err) {
               return Promise.reject();
@@ -82,8 +80,17 @@ class Form extends PureComponent {
             this.props.commentId,
             this.state.text
           )
+          .then(resp => {
+            if (resp.err) {
+              this.props.toggleTextForm();
+              return Promise.reject();
+            }
+          })
           .then(() => this.props.toggleTextForm())
-          .then(() => this.props.fetchCommentsForPost(this.props.postId));
+          .then(() => this.props.fetchCommentsForPost(this.props.postId))
+          .catch(() => {
+            return;
+          });
       }
       if (this.props.toggleTextFormReply) {
         this.props

@@ -89,53 +89,41 @@ function createCommentForPost(postId, commentText) {
     }
   };
 }
+
 //COMMENT DETAIL ACTIONS
+
 function deleteCommentForPost(postId, commentId) {
   return async function(dispatch) {
-    //dispatch(isDeletingCommentReply());
-    try {
-      let headers = await determineHeaders();
-      let response = await fetch(
-        `${url}/posts/${postId}/comments/${commentId}/`,
-        {
-          method: "DELETE",
-          headers: headers
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Could not delete the requested comment.");
+    let headers = await determineHeaders();
+    let response = await fetch(
+      `${url}/posts/${postId}/comments/${commentId}/`,
+      {
+        method: "DELETE",
+        headers: headers
       }
-      return response;
-    } catch (err) {
-      console.log(err);
-      //return dispatch(deleteCommentReplyFailure(err));
-    }
+    );
+    return response;
   };
 }
 
 function editCommentForPost(postId, commentId, commentText) {
   return async function(dispatch) {
-    try {
-      let headers = await determineHeaders();
-      let response = await fetch(
-        `${url}/posts/${postId}/comments/${commentId}/`,
-        {
-          method: "PATCH",
-          headers: headers,
-          body: JSON.stringify({
-            text: commentText
-          })
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Could not delete the requested commentreply.");
+    let headers = await determineHeaders();
+    let response = await fetch(
+      `${url}/posts/${postId}/comments/${commentId}/`,
+      {
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify({
+          text: commentText
+        })
       }
-      let responseJson = await response.json();
-      return responseJson;
-    } catch (err) {
-      console.log(err);
-      //return dispatch(deleteCommentReplyFailure(err));
+    );
+    if (!response.ok) {
+      throw new Error("Could not delete the requested commentreply.");
     }
+    let responseJson = await response.json();
+    return responseJson;
   };
 }
 
@@ -168,57 +156,36 @@ function createCommentReply(postId, commentId, commentText) {
 }
 
 //COMMENTREPLY DETAIL ACTIONS
-const isDeletingCommentReply = () => ({ type: "IS_DELETING_COMMENT_REPLY" });
-const deleteCommentReplyFailure = err => ({
-  type: "DELETE_COMMENT_REPLY_FAILURE",
-  err
-});
 
 function deleteCommentReply(postId, commentId, commentReplyId) {
   return async function(dispatch) {
-    dispatch(isDeletingCommentReply());
-    try {
-      let headers = await determineHeaders();
-      let response = await fetch(
-        `${url}/posts/${postId}/comments/${commentId}/commentreplies/${commentReplyId}/`,
-        {
-          method: "DELETE",
-          headers: headers
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Could not delete the requested commentreply.");
+    let headers = await determineHeaders();
+    let response = await fetch(
+      `${url}/posts/${postId}/comments/${commentId}/commentreplies/${commentReplyId}/`,
+      {
+        method: "DELETE",
+        headers: headers
       }
-      return response;
-    } catch (err) {
-      return dispatch(deleteCommentReplyFailure(err));
-    }
+    );
+    return response;
   };
 }
 
 function editCommentReply(postId, commentId, commentReplyId, commentReplyText) {
   return async function(dispatch) {
-    try {
-      let headers = await determineHeaders();
-      let response = await fetch(
-        `${url}/posts/${postId}/comments/${commentId}/commentreplies/${commentReplyId}/`,
-        {
-          method: "PATCH",
-          headers: headers,
-          body: JSON.stringify({
-            text: commentReplyText
-          })
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Could not delete the requested commentreply.");
+    let headers = await determineHeaders();
+    let response = await fetch(
+      `${url}/posts/${postId}/comments/${commentId}/commentreplies/${commentReplyId}/`,
+      {
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify({
+          text: commentReplyText
+        })
       }
-      let responseJson = await response.json();
-      return responseJson;
-    } catch (err) {
-      console.log(err);
-      //return dispatch(deleteCommentReplyFailure(err));
-    }
+    );
+    let responseJson = await response.json();
+    return responseJson;
   };
 }
 
