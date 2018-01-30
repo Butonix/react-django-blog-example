@@ -16,7 +16,7 @@ class CommentList(ListCreateAPIView):
         user = self.request.user
         try:
             post = Post.objects.get(pk=self.kwargs['pk'])
-        except Post.DoesNotExist:
+        except (Post.DoesNotExist):
             raise Http404
         serializer.save(user=user, post=post)
 
@@ -35,8 +35,11 @@ class CommentDetail(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly )
 
     def get_object(self):
-        post_obj = Post.objects.get(pk=self.kwargs['pk'])
-        comment_obj = Comment.objects.filter(post=post_obj).get(pk=self.kwargs['comment_pk'])
+        try:
+            post_obj = Post.objects.get(pk=self.kwargs['pk'])
+            comment_obj = Comment.objects.filter(post=post_obj).get(pk=self.kwargs['comment_pk'])
+        except (Post.DoesNotExist, Comment.DoesNotExist) as e:
+            raise Http404
         return comment_obj
 
 class CommentReplyList(ListCreateAPIView):
@@ -45,13 +48,19 @@ class CommentReplyList(ListCreateAPIView):
 
     def perform_create(self, serializer):
         user = self.request.user
-        post = Post.objects.get(pk=self.kwargs['pk'])
-        comment  = Comment.objects.get(pk=self.kwargs['comment_pk'])
+        try:
+            post = Post.objects.get(pk=self.kwargs['pk'])
+            comment  = Comment.objects.get(pk=self.kwargs['comment_pk'])
+        except (Post.DoesNotExist, Comment.DoesNotExist) as e:
+            raise Http404
         serializer.save(user=user, post=post, comment=comment)
 
     def get_queryset(self):
-        post_obj = Post.objects.get(pk=self.kwargs['pk'])
-        comment_obj = Comment.objects.get(pk = self.kwargs['comment_pk'])
+        try:
+            post_obj = Post.objects.get(pk=self.kwargs['pk'])
+            comment_obj = Comment.objects.get(pk = self.kwargs['comment_pk'])
+        except (Post.DoesNotExist, Comment.DoesNotExist) as e:
+            raise Http404
         return CommentReply.objects.filter(post=post_obj).filter(comment=comment_obj)
 
 class CommentReplyDetail(RetrieveUpdateDestroyAPIView):
@@ -59,4 +68,8 @@ class CommentReplyDetail(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
     def get_object(self):
-        return CommentReply.objects.get(pk=self.kwargs['pk'])
+        try:
+            comment_obj = CommentReply.objects.get(pk=self.kwargs['pk'])
+        except CommentReply.DoesNotExist:
+            raise Http404
+        return comment_obj
