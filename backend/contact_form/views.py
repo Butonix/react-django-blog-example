@@ -13,12 +13,17 @@ class ContactFormCreate(generics.ListCreateAPIView):
 	serializer_class = ContactFormSerializer
 
 	def create(self, request, *args, **kwargs):
-		g_recaptcha_response = request.data['g_recaptcha_response']
+		try:
+			g_recaptcha_response = request.data['g_recaptcha_response']
+		except KeyError:
+			return Response({'captcha_error': 'Please complete the captcha.'},
+			status = status.HTTP_400_BAD_REQUEST)
 		r = requests.post(settings.GR_CAPTCHA_URL, {
 		'secret': settings.GR_CAPTCHA_SECRET_KEY,
 		'response': g_recaptcha_response
 		})
 		if not json.loads(r.content.decode())['success']:
+			print("inside if")
 			return Response(
 				{'captcha_error': 'Please complete the captcha.'},
 				status = status.HTTP_400_BAD_REQUEST

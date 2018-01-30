@@ -32,6 +32,7 @@ function submitContactForm(data) {
       return responseJson;
     } catch (err) {
       dispatch(submitContactFormFail(err));
+      return err;
     }
   };
 }

@@ -50,11 +50,20 @@ class ContactForm extends Component {
         message,
         g_recaptcha_response: this.g_recaptcha_response
       })
-      .then(response => console.log("RESPONSE-", response))
-      .then(() => this.props.resetForm())
+      .then(response => {
+        if (this.props.contact_form.err) {
+          return Promise.reject();
+        }
+      })
       .then(() => this.props.setSubmitting(false))
       .then(() => window.scrollTo(0, 0))
-      .then(() => this.recaptchaInstance.reset());
+      .then(() => this.recaptchaInstance.reset())
+      .then(() => this.props.resetForm())
+      .catch(() => {
+        window.scrollTo(0, 0);
+        this.recaptchaInstance.reset();
+        return this.props.setSubmitting(false);
+      });
   }
   render() {
     const {
