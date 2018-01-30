@@ -4,7 +4,7 @@ import { GoogleLogout } from "react-google-login";
 import gapi from "gapi-client";
 
 class GoogleLogoutButton extends Component {
-  componentDidMount() {
+  componentWillMount() {
     gapi.load("auth2", () => {
       this.auth2 = gapi.auth2.init({
         client_id:
