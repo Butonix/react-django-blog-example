@@ -5,8 +5,8 @@ import { fetchPostSlug, fetchPostPk } from "../../actions/postActions";
 
 const mapStateToProps = state => ({ post: state.post });
 const mapDispatchToProps = dispatch => ({
-	fetchPostSlug: slug => dispatch(fetchPostSlug(slug)),
-	fetchPostPk: paginateLink => dispatch(fetchPostPk(paginateLink))
+  fetchPostSlug: slug => dispatch(fetchPostSlug(slug)),
+  fetchPostPk: paginateLink => dispatch(fetchPostPk(paginateLink))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

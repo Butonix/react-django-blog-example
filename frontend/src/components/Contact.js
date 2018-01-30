@@ -40,7 +40,6 @@ class ContactForm extends Component {
     { first_name, last_name, email, website, message } = this.props.values
   ) {
     event.preventDefault();
-    console.log("submitting");
     this.props
       .submitContactForm({
         first_name,

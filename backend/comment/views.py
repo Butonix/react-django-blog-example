@@ -1,7 +1,7 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-
+from django.http import Http404
 
 from .models import Comment, CommentReply
 from .serializers import CommentSerializer, CommentReplySerializer
@@ -14,12 +14,18 @@ class CommentList(ListCreateAPIView):
 
     def perform_create(self, serializer):
         user = self.request.user
-        post = Post.objects.get(pk=self.kwargs['pk'])
+        try:
+            post = Post.objects.get(pk=self.kwargs['pk'])
+        except Post.DoesNotExist:
+            raise Http404
         serializer.save(user=user, post=post)
 
     def get_queryset(self):
         print("USER CURRENT", self.request.user.username)
-        post_obj = Post.objects.get(pk=self.kwargs['pk'])
+        try:
+            post_obj = Post.objects.get(pk=self.kwargs['pk'])
+        except Post.DoesNotExist:
+            raise Http404
         return Comment.objects.filter(post=post_obj)
 
 class CommentDetail(RetrieveUpdateDestroyAPIView):
