@@ -12,25 +12,24 @@ class GoogleLogoutButton extends Component {
       });
     });
   }
-
+  signOut = dispatch => {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2
+      .signOut()
+      .then(() => {
+        console.log("User signed out.");
+        localStorage.removeItem("goog_avatar_url");
+        localStorage.removeItem("goog_name");
+        localStorage.removeItem("goog_email");
+      })
+      .then(() => this.props.googleLogoutAction())
+      .then(() => this.props.history.push("/"));
+  };
   render() {
-    const signOut = dispatch => {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2
-        .signOut()
-        .then(() => {
-          console.log("User signed out.");
-          localStorage.removeItem("goog_avatar_url");
-          localStorage.removeItem("goog_name");
-          localStorage.removeItem("goog_email");
-        })
-        .then(() => this.props.googleLogoutAction())
-        .then(() => this.props.history.push("/"));
-    };
     return (
       <GoogleLogout
         buttonText="Logout"
-        onLogoutSuccess={signOut}
+        onLogoutSuccess={this.signOut}
         className="loginBtn loginBtn--google"
       />
     );

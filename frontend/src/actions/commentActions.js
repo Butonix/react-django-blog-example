@@ -178,19 +178,7 @@ function deleteCommentReply(postId, commentId, commentReplyId) {
   return async function(dispatch) {
     dispatch(isDeletingCommentReply());
     try {
-      let token_conv = await (localStorage.getItem("goog_access_token_conv") ||
-        localStorage.getItem("token"));
-      console.log("TOKEN_CONV", token_conv);
-      let headers =
-        (await token_conv) && token_conv.length > 35
-          ? {
-              "Content-Type": "application/json",
-              Authorization: `JWT ${token_conv}`
-            }
-          : {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token_conv}`
-            };
+      let headers = await determineHeaders();
       let response = await fetch(
         `${url}/posts/${postId}/comments/${commentId}/commentreplies/${commentReplyId}/`,
         {
@@ -211,19 +199,7 @@ function deleteCommentReply(postId, commentId, commentReplyId) {
 function editCommentReply(postId, commentId, commentReplyId, commentReplyText) {
   return async function(dispatch) {
     try {
-      let token_conv = await (localStorage.getItem("goog_access_token_conv") ||
-        localStorage.getItem("token"));
-      console.log("TOKEN_CONV", token_conv);
-      let headers =
-        (await token_conv) && token_conv.length > 35
-          ? {
-              "Content-Type": "application/json",
-              Authorization: `JWT ${token_conv}`
-            }
-          : {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token_conv}`
-            };
+      let headers = await determineHeaders();
       let response = await fetch(
         `${url}/posts/${postId}/comments/${commentId}/commentreplies/${commentReplyId}/`,
         {
