@@ -111,7 +111,7 @@ class Navbar extends Component {
           </li>
           <li key="about-app" className="nav-item">
             <NavLink
-              to="/users/opmftw"
+              to="/about"
               className="nav-link"
               activeClassName="active"
               exact

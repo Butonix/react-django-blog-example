@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withFormik } from "formik";
 import Yup from "yup";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
@@ -27,10 +26,14 @@ const styles = theme => ({
     marginTop: "30px",
     marginBottom: "3em",
     width: "10%"
+  },
+  input: {
+    display: "none"
   }
 });
 
-class InnerRegistrationForm extends Component {
+class InnerEditProfileForm extends Component {
+  componentDidMoutn() {}
   render() {
     const {
       values,
@@ -50,72 +53,55 @@ class InnerRegistrationForm extends Component {
         <h3 style={{ textAlign: "center" }}>Registration Form</h3>
         <form onSubmit={handleSubmit}>
           <TextField
-            name="username"
-            placeholder="Enter your Username"
+            name="full_name"
+            placeholder="Enter your Name"
             type="text"
             value={values.username}
             onChange={handleChange}
             onBlur={handleBlur}
             error={errors.username && touched.username}
             helperText={errors.username && touched.username && errors.username}
-            label="Username"
+            label="Name"
             className={classes.textField}
-            required
           />
           <TextField
-            name="email"
-            placeholder="Enter your Email"
+            name="bio"
+            multiline={true}
+            rows={6}
+            value={values.message}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.message && touched.message}
+            helperText={errors.message && touched.message && errors.message}
+            label="Enter Your Bio/Interests"
+            className={classes.textField}
+          />
+          <TextField
+            name="location"
+            placeholder="Enter your City/Country"
             type="text"
-            value={values.email}
+            value={values.username}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors.email && touched.email}
-            helperText={errors.email && touched.email && errors.email}
-            label="Email Address"
+            error={errors.username && touched.username}
+            helperText={errors.username && touched.username && errors.username}
+            label="Enter your City/Country"
             className={classes.textField}
-            required
           />
-          <TextField
-            name="password1"
-            placeholder="Enter your Password"
-            type="password"
-            value={values.password1}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.password1 && touched.password1}
-            helperText={
-              errors.password1 && touched.password1 && errors.password1
-            }
-            className={classes.textField}
-            label="Password"
-            required
-          />
-          <TextField
-            name="password2"
-            placeholder="Repeat your password"
-            type="password"
-            value={values.password2}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.password2 && touched.password2}
-            helperText={
-              errors.password2 && touched.password2 && errors.password2
-            }
-            className={classes.textField}
-            label="Repeat your Password"
-            required
-          />
-
           <br />
-          <Button
-            raised
-            className={classes.button}
-            type="button"
-            onClick={handleReset}
-            disabled={!dirty || isSubmitting}
-          >
-            Reset
-          </Button>
+          <input
+            accept="image/*"
+            className={classes.input}
+            id="raised-button-file"
+            multiple
+            type="file"
+          />
+          <label htmlFor="raised-button-file">
+            <Button raised component="span" className={classes.button}>
+              Upload An Avatar
+            </Button>
+          </label>
+          <br />
           <Button
             raised
             className={classes.button}
@@ -125,8 +111,6 @@ class InnerRegistrationForm extends Component {
             Submit
           </Button>
         </form>
-        <span>Already have an account?</span>
-        <Link to="/login"> Login</Link>
       </span>
     );
   }
@@ -176,13 +160,6 @@ const EnhancedForm = withFormik({
     setSubmitting(false);
   },
   displayName: "RegistrationForm" //hlps with react devtools
-})(InnerRegistrationForm);
+})(InnerEditProfileForm);
 
-export const Register = withStyles(styles)(EnhancedForm);
-
-Register.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }),
-  registerAction: PropTypes.func.isRequired
-};
+export const EditProfile = withStyles(styles)(EnhancedForm);

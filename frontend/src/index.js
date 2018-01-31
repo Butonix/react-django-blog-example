@@ -12,6 +12,7 @@ import PostDetail from "./containers/posts/PostDetailContainer";
 import CategoryList from "./containers/posts/CategoryListContainer";
 import FilterPosts from "./containers/posts/FilterPostsContainer";
 import About from "./containers/author/AboutContainer";
+import EditProfile from "./containers/userProfile/EditProfileContainer";
 import Contact from "./containers/ContactContainer";
 import ScrollToTop from "./components/reusableComponents/ScrollToTop";
 import Register from "./containers/authentication/RegisterContainer";
@@ -45,7 +46,8 @@ ReactDOM.render(
               path="/category/:category_type"
               component={CategoryList}
             />
-            <Route exact path="/users/:username" component={About} />
+            <Route exact path="/users/:username" component={EditProfile} />
+            <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
             <Route path="/posts/*" component={FilterPosts} />
             <Route exact path="/:slug" component={PostDetail} />
