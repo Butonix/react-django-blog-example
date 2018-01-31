@@ -46,7 +46,7 @@ ReactDOM.render(
               path="/category/:category_type"
               component={CategoryList}
             />
-            <Route exact path="/users/:username" component={EditProfile} />
+            <Route exact path="/profile" component={EditProfile} />
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
             <Route path="/posts/*" component={FilterPosts} />

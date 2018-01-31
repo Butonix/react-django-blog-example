@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import { EditProfile } from "../../components/userProfile/EditProfile";
+import EditProfile from "../../components/userProfile/EditProfile";
 import { fetchProfileData } from "../../actions/userProfileActions.js";
 
 const mapStateToProps = state => ({

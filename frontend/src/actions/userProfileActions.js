@@ -12,20 +12,20 @@ const fetchProfileDataFail = err => ({
   err
 });
 
-function fetchProfileData(username) {
+function fetchProfileData() {
   return async function(dispatch) {
     dispatch(isFetching());
     try {
       let token_conv = await localStorage.getItem("token");
-      let response = await fetch(`${url}/users/${username}/`, {
+      let response = await fetch(`${url}/profile/`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `JWT ${token_conv}`
         }
       });
-      if (response.status !== 200) {
-        throw new Error("The requested User does not exist.");
+      if (!response.ok) {
+        throw new Error("Unable to load the requested Profile..");
       } else {
         let responseJson = await response.json();
         return dispatch(fetchProfileDataSuccess(responseJson));

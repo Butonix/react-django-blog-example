@@ -33,6 +33,11 @@ class Navbar extends Component {
           <NavLink to="/changepassword" className="nav-link">
             Change Password
           </NavLink>
+        </li>,
+        <li key="edit-profile" className="nav-item">
+          <NavLink to="/profile" className="nav-link">
+            Profile
+          </NavLink>
         </li>
       ];
     }

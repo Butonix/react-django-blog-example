@@ -32,37 +32,48 @@ const styles = theme => ({
   }
 });
 
-class InnerEditProfileForm extends Component {
-  componentDidMoutn() {
-    this.props.fetchProfileData();
+class EditProfile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bio: "",
+      location: "",
+      full_name: ""
+    };
   }
+
+  componentDidMount() {
+    this.props
+      .fetchProfileData()
+      .then(resp =>
+        this.setState({
+          bio: resp.userData.bio,
+          full_name: resp.userData.full_name,
+          location: resp.userData.location
+        })
+      )
+      .then(response => console.log("EDIT RESPONSE______", response));
+  }
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
   render() {
-    const {
-      values,
-      touched,
-      errors,
-      dirty,
-      isSubmitting,
-      handleChange,
-      handleBlur,
-      handleSubmit,
-      handleReset,
-      classes
-    } = this.props;
+    const { classes } = this.props;
 
     return (
       <span className={classes.container}>
         <h3 style={{ textAlign: "center" }}>Registration Form</h3>
-        <form onSubmit={handleSubmit}>
+        <form>
           <TextField
             name="full_name"
             placeholder="Enter your Name"
             type="text"
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.username && touched.username}
-            helperText={errors.username && touched.username && errors.username}
+            value={this.state.full_name}
+            onChange={this.handleChange}
+            error={false}
+            helperText={false}
             label="Name"
             className={classes.textField}
           />
@@ -70,11 +81,10 @@ class InnerEditProfileForm extends Component {
             name="bio"
             multiline={true}
             rows={6}
-            value={values.message}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.message && touched.message}
-            helperText={errors.message && touched.message && errors.message}
+            value={this.state.bio}
+            onChange={this.handleChange}
+            error={false}
+            helperText={false}
             label="Enter Your Bio/Interests"
             className={classes.textField}
           />
@@ -82,11 +92,10 @@ class InnerEditProfileForm extends Component {
             name="location"
             placeholder="Enter your City/Country"
             type="text"
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.username && touched.username}
-            helperText={errors.username && touched.username && errors.username}
+            value={this.state.location}
+            onChange={this.handleChange}
+            error={false}
+            helperText={false}
             label="Enter your City/Country"
             className={classes.textField}
           />
@@ -108,7 +117,7 @@ class InnerEditProfileForm extends Component {
             raised
             className={classes.button}
             type="submit"
-            disabled={isSubmitting}
+            disabled={false}
           >
             Submit
           </Button>
@@ -118,50 +127,4 @@ class InnerEditProfileForm extends Component {
   }
 }
 
-const EnhancedForm = withFormik({
-  mapPropsToValues: () => ({
-    username: "",
-    email: "",
-    password1: "",
-    password2: ""
-  }),
-  validationSchema: Yup.object().shape({
-    username: Yup.string().required("Username is required"),
-    password1: Yup.string()
-      .min(8, "The password must be at least 8 characters")
-      .required("Password is required"),
-    password2: Yup.string()
-      .oneOf([Yup.ref("password1"), null], "Passwords don't match.")
-      .required("Password confirm is required"),
-    email: Yup.string()
-      .email("Invalid Email Address")
-      .required("Email is required")
-  }),
-  handleSubmit: (
-    { username, email, password1, password2 },
-    { props, setSubmitting, setErrors }
-  ) => {
-    console.log("submitting RegistrationF");
-    props
-      .registerAction({ username, email, password1, password2 })
-      .then(resp => {
-        if (
-          resp.username ||
-          resp.password1 ||
-          resp.password2 ||
-          resp.email ||
-          resp.non_field_errors
-        ) {
-          console.log(resp);
-          setErrors(resp);
-        } else {
-          console.log(resp);
-          return props.history.push("/");
-        }
-      });
-    setSubmitting(false);
-  },
-  displayName: "RegistrationForm" //hlps with react devtools
-})(InnerEditProfileForm);
-
-export const EditProfile = withStyles(styles)(EnhancedForm);
+export default withStyles(styles)(EditProfile);
