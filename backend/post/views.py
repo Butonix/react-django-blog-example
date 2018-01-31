@@ -25,7 +25,8 @@ class PostList(generics.ListAPIView):
                 Q(title__icontains=query_param) |
                 Q(category__name__icontains=query_param) |
                 Q(author__username__icontains=query_param) |
-                Q(archive__icontains=query_param)
+                Q(archive__icontains=query_param) |
+                Q(category__name__icontains=query_param) 
             )
             if queryset.count() > 0:
                 return queryset
