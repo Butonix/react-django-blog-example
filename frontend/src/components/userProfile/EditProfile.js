@@ -20,8 +20,8 @@ const styles = theme => ({
   button: {
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: "30px",
-    marginBottom: "3em",
+    marginTop: "10px",
+    marginBottom: "1em",
     width: "10%"
   },
   input: {
@@ -40,7 +40,8 @@ class EditProfile extends Component {
       bio: "",
       location: "",
       full_name: "",
-      user_image: ""
+      user_image: "",
+      err: ""
     };
   }
 
@@ -73,9 +74,21 @@ class EditProfile extends Component {
     data.append("user_image", this.state.user_image);
     this.props
       .updateProfileData(data)
-      .then(resp => console.log("UPDATE RESPONSE______", resp))
-      .then(() => this.fetchData())
-      .then(() => window.scrollTo(0, 0));
+      .then(resp => {
+        if (resp.err) {
+          return Promise.reject(resp.err.message);
+        }
+      })
+      .then(() => {
+        this.setState({ err: "" });
+        return this.fetchData();
+      })
+      .then(() => window.scrollTo(0, 0))
+      .catch(err => {
+        console.log("Caught err &&& ** ** * & && & &");
+        this.setState({ err: err });
+        return window.scrollTo(0, 0);
+      });
   };
 
   handleImageChange = e => {
@@ -99,6 +112,11 @@ class EditProfile extends Component {
               alt="avatar"
               className={classes.avatar}
             />
+          )}
+          {this.state.err && (
+            <div className="alert alert-danger" role="alert">
+              <strong>{this.state.err}</strong>
+            </div>
           )}
         </span>
         <form>

@@ -59,9 +59,9 @@ function updateProfileData(newData) {
         },
         body: newData
       });
-      // if (!response.ok) {
-      //   throw new Error("Unable to load the requested Profile..");
-      // }
+      if (!response.ok) {
+        throw new Error("Unable to update the requested Profile.");
+      }
       let responseJson = await response.json();
       return dispatch(updateProfileDataSuccess(responseJson));
     } catch (err) {
