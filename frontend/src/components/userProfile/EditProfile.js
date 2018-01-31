@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { withFormik } from "formik";
-import Yup from "yup";
-import { Link } from "react-router-dom";
 
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
@@ -43,28 +40,53 @@ class EditProfile extends Component {
   }
 
   componentDidMount() {
-    this.props
-      .fetchProfileData()
-      .then(resp =>
-        this.setState({
-          bio: resp.userData.bio,
-          full_name: resp.userData.full_name,
-          location: resp.userData.location
-        })
-      )
-      .then(response => console.log("EDIT RESPONSE______", response));
+    this.props.fetchProfileData().then(resp =>
+      this.setState({
+        bio: resp.userData.bio,
+        full_name: resp.userData.full_name,
+        location: resp.userData.location,
+        user_image: ""
+      })
+    );
   }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    var data = new FormData();
+    var imageInput = this.imageInput;
+    data.append("bio", this.state.bio);
+    data.append("location", this.state.location);
+    data.append("full_name", this.state.full_name);
+    data.append("user_image", this.state.user_image);
+    // let data = {
+    //   bio: this.state.bio,
+    //   location: this.state.location,
+    //   full_name: this.state.full_name,
+    //   user_image: this.imageInput
+    // };
+    this.props
+      .updateProfileData(data)
+      .then(resp => console.log("UPDATE RESPONSE______", resp));
+  };
+
+  handleImageChange = e => {
+    e.preventDefault();
+    let file = e.target.files[0];
+
+    this.setState({
+      user_image: file
+    });
+  };
   render() {
     const { classes } = this.props;
 
     return (
       <span className={classes.container}>
-        <h3 style={{ textAlign: "center" }}>Registration Form</h3>
+        <h3 style={{ textAlign: "center" }}>Edit your Profile</h3>
         <form>
           <TextField
             name="full_name"
@@ -106,6 +128,7 @@ class EditProfile extends Component {
             id="raised-button-file"
             multiple
             type="file"
+            onChange={e => this.handleImageChange(e)}
           />
           <label htmlFor="raised-button-file">
             <Button raised component="span" className={classes.button}>
@@ -117,7 +140,7 @@ class EditProfile extends Component {
             raised
             className={classes.button}
             type="submit"
-            disabled={false}
+            onClick={e => this.handleSubmit(e)}
           >
             Submit
           </Button>

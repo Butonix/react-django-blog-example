@@ -2,7 +2,7 @@ import * as types from "../types/actionTypes";
 
 const url = "http://127.0.0.1:8000";
 
-const isFetching = () => ({ type: types.FETCHING_PROFILE_DATA });
+const isFetchingProfileData = () => ({ type: types.FETCHING_PROFILE_DATA });
 const fetchProfileDataSuccess = userData => ({
   type: types.FETCH_PROFILE_DATA_SUCCESS,
   userData
@@ -14,7 +14,7 @@ const fetchProfileDataFail = err => ({
 
 function fetchProfileData() {
   return async function(dispatch) {
-    dispatch(isFetching());
+    dispatch(isFetchingProfileData());
     try {
       let token_conv = await localStorage.getItem("token");
       let response = await fetch(`${url}/profile/`, {
@@ -36,4 +36,38 @@ function fetchProfileData() {
   };
 }
 
-export { fetchProfileData };
+const isUpdatingProfileDate = () => ({ type: "IS_UPDATING_PROFILE_DATA" });
+const updateProfileDataSuccess = userData => ({
+  type: "UPDATE_PROFILE_DATA_SUCCESS",
+  userData
+});
+const updateProfileDataFailure = err => ({
+  type: "UPDATE_PROFILE_DATA_FAILURE",
+  err
+});
+
+function updateProfileData(newData) {
+  return async function(dispatch) {
+    dispatch(isUpdatingProfileDate());
+    try {
+      let token_conv = await localStorage.getItem("token");
+      let response = await fetch(`${url}/profile/`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `JWT ${token_conv}`,
+          Accept: "application/json"
+        },
+        body: newData
+      });
+      // if (!response.ok) {
+      //   throw new Error("Unable to load the requested Profile..");
+      // }
+      let responseJson = await response.json();
+      return dispatch(updateProfileDataSuccess(responseJson));
+    } catch (err) {
+      return dispatch(updateProfileDataFailure(err));
+    }
+  };
+}
+
+export { fetchProfileData, updateProfileData };
