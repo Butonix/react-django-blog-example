@@ -36,19 +36,8 @@ function fetchProfileData() {
   };
 }
 
-const isUpdatingProfileData = () => ({ type: "IS_UPDATING_PROFILE_DATA" });
-const updateProfileDataSuccess = userData => ({
-  type: "UPDATE_PROFILE_DATA_SUCCESS",
-  userData
-});
-const updateProfileDataFailure = err => ({
-  type: "UPDATE_PROFILE_DATA_FAILURE",
-  err
-});
-
 function updateProfileData(newData) {
   return async function(dispatch) {
-    dispatch(isUpdatingProfileData());
     try {
       let token_conv = await localStorage.getItem("token");
       let response = await fetch(`${url}/profile/`, {
@@ -63,9 +52,9 @@ function updateProfileData(newData) {
         throw new Error("Unable to update the requested Profile.");
       }
       let responseJson = await response.json();
-      return dispatch(updateProfileDataSuccess(responseJson));
+      return responseJson;
     } catch (err) {
-      return dispatch(updateProfileDataFailure(err));
+      return err;
     }
   };
 }

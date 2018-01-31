@@ -40,7 +40,6 @@ class EditProfile extends Component {
       bio: "",
       location: "",
       full_name: "",
-      user_image: "",
       err: ""
     };
   }
@@ -70,12 +69,15 @@ class EditProfile extends Component {
     data.append("bio", this.state.bio);
     data.append("location", this.state.location);
     data.append("full_name", this.state.full_name);
-    data.append("user_image", this.state.user_image);
+    if (typeof this.state.user_image === "object") {
+      data.append("user_image", this.state.user_image);
+    }
     this.props
       .updateProfileData(data)
       .then(resp => {
-        if (resp.err) {
-          return Promise.reject(resp.err.message);
+        if (resp.message) {
+          this.setState({ user_image: "" });
+          return Promise.reject(resp.message);
         }
       })
       .then(() => {
@@ -92,13 +94,12 @@ class EditProfile extends Component {
   handleImageChange = e => {
     e.preventDefault();
     let file = e.target.files[0];
-    this.setState({
+    return this.setState({
       user_image: file
     });
   };
   render() {
     const { classes } = this.props;
-
     return (
       <span className={classes.container}>
         <span style={{ textAlign: "center" }}>
@@ -123,8 +124,6 @@ class EditProfile extends Component {
             type="text"
             value={this.state.full_name}
             onChange={this.handleChange}
-            error={false}
-            helperText={false}
             label="Name"
             className={classes.textField}
           />
@@ -134,8 +133,6 @@ class EditProfile extends Component {
             rows={6}
             value={this.state.bio}
             onChange={this.handleChange}
-            error={false}
-            helperText={false}
             label="Enter Your Bio/Interests"
             className={classes.textField}
           />
@@ -145,8 +142,6 @@ class EditProfile extends Component {
             type="text"
             value={this.state.location}
             onChange={this.handleChange}
-            error={false}
-            helperText={false}
             label="Enter your City/Country"
             className={classes.textField}
           />
