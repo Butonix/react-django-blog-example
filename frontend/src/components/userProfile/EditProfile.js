@@ -67,7 +67,6 @@ class EditProfile extends Component {
   handleSubmit = e => {
     e.preventDefault();
     var data = new FormData();
-    var imageInput = this.imageInput;
     data.append("bio", this.state.bio);
     data.append("location", this.state.location);
     data.append("full_name", this.state.full_name);
@@ -85,7 +84,6 @@ class EditProfile extends Component {
       })
       .then(() => window.scrollTo(0, 0))
       .catch(err => {
-        console.log("Caught err &&& ** ** * & && & &");
         this.setState({ err: err });
         return window.scrollTo(0, 0);
       });
@@ -99,7 +97,6 @@ class EditProfile extends Component {
     });
   };
   render() {
-    console.log("STATE", this.state);
     const { classes } = this.props;
 
     return (
