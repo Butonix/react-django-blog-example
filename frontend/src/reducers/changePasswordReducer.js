@@ -12,7 +12,7 @@ function changePasswordReducer(state = initialState, action) {
       return {
         ...state,
         isChangingPassword: false,
-        resp_message: action.resp
+        resp_message: action.resp.detail
       };
     case "CHANGE_PASSWORD_FAILURE":
       return {

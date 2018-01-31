@@ -4,7 +4,7 @@ import { ChangePassword } from "../../components/authentication/ChangePassword";
 
 const mapStateToProps = state => ({ change_password: state.change_password });
 const mapDispatchToProps = dispatch => ({
-  changePassword: () => dispatch(changePassword())
+  changePassword: pwDetails => dispatch(changePassword(pwDetails))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);

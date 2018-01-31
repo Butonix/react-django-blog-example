@@ -46,16 +46,28 @@ class InnerPwForm extends Component {
     return (
       <span className={classes.container}>
         <h3 style={{ textAlign: "center" }}>Change Your Password</h3>
+        {this.props.change_password.resp_message && (
+          <div className="alert alert-success" role="alert">
+            <strong>{this.props.change_password.resp_message}</strong>
+          </div>
+        )}
+        {this.props.change_password.err && (
+          <div className="alert alert-danger" role="alert">
+            <strong>{this.props.change_password.err.message}</strong>
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
           <TextField
             name="old_password"
             placeholder="Enter your Old password"
             type="password"
-            value={values.password}
+            value={values.old_password}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors.password && touched.password}
-            helperText={errors.password && touched.password && errors.password}
+            error={errors.old_password && touched.old_password}
+            helperText={
+              errors.old_password && touched.old_password && errors.old_password
+            }
             label="Old Password"
             className={classes.textField}
           />
@@ -64,11 +76,15 @@ class InnerPwForm extends Component {
             name="new_password1"
             placeholder="Enter your new password"
             type="password"
-            value={values.password}
+            value={values.new_password1}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors.password && touched.password}
-            helperText={errors.password && touched.password && errors.password}
+            error={errors.new_password1 && touched.new_password1}
+            helperText={
+              errors.new_password1 &&
+              touched.new_password1 &&
+              errors.new_password1
+            }
             label="New Password"
             className={classes.textField}
           />
@@ -76,11 +92,15 @@ class InnerPwForm extends Component {
             name="new_password2"
             placeholder="Repeat your new password"
             type="password"
-            value={values.password}
+            value={values.new_password2}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors.password && touched.password}
-            helperText={errors.password && touched.password && errors.password}
+            error={errors.new_password2 && touched.new_password2}
+            helperText={
+              errors.new_password2 &&
+              touched.new_password2 &&
+              errors.new_password2
+            }
             label="Repeat your new Password"
             className={classes.textField}
           />
@@ -115,29 +135,28 @@ const EnhancedForm = withFormik({
     new_password2: ""
   }),
   validationSchema: Yup.object().shape({
+    old_password: Yup.string()
+      .min(6, "This field must be at least 6 characters")
+      .required("This field is required"),
     new_password1: Yup.string()
       .min(8, "The password must be at least 8 characters")
-      .required("Password is required"),
+      .required("New Password is required"),
     new_password2: Yup.string()
       .oneOf([Yup.ref("new_password1"), null], "Passwords don't match.")
       .required("Password confirm is required")
   }),
   handleSubmit: (
     { old_password, new_password1, new_password2 },
-    { props, setSubmitting, setErrors }
+    { props, setSubmitting, setErrors, resetForm }
   ) => {
-    console.log("submitting LoginF");
+    console.log("submitting PasswordChangeF");
     props
       .changePassword({ old_password, new_password1, new_password2 })
       .then(response => {
-        if (response.non_field_errors) {
-          console.log(response);
-          setErrors({ password: response.non_field_errors[0] });
-        } else {
-          console.log(response);
-          props.authenticateAction(response, props.history, props.dispatch);
-        }
-      });
+        console.log("CHANGEPW_______", response);
+      })
+      .then(() => window.scrollTo(0, 0))
+      .then(() => resetForm());
     setSubmitting(false);
   },
   displayName: "ChangePasswordForm" //hlps with react devtools
