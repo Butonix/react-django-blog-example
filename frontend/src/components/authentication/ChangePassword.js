@@ -40,20 +40,21 @@ class InnerPwForm extends Component {
       handleBlur,
       handleSubmit,
       handleReset,
-      classes
+      classes,
+      change_password
     } = this.props;
 
     return (
       <span className={classes.container}>
         <h3 style={{ textAlign: "center" }}>Change Your Password</h3>
-        {this.props.change_password.resp_message && (
+        {change_password.resp_message && (
           <div className="alert alert-success" role="alert">
-            <strong>{this.props.change_password.resp_message}</strong>
+            <strong>{change_password.resp_message}</strong>
           </div>
         )}
-        {this.props.change_password.err && (
+        {change_password.err && (
           <div className="alert alert-danger" role="alert">
-            <strong>{this.props.change_password.err.message}</strong>
+            <strong>{change_password.err.message}</strong>
           </div>
         )}
         <form onSubmit={handleSubmit}>
@@ -149,12 +150,8 @@ const EnhancedForm = withFormik({
     { old_password, new_password1, new_password2 },
     { props, setSubmitting, setErrors, resetForm }
   ) => {
-    console.log("submitting PasswordChangeF");
     props
       .changePassword({ old_password, new_password1, new_password2 })
-      .then(response => {
-        console.log("CHANGEPW_______", response);
-      })
       .then(() => window.scrollTo(0, 0))
       .then(() => resetForm());
     setSubmitting(false);

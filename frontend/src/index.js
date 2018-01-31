@@ -39,7 +39,7 @@ ReactDOM.render(
             <Route exact path="/signout" render={() => <Redirect to="/" />} />
             <AuthenticatedRoute exact path="/register" component={Register} />
             <AuthenticatedRoute exact path="/login" component={Login} />
-            <Route path="/changepassword" component={ChangePassword} />
+            <PrivateRoute path="/changepassword" component={ChangePassword} />
             <Route
               exact
               path="/category/:category_type"
