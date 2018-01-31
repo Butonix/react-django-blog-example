@@ -11,7 +11,7 @@ import HomePage from "./containers/posts/HomePageContainer";
 import PostDetail from "./containers/posts/PostDetailContainer";
 import CategoryList from "./containers/posts/CategoryListContainer";
 import FilterPosts from "./containers/posts/FilterPostsContainer";
-import About from "./containers/author/AboutContainer";
+import About from "./components/author/About";
 import EditProfile from "./containers/userProfile/EditProfileContainer";
 import Contact from "./containers/ContactContainer";
 import ScrollToTop from "./components/reusableComponents/ScrollToTop";
