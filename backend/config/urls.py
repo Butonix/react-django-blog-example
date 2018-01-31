@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^auth/', include('rest_auth.urls')),
     url(r"^newsletter/", include('newsletter.urls')),
     url(r"^category/", include('category.urls')),
-    url(r"^users/", include('user_profile.urls')),
+    url(r"^profile/", include('user_profile.urls')),
     url(r"^contact/", include('contact_form.urls')),
     url(r"^testing/", include("authenticated_test_endpoint.urls")),
     url(r"^posts/", include('post.urls', namespace='blog')),

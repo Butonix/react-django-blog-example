@@ -33,7 +33,9 @@ const styles = theme => ({
 });
 
 class InnerEditProfileForm extends Component {
-  componentDidMoutn() {}
+  componentDidMoutn() {
+    this.props.fetchProfileData();
+  }
   render() {
     const {
       values,

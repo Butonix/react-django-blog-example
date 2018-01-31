@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
   user_profile: state.user_profile
 });
 const mapDispatchToProps = dispatch => ({
-  fetchProfileData: username => dispatch(fetchProfileData(username))
+  fetchProfileData: () => dispatch(fetchProfileData())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

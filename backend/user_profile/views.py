@@ -1,12 +1,24 @@
 from rest_framework import generics
+from rest_framework.response import Response
 from django.http import Http404
 
 from user_profile.models import UserProfile
 from user_profile.serializers import UserProfileSerializer
 
-class UserList(generics.ListAPIView):
+class PersonalProfile(generics.RetrieveUpdateAPIView):
 	serializer_class = UserProfileSerializer
 	queryset = UserProfile.objects.all()
+
+	def get_object(self):
+		try:
+			return UserProfile.objects.get(user=self.request.user)
+		except UserProfile.DoesNotEXist:
+			raise Http404
+
+	def retrieve(self, request, *args, **kwargs):
+		instance = self.get_object()
+		serializer = self.get_serializer(instance)
+		return Response(serializer.data)
 
 class UserDetail(generics.RetrieveAPIView):
 	serializer_class = UserProfileSerializer
