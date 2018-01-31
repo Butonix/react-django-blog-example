@@ -8,10 +8,10 @@ class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete = models.CASCADE,
 		related_name = 'profile')
 	slug = models.SlugField(max_length = 255, blank = True)
-	bio = models.TextField(blank=True)
-	location = models.CharField(max_length = 50, blank = True)
-	avatar = models.CharField(max_length = 255, blank = True)
-	full_name = models.CharField(max_length= 150, blank = True)
+	bio = models.TextField(blank=True, null=True)
+	location = models.CharField(max_length = 50, blank = True, null=True)
+	full_name = models.CharField(max_length= 150, blank = True, null=True)
+	user_image = models.ImageField(upload_to='profile_images', blank=True, null=True, default = '/profile_images/pr_image.png')
 
 	def __str__(self):
 		return self.user.username

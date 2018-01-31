@@ -223,3 +223,10 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get(
 OAUTH2_PROVIDER = {
     'ACCESS_TOKEN_EXPIRE_SECONDS': 36000,
 }
+
+
+#USER UPLOAD FILES
+#where django stores user uploads
+MEDIA_ROOT = os.path.join(BASE_DIR, 'user_uploads')
+#public url for user uploads
+MEDIA_URL = '/media/'

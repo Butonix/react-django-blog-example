@@ -172,8 +172,8 @@ const EnhancedForm = withFormik({
           console.log(resp);
           return props.history.push("/");
         }
-      })
-      .then(() => setSubmitting(false));
+      });
+    setSubmitting(false);
   },
   displayName: "RegistrationForm" //hlps with react devtools
 })(MyInnerRegistrationForm);
