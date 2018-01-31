@@ -25,4 +25,5 @@ urlpatterns = [
 #Browsable API login
 urlpatterns += [
     url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
+    #url(r'^', include('django.contrib.auth.urls')),
 ]

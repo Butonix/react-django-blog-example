@@ -28,6 +28,11 @@ class Navbar extends Component {
           <NavLink to="/signout" className="nav-link">
             Log out
           </NavLink>
+        </li>,
+        <li key="change-password" className="nav-item">
+          <NavLink to="/changepassword" className="nav-link">
+            Change Password
+          </NavLink>
         </li>
       ];
     }

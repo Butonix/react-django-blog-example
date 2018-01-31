@@ -1,7 +1,7 @@
 const url = "http://127.0.0.1:8000";
 
 //Method called for each action to determine headers sent
-const determineHeaders = () => {
+export const determineHeaders = () => {
   let token_conv =
     localStorage.getItem("goog_access_token_conv") ||
     localStorage.getItem("token");

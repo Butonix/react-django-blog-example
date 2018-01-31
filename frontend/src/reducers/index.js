@@ -12,6 +12,7 @@ import postArchiveReducer from "./postArchiveReducer";
 import filterPostsReducer from "./filterPostsReducer";
 import googleInfoReducer from "./googleAuthReducer";
 import commentListReducer from "./commentListReducer";
+import changePasswordReducer from "./changePasswordReducer";
 //Auth testing purposes
 import dogReducer from "./dogReducer";
 
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   posts_filtered: filterPostsReducer,
   goog_auth: googleInfoReducer,
   comments: commentListReducer,
+  change_password: changePasswordReducer,
   //testing purposes
   dogs: dogReducer
 });
