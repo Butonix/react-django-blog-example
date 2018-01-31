@@ -36,7 +36,7 @@ function fetchProfileData() {
   };
 }
 
-const isUpdatingProfileDate = () => ({ type: "IS_UPDATING_PROFILE_DATA" });
+const isUpdatingProfileData = () => ({ type: "IS_UPDATING_PROFILE_DATA" });
 const updateProfileDataSuccess = userData => ({
   type: "UPDATE_PROFILE_DATA_SUCCESS",
   userData
@@ -48,7 +48,7 @@ const updateProfileDataFailure = err => ({
 
 function updateProfileData(newData) {
   return async function(dispatch) {
-    dispatch(isUpdatingProfileDate());
+    dispatch(isUpdatingProfileData());
     try {
       let token_conv = await localStorage.getItem("token");
       let response = await fetch(`${url}/profile/`, {

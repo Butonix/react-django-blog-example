@@ -26,6 +26,10 @@ const styles = theme => ({
   },
   input: {
     display: "none"
+  },
+  avatar: {
+    height: "7em",
+    width: "5em"
   }
 });
 
@@ -35,20 +39,25 @@ class EditProfile extends Component {
     this.state = {
       bio: "",
       location: "",
-      full_name: ""
+      full_name: "",
+      user_image: ""
     };
   }
 
   componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = () => {
     this.props.fetchProfileData().then(resp =>
       this.setState({
         bio: resp.userData.bio,
         full_name: resp.userData.full_name,
         location: resp.userData.location,
-        user_image: ""
+        user_image: resp.userData.user_image
       })
     );
-  }
+  };
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -62,31 +71,36 @@ class EditProfile extends Component {
     data.append("location", this.state.location);
     data.append("full_name", this.state.full_name);
     data.append("user_image", this.state.user_image);
-    // let data = {
-    //   bio: this.state.bio,
-    //   location: this.state.location,
-    //   full_name: this.state.full_name,
-    //   user_image: this.imageInput
-    // };
     this.props
       .updateProfileData(data)
-      .then(resp => console.log("UPDATE RESPONSE______", resp));
+      .then(resp => console.log("UPDATE RESPONSE______", resp))
+      .then(() => this.fetchData())
+      .then(() => window.scrollTo(0, 0));
   };
 
   handleImageChange = e => {
     e.preventDefault();
     let file = e.target.files[0];
-
     this.setState({
       user_image: file
     });
   };
   render() {
+    console.log("STATE", this.state);
     const { classes } = this.props;
 
     return (
       <span className={classes.container}>
-        <h3 style={{ textAlign: "center" }}>Edit your Profile</h3>
+        <span style={{ textAlign: "center" }}>
+          <h3>Edit your Profile</h3>
+          {this.state.user_image && (
+            <img
+              src={this.state.user_image}
+              alt="avatar"
+              className={classes.avatar}
+            />
+          )}
+        </span>
         <form>
           <TextField
             name="full_name"
@@ -126,7 +140,6 @@ class EditProfile extends Component {
             accept="image/*"
             className={classes.input}
             id="raised-button-file"
-            multiple
             type="file"
             onChange={e => this.handleImageChange(e)}
           />
