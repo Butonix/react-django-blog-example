@@ -83,13 +83,15 @@ class PostDetail extends Component {
                       <span>
                         {" "}
                         in{" "}
-                        <Link to={`/category/${result.category}/`}>
+                        <Link
+                          to={{
+                            pathname: "/posts/",
+                            search: `?q=${result.category}`
+                          }}
+                        >
                           {category_upper_case}
                         </Link>{" "}
-                        by{" "}
-                        <Link to={`/users/${result.author}`}>
-                          {result.author}
-                        </Link>
+                        by <Link to={`about`}>{result.author}</Link>
                       </span>
                     </p>
 
