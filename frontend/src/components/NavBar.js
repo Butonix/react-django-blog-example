@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 
 import "../index.css";
 import SearchModal from "./reusableComponents/SearchModal";
-import GoogleLoginButton from "../containers/GoogleAuth/GoogleLoginButtonContainer.js";
-import GoogleLogoutButton from "../containers/GoogleAuth/GoogleLogoutButtonContainer.js";
+import GoogleLoginButton from "../containers/GoogleAuth/GoogleLoginButtonContainer";
+import GoogleLogoutButton from "../containers/GoogleAuth/GoogleLogoutButtonContainer";
 
 class Navbar extends Component {
   userIsAuthenticatedGoogle() {
@@ -63,7 +63,9 @@ class Navbar extends Component {
             aria-labelledby="navbarDropdownMenuLink"
             key="account-div"
           >
-            <GoogleLoginButton />
+            <span className="btn btn-social-icon btn-google">
+              <GoogleLoginButton />
+            </span>
             <NavLink
               to="/login"
               className="dropdown-item"
@@ -107,53 +109,76 @@ class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-        <ul className="navbar-nav mr-auto">
-          <li key="auth-app" className="nav-item">
-            <NavLink to="/" className="nav-link" activeClassName="active" exact>
-              Home
-            </NavLink>
-          </li>
-          <li key="about-app" className="nav-item">
-            <NavLink
-              to="/about"
-              className="nav-link"
-              activeClassName="active"
-              exact
-            >
-              About
-            </NavLink>
-          </li>
-          <li key="contact-app" className="nav-item">
-            <NavLink
-              to="/contact"
-              className="nav-link"
-              activeClassName="active"
-              exact
-            >
-              Contact
-            </NavLink>
-          </li>
-          <li key="browse-posts" className="nav-item">
-            <NavLink
-              to="/browse"
-              className="nav-link"
-              activeClassName="active"
-              exact
-            >
-              Browse
-            </NavLink>
-          </li>
-          {this.userIsNotAuthenticated()}
-          {this.userIsAuthenticated()}
-          {this.userIsAuthenticatedEmail()}
-          {this.userIsAuthenticatedGoogle()}
-        </ul>
-        <ul className="navbar-nav ml-auto">
-          <li key="search-app" className="nav-item">
-            <SearchModal className="modal-scrollbar" buttonLabel="Search..." />
-          </li>
-        </ul>
+      <nav className="navbar navbar-inverse bg-inverse navbar-toggleable-md">
+        <div className="container">
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+          <div className="collapse navbar-collapse " id="navbarResponsive">
+            <ul className="navbar-nav mr-auto">
+              <li key="auth-app" className="nav-item">
+                <NavLink
+                  to="/"
+                  className="nav-link"
+                  activeClassName="active"
+                  exact
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li key="about-app" className="nav-item">
+                <NavLink
+                  to="/about"
+                  className="nav-link"
+                  activeClassName="active"
+                  exact
+                >
+                  About
+                </NavLink>
+              </li>
+              <li key="contact-app" className="nav-item">
+                <NavLink
+                  to="/contact"
+                  className="nav-link "
+                  activeClassName="active"
+                  exact
+                >
+                  Contact
+                </NavLink>
+              </li>
+              <li key="browse-posts" className="nav-item">
+                <NavLink
+                  to="/browse"
+                  className="nav-link"
+                  activeClassName="active"
+                  exact
+                >
+                  Browse
+                </NavLink>
+              </li>
+              {this.userIsNotAuthenticated()}
+              {this.userIsAuthenticated()}
+              {this.userIsAuthenticatedEmail()}
+              {this.userIsAuthenticatedGoogle()}
+            </ul>
+            <ul className="navbar-nav ml-auto">
+              <li key="search-app" className="nav-item">
+                <SearchModal
+                  className="modal-scrollbar"
+                  buttonLabel="Search..."
+                />
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
     );
   }

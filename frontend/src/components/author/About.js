@@ -6,7 +6,7 @@ const About = () => {
   return (
     <div className="container">
       <span className="row">
-        <span className="col-sm-4 text-center">
+        <span className="col-md-4 text-center">
           <img
             src={MyPhoto}
             alt="avatar_failed"
@@ -14,10 +14,10 @@ const About = () => {
               height: "75%",
               width: "65%"
             }}
-            className="img-thumbnail mt-2"
+            className="mt-2 img-fluid"
           />
         </span>
-        <span className="col-sm-6">
+        <span className="col-md-6">
           <h1 className="cover-heading">Borislav Hadzhiev</h1>
           <p className="lead">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

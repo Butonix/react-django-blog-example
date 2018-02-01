@@ -21,7 +21,7 @@ const PostList = ({
   return (
     <div className="card mb-4">
       <img
-        className="card-img-top"
+        className="card-img-top img-fluid"
         src={image_home_page}
         alt={image_home_page}
       />
