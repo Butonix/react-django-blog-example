@@ -10,6 +10,7 @@ import { store } from "./store";
 import HomePage from "./containers/posts/HomePageContainer";
 import PostDetail from "./containers/posts/PostDetailContainer";
 import FilterPosts from "./containers/posts/FilterPostsContainer";
+import AutocompletePost from "./containers/posts/AutocompletePostContainer";
 import About from "./components/author/About";
 import EditProfile from "./containers/userProfile/EditProfileContainer";
 import Contact from "./containers/ContactContainer";
@@ -27,8 +28,6 @@ import {
 //testing purposes
 import DogList from "./containers/Secret/DogListContainer.js";
 
-import MyDownshift from "./components/reusableComponents/MyDownshiftContainer.js";
-
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
@@ -37,7 +36,6 @@ ReactDOM.render(
         <ScrollToTop>
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route exact path="/down" component={MyDownshift} />
             <PrivateRoute exact path="/secret" component={DogList} />
             <Route exact path="/signout" render={() => <Redirect to="/" />} />
             <AuthenticatedRoute exact path="/register" component={Register} />
@@ -46,6 +44,7 @@ ReactDOM.render(
             <Route exact path="/profile" component={EditProfile} />
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
+            <Route exact path="/browse" component={AutocompletePost} />
             <Route path="/posts/*" component={FilterPosts} />
             <Route exact path="/:slug" component={PostDetail} />
             <Route path="*" component={Http404Page} />

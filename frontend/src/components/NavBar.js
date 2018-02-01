@@ -134,6 +134,16 @@ class Navbar extends Component {
               Contact
             </NavLink>
           </li>
+          <li key="browse-posts" className="nav-item">
+            <NavLink
+              to="/browse"
+              className="nav-link"
+              activeClassName="active"
+              exact
+            >
+              Browse
+            </NavLink>
+          </li>
           {this.userIsNotAuthenticated()}
           {this.userIsAuthenticated()}
           {this.userIsAuthenticatedEmail()}
