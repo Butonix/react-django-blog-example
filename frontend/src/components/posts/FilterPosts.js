@@ -28,6 +28,7 @@ class FilterPosts extends Component {
   }
 
   render() {
+    console.log("FILTER_____", this.props);
     let { isFiltering, err, posts } = this.props.posts_filtered;
     return (
       <div className="container">

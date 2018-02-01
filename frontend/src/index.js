@@ -27,6 +27,8 @@ import {
 //testing purposes
 import DogList from "./containers/Secret/DogListContainer.js";
 
+import MyDownshift from "./components/reusableComponents/MyDownshiftContainer.js";
+
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
@@ -35,6 +37,7 @@ ReactDOM.render(
         <ScrollToTop>
           <Switch>
             <Route exact path="/" component={HomePage} />
+            <Route exact path="/down" component={MyDownshift} />
             <PrivateRoute exact path="/secret" component={DogList} />
             <Route exact path="/signout" render={() => <Redirect to="/" />} />
             <AuthenticatedRoute exact path="/register" component={Register} />
