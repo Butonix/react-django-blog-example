@@ -8,7 +8,7 @@ const styles = theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    flexDirection: "row"
+    flexDirection: "column"
   },
   textField: {
     marginLeft: "auto",

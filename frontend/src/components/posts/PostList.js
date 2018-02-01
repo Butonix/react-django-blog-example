@@ -25,7 +25,7 @@ const PostList = ({
         src={image_home_page}
         alt={image_home_page}
       />
-      <div className="card-body">
+      <div className="card-body px-3 py-3 text-justify">
         <h2 className="card-title">{title}</h2>
         <p
           className="card-text"
@@ -46,8 +46,16 @@ const PostList = ({
           </span>
         )}
         <span>
-          in <Link to={`/category/${category}/`}>{category_upper_case}</Link> by{" "}
-          <Link to={`/users/${author}/`}>{author}</Link>
+          in{" "}
+          <Link
+            to={{
+              pathname: "/posts/",
+              search: `?q=${category}`
+            }}
+          >
+            {category_upper_case}
+          </Link>{" "}
+          by <Link to={`/about/`}>{author}</Link>
         </span>
       </div>
     </div>

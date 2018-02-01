@@ -38,7 +38,7 @@ class PostDetail extends Component {
         {isFetching ? (
           <LoadingSpinner />
         ) : (
-          <span>
+          <div>
             <h1>{result.title}</h1>
 
             {result.id >= 2 && (
@@ -61,7 +61,7 @@ class PostDetail extends Component {
 
             <hr />
             <div className="row">
-              <div className="col-lg-8">
+              <div className="col-md-8">
                 {err ? (
                   <div className="alert alert-danger" role="alert">
                     <strong>{err.message}</strong>
@@ -118,7 +118,7 @@ class PostDetail extends Component {
                 <CategoryHtmlStyled />
               </div>
             </div>
-          </span>
+          </div>
         )}
         {!err && <CommentList postId={result.id} />}
       </div>

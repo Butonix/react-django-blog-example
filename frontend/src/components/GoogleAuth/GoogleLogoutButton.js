@@ -28,8 +28,8 @@ class GoogleLogoutButton extends Component {
     };
     return (
       <GoogleLogout
-        buttonText="Logout"
-        className="loginBtn loginBtn--google"
+        buttonText=" Logout"
+        className="fa fa-google mt-2"
         onLogoutSuccess={signOut}
       />
     );

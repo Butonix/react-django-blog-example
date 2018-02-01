@@ -18,10 +18,10 @@ const GoogleLoginButton = props => {
   return (
     <GoogleLogin
       clientId="254472747355-6umtrkcedqn00tg7ec17l705ftttam0r.apps.googleusercontent.com"
-      buttonText="Login"
+      buttonText="oogle"
       onSuccess={responseGoogleSuccess}
       onFailure={responseGoogleFailure}
-      className="loginBtn loginBtn--google"
+      className="fa fa-google"
       prompt="select_account"
       redirectUri="http://localhost:3000/secret/"
     />

@@ -12,7 +12,10 @@ class Navbar extends Component {
     if (this.props.goog_auth.isAuthenticated) {
       return [
         <li className="nav-item" key="goog-logout-btn">
-          <GoogleLogoutButton history={this.props.history} />
+          <GoogleLogoutButton
+            className="nav-link"
+            history={this.props.history}
+          />
         </li>
       ];
     }
@@ -109,7 +112,7 @@ class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-inverse bg-inverse navbar-toggleable-md">
+      <nav className="navbar navbar-inverse bg-inverse navbar-toggleable-sm">
         <div className="container">
           <button
             className="navbar-toggler"
@@ -170,7 +173,7 @@ class Navbar extends Component {
               {this.userIsAuthenticatedGoogle()}
             </ul>
             <ul className="navbar-nav ml-auto">
-              <li key="search-app" className="nav-item">
+              <li key="search-app" className="nav-item mt-2">
                 <SearchModal
                   className="modal-scrollbar"
                   buttonLabel="Search..."

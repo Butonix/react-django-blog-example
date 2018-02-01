@@ -9,7 +9,8 @@ import TextField from "material-ui/TextField";
 
 const styles = {
   card: {
-    maxWidth: "95%"
+    maxWidth: "95%",
+    marginBottom: "1em"
   },
   media: {
     height: 200,
@@ -86,7 +87,7 @@ class PostAutocomplete extends React.Component {
                           index,
                           item
                         })}
-                        className="col-sm-4"
+                        className="col-md-4"
                       >
                         {" "}
                         <Card className={classes.card}>

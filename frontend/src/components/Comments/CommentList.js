@@ -22,7 +22,7 @@ class CommentList extends Component {
   }
   render() {
     return (
-      <span>
+      <div>
         {this.props.comments.err && (
           <div className="alert alert-danger" role="alert">
             {this.props.comments.err.message}
@@ -48,7 +48,7 @@ class CommentList extends Component {
             />
           ))}
         </ul>
-      </span>
+      </div>
     );
   }
 }
