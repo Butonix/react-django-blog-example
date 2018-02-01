@@ -9,7 +9,6 @@ import { history } from "./store";
 import { store } from "./store";
 import HomePage from "./containers/posts/HomePageContainer";
 import PostDetail from "./containers/posts/PostDetailContainer";
-import CategoryList from "./containers/posts/CategoryListContainer";
 import FilterPosts from "./containers/posts/FilterPostsContainer";
 import About from "./components/author/About";
 import EditProfile from "./containers/userProfile/EditProfileContainer";
@@ -41,11 +40,6 @@ ReactDOM.render(
             <AuthenticatedRoute exact path="/register" component={Register} />
             <AuthenticatedRoute exact path="/login" component={Login} />
             <PrivateRoute path="/changepassword" component={ChangePassword} />
-            <Route
-              exact
-              path="/category/:category_type"
-              component={CategoryList}
-            />
             <Route exact path="/profile" component={EditProfile} />
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
