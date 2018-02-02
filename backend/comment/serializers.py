@@ -1,6 +1,8 @@
 from .models import Comment, CommentReply
 from rest_framework import serializers
 
+from user_profile.models import UserProfile
+
 class CommentReplies(serializers.RelatedField):
     #comment_replies is an array of class instances
     #for each class instance I return the below fields
@@ -21,6 +23,7 @@ class CommentSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     comment_replies = CommentReplies(many=True, read_only=True)
     current_user = serializers.SerializerMethodField(method_name='_current_user')
+    user_avatar = serializers.SerializerMethodField(method_name='_user_avatar')
 
     #obj is the object being serialized
     #you can access the obj being serialized with obj.fieldName
@@ -28,10 +31,17 @@ class CommentSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         return user.username
 
+    def _user_avatar(self,obj):
+        try:
+            user = self.context['request'].user
+            return str(user.profile.user_image)
+        except AttributeError:
+            return ""
+
     class Meta:
         model = Comment
         fields = ('id','post', 'user', 'text', 'posted_on', 'updated_on',
-        'comment_replies', 'current_user')
+        'comment_replies', 'current_user', 'user_avatar')
 
 class CommentReplySerializer(serializers.ModelSerializer):
     post = serializers.ReadOnlyField(source='post.title')

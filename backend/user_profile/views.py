@@ -12,7 +12,7 @@ class PersonalProfile(generics.RetrieveUpdateAPIView):
 	def get_object(self):
 		try:
 			return UserProfile.objects.get(user=self.request.user)
-		except UserProfile.DoesNotEXist:
+		except (UserProfile.DoesNotExist, TypeError) as e:
 			raise Http404
 
 	def retrieve(self, request, *args, **kwargs):

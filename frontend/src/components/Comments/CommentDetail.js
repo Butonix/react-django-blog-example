@@ -42,7 +42,7 @@ class CommentDetail extends Component {
               <div className="comment-avatar col-md-1 col-sm-2 text-center pr-1">
                 <img
                   className="mx-auto rounded-circle img-fluid"
-                  src="http://demos.themes.guide/bodeo/assets/images/users/m103.jpg"
+                  src={`http://127.0.0.1:8000/media/${this.props.user_avatar}`}
                   alt="avatarxz"
                 />
               </div>
