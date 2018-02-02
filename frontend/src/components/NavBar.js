@@ -8,6 +8,13 @@ import GoogleLoginButton from "../containers/GoogleAuth/GoogleLoginButtonContain
 import GoogleLogoutButton from "../containers/GoogleAuth/GoogleLogoutButtonContainer";
 
 class Navbar extends Component {
+  state = {
+    navCollapsed: false
+  };
+  _onToggleNav = () => {
+    this.setState({ navCollapsed: !this.state.navCollapsed });
+  };
+
   userIsAuthenticatedGoogle() {
     if (this.props.goog_auth.isAuthenticated) {
       return [
@@ -109,8 +116,9 @@ class Navbar extends Component {
       <nav className="navbar navbar-inverse bg-inverse navbar-toggleable-sm">
         <div className="container">
           <button
-            className="navbar-toggler"
+            className="navbar-toggler collapsed"
             type="button"
+            onClick={this._onToggleNav}
             data-toggle="collapse"
             data-target="#navbarResponsive"
             aria-controls="navbarResponsive"

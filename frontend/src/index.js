@@ -50,7 +50,7 @@ ReactDOM.render(
             </Switch>
           </ScrollToTopRoute>
           <ScrollToTop
-            showUnder={1500}
+            showUnder={160}
             style={{
               position: "absolute",
               bottom: 70,
