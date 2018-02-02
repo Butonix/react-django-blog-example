@@ -102,7 +102,7 @@ class EditProfile extends Component {
     const { classes } = this.props;
     return (
       <span className={classes.container}>
-        <span style={{ textAlign: "center" }}>
+        <span style={{ textAlign: "center", marginTop: "2em" }}>
           <h3>Edit your Profile</h3>
           {this.state.user_image && (
             <img

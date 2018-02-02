@@ -11,7 +11,8 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     flexWrap: "wrap",
-    textAlign: "center"
+    textAlign: "center",
+    marginTop: "2em"
   },
   textField: {
     marginLeft: "auto",
