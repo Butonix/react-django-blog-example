@@ -93,8 +93,7 @@ class CommentDetail extends Component {
                     className="btn btn-link"
                     onClick={() => this.toggleEditForm()}
                   >
-                    <i className="fa fa-pencil-square-o" aria-hidden="true" />{" "}
-                    Edit
+                    <i className="fas fa-edit" aria-hidden="true" /> Edit
                   </button>
                   <button
                     style={{ cursor: "pointer" }}

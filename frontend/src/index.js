@@ -14,7 +14,8 @@ import AutocompletePost from "./containers/posts/AutocompletePostContainer";
 import About from "./components/author/About";
 import EditProfile from "./containers/userProfile/EditProfileContainer";
 import Contact from "./containers/ContactContainer";
-import ScrollToTop from "./components/reusableComponents/ScrollToTop";
+import ScrollToTopRoute from "./components/reusableComponents/ScrollToTopRoute";
+import ScrollToTop from "react-scroll-up";
 import Register from "./containers/authentication/RegisterContainer";
 import Login from "./containers/authentication/LoginContainer";
 import ChangePassword from "./containers/authentication/ChangePasswordContainer";
@@ -30,9 +31,9 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div style={{ position: "relative", minHeight: "100vh" }}>
-        <div style={{ paddingBottom: "60px" }}>
+        <div style={{ paddingBottom: "95px" }}>
           <NavBar />
-          <ScrollToTop>
+          <ScrollToTopRoute>
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/signout" render={() => <Redirect to="/" />} />
@@ -47,6 +48,23 @@ ReactDOM.render(
               <Route exact path="/:slug" component={PostDetail} />
               <Route path="*" component={Http404Page} />
             </Switch>
+          </ScrollToTopRoute>
+          <ScrollToTop
+            showUnder={1500}
+            style={{
+              position: "absolute",
+              bottom: 70,
+              right: 30,
+              cursor: "pointer",
+              transitionDuration: "0.2s",
+              transitionTimingFunction: "linear",
+              transitionDelay: "0s"
+            }}
+          >
+            <i
+              className="fas fa-arrow-circle-up fa-3x"
+              style={{ opacity: "0.7" }}
+            />
           </ScrollToTop>
         </div>
         <Footer />

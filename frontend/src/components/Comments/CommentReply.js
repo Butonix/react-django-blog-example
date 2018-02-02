@@ -40,7 +40,7 @@ class CommentReply extends Component {
               <div className="comment-avatar col-md-1 col-sm-2 text-center pr-1">
                 <img
                   className="mx-auto rounded-circle img-fluid"
-                  src="http://demos.themes.guide/bodeo/assets/images/users/m103.jpg"
+                  src="https://www.nzonscreen.com/assets/images/content/placeholders/profile.jpg.120x120-4559722d43a7e6983ef108e03151f845ffdb918cbbea3502d89caa3fdd29d89d.jpg"
                   alt="avatarxz"
                 />
               </div>
@@ -90,8 +90,7 @@ class CommentReply extends Component {
                     className="btn btn-link"
                     onClick={this.toggleEditFormReply}
                   >
-                    <i className="fa fa-pencil-square-o" aria-hidden="true" />{" "}
-                    Edit
+                    <i className="fas fa-edit" aria-hidden="true" /> Edit
                   </button>
                   <button
                     style={{ cursor: "pointer" }}

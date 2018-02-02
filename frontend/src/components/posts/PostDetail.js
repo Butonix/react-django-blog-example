@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import PropTypes from "prop-types";
-
 import LoadingSpinner from "../reusableComponents/LoadingSpinner";
-import PostArchiveHtmlStyled from "../../components/reusableComponents/PostArchiveHtmlStyled";
-import CategoryHtmlStyled from "../../components/reusableComponents/CategoryHtmlStyled";
 
 // COMMENTS
 import CommentList from "../../containers/Comments/CommentListContainer.js";
@@ -46,7 +43,7 @@ class PostDetail extends Component {
                 className="pagination-left"
                 onClick={() => this.props.fetchPostPk(result.id - 1)}
               >
-                <i className="fa fa-chevron-left fa-5x" aria-hidden="true" />
+                <i className="fas fa-angle-left fa-5x" aria-hidden="true" />
               </span>
             )}
 
@@ -55,7 +52,7 @@ class PostDetail extends Component {
                 className="pagination-right"
                 onClick={() => this.props.fetchPostPk(result.id + 1)}
               >
-                <i className="fa fa-chevron-right fa-5x" aria-hidden="true" />
+                <i className="fas fa-angle-right fa-5x" aria-hidden="true" />
               </span>
             )}
 
