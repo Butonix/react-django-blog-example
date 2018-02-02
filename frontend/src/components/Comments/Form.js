@@ -15,7 +15,7 @@ const styles = theme => ({
   textField: {
     marginLeft: "auto",
     marginRight: "auto",
-    width: "85%"
+    width: "95%"
   },
   button: {
     margin: "auto"
@@ -127,6 +127,8 @@ class Form extends PureComponent {
           margin="normal"
           error={!!this.state.textError}
           helperText={this.state.textError}
+          multiline={true}
+          rows={4}
         />
         {this.props.isAuthenticatedGoogle || this.props.isAuthenticatedEmail ? (
           <Button

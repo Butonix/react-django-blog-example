@@ -33,74 +33,82 @@ class CommentReply extends Component {
 
   render() {
     return (
-      <div className="row ml-5" key={this.props.id}>
-        <div className="col-sm-8">
-          <div className="panel panel-white post panel-shadow">
-            <div className="post-heading">
-              <div className="pull-left image">
+      <div className="ml-5" key={this.props.id}>
+        <div>
+          <div id="comments">
+            <div className="comment">
+              <div className="comment-avatar col-md-1 col-sm-2 text-center pr-1">
                 <img
-                  src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y"
-                  className="img-circle avatar"
-                  alt="fuck off alt"
+                  className="mx-auto rounded-circle img-fluid"
+                  src="http://demos.themes.guide/bodeo/assets/images/users/m103.jpg"
+                  alt="avatarxz"
                 />
               </div>
-              <div className="pull-left meta">
-                <div className="title h5">
-                  <span>
-                    <b>{this.props.user} </b>
-                  </span>
-                  made a post.
-                </div>
+              <div className="comment-content col-md-11 col-sm-10">
+                <span>
+                  <b>{this.props.user} </b>
+                </span>
+                made a post.
                 <h6 className="text-muted time">
                   {moment(this.props.posted_on).fromNow()}
                 </h6>
+                <div className="post-description">
+                  <p
+                    style={{
+                      display: "flex",
+                      whiteSpace: "normal",
+                      wordBreak: "break-word",
+                      textAlign: "justify"
+                    }}
+                  >
+                    {this.props.text}
+                  </p>
+                  <div className="stats" />
+                </div>
+                <button
+                  style={{ cursor: "pointer" }}
+                  className="btn btn-link"
+                  onClick={() =>
+                    this.setState({
+                      toggleTextFormReply: !this.state.toggleTextFormReply
+                    })
+                  }
+                >
+                  <i className="fa fa-reply" aria-hidden="true" title="Reply" />{" "}
+                  Reply
+                </button>
+                <span
+                  style={{
+                    display:
+                      this.props.current_user === this.props.user
+                        ? "inline-block"
+                        : "none"
+                  }}
+                >
+                  <button
+                    style={{ cursor: "pointer" }}
+                    className="btn btn-link"
+                    onClick={this.toggleEditFormReply}
+                  >
+                    <i className="fa fa-pencil-square-o" aria-hidden="true" />{" "}
+                    Edit
+                  </button>
+                  <button
+                    style={{ cursor: "pointer" }}
+                    className="btn btn-link"
+                    onClick={() =>
+                      this.deleteReplyAndFetch(
+                        this.props.postId,
+                        this.props.commentId,
+                        this.props.id
+                      )
+                    }
+                  >
+                    <i className="fa fa-trash" aria-hidden="true" /> Delete
+                  </button>
+                </span>
               </div>
-            </div>
-            <div className="post-description">
-              <p
-                style={{
-                  display: "flex",
-                  whiteSpace: "normal",
-                  wordBreak: "break-word"
-                }}
-              >
-                {this.props.text}
-              </p>
-              <div className="stats" />
-            </div>
-            <button
-              onClick={() =>
-                this.setState({
-                  toggleTextFormReply: !this.state.toggleTextFormReply
-                })
-              }
-            >
-              <i className="fa fa-reply" aria-hidden="true" title="Reply" />
-            </button>
 
-            <span
-              style={{
-                display:
-                  this.props.current_user === this.props.user
-                    ? "inline-block"
-                    : "none"
-              }}
-            >
-              <button
-                onClick={() =>
-                  this.deleteReplyAndFetch(
-                    this.props.postId,
-                    this.props.commentId,
-                    this.props.id
-                  )
-                }
-              >
-                <i className="fa fa-trash" aria-hidden="true" />Delete
-              </button>
-              <button onClick={this.toggleEditFormReply}>
-                <i className="fa fa-pencil-square-o" aria-hidden="true" />
-                Edit
-              </button>
               <span
                 style={{
                   display: this.state.toggleEditFormReply ? "block" : "none"
@@ -117,25 +125,24 @@ class CommentReply extends Component {
                   stateEditFormReply={this.state.toggleEditFormReply}
                 />
               </span>
-            </span>
+              <span
+                style={{
+                  display: this.state.toggleTextFormReply ? "block" : "none"
+                }}
+              >
+                <Form
+                  fetchCommentsForPost={this.props.fetchCommentsForPost}
+                  createCommentReply={this.props.createCommentReply}
+                  commentId={this.props.commentId}
+                  postId={this.props.postId}
+                  toggleTextFormReply={this.toggleTextFormReply}
+                  isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
+                  isAuthenticatedEmail={this.props.isAuthenticatedEmail}
+                  stateTextFormReply={this.state.toggleTextFormReply}
+                />
+              </span>
+            </div>
           </div>
-
-          <span
-            style={{
-              display: this.state.toggleTextFormReply ? "block" : "none"
-            }}
-          >
-            <Form
-              fetchCommentsForPost={this.props.fetchCommentsForPost}
-              createCommentReply={this.props.createCommentReply}
-              commentId={this.props.commentId}
-              postId={this.props.postId}
-              toggleTextFormReply={this.toggleTextFormReply}
-              isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
-              isAuthenticatedEmail={this.props.isAuthenticatedEmail}
-              stateTextFormReply={this.state.toggleTextFormReply}
-            />
-          </span>
         </div>
       </div>
     );

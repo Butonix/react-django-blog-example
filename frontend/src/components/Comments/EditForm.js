@@ -124,6 +124,8 @@ class EditForm extends PureComponent {
           margin="normal"
           error={!!this.state.textError}
           helperText={this.state.textError}
+          multiline={true}
+          rows={4}
         />
 
         <Button

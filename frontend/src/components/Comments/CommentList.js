@@ -39,7 +39,7 @@ class CommentList extends Component {
             isAuthenticatedEmail={this.props.isAuthenticatedEmail}
           />
         </div>
-        <div className="container-fluid">
+        <div>
           {this.props.comments.commentArr.map(comment => (
             <CommentDetail
               key={comment.id}
