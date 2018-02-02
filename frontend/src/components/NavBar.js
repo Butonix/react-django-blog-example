@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink as Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import "../index.css";
@@ -7,52 +7,74 @@ import SearchModal from "./reusableComponents/SearchModal";
 import GoogleLoginButton from "../containers/GoogleAuth/GoogleLoginButtonContainer";
 import GoogleLogoutButton from "../containers/GoogleAuth/GoogleLogoutButtonContainer";
 
-class Navbar extends Component {
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from "reactstrap";
+
+class NavBar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
   userIsAuthenticatedGoogle() {
     if (this.props.goog_auth.isAuthenticated) {
       return [
-        <li className="nav-item" key="goog-logout-btn">
+        <NavItem>
           <GoogleLogoutButton
             className="nav-link"
             history={this.props.history}
           />
-        </li>
+        </NavItem>
       ];
     }
   }
   userIsAuthenticatedEmail() {
     if (this.props.authenticated) {
       return [
-        <li className="nav-item dropdown" key="dropdown-li">
-          <a
-            className="nav-link dropdown-toggle"
-            href="http://localhost3000.com"
-            id="navbarDropdownMenuLink"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            key="account-email"
-          >
+        <UncontrolledDropdown nav className="nav-item dropdown">
+          <DropdownToggle nav caret className="nav-link">
             Account
-          </a>
-          <div
-            className="dropdown-menu"
-            aria-labelledby="navbarDropdownMenuLink"
-            key="account-div"
-          >
-            <span key="signout" onClick={() => this.props.logoutAction()}>
-              <NavLink to="/signout" className="dropdown-item">
-                Log out
+          </DropdownToggle>
+          <DropdownMenu className="dropdown-menu">
+            <DropdownItem className="inverse-dropdown">
+              <span key="signout" onClick={() => this.props.logoutAction()}>
+                <NavLink tag={Link} to="/signout">
+                  Log out
+                </NavLink>
+              </span>
+            </DropdownItem>
+            <DropdownItem className="inverse-dropdown">
+              <NavLink tag={Link} to="/changepassword">
+                Change Password
               </NavLink>
-            </span>
-            <NavLink to="/changepassword" className="dropdown-item">
-              Change Password
-            </NavLink>
-            <NavLink to="/profile" className="dropdown-item">
-              Profile
-            </NavLink>
-          </div>
-        </li>
+            </DropdownItem>
+            <DropdownItem className="inverse-dropdown">
+              <NavLink tag={Link} to="/profile">
+                Profile
+              </NavLink>
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
       ];
     }
   }
@@ -60,123 +82,99 @@ class Navbar extends Component {
   userIsNotAuthenticated() {
     if (!this.props.authenticated && !this.props.goog_auth.isAuthenticated) {
       return [
-        <li className="nav-item dropdown" key="dropdown-li">
-          <a
-            className="nav-link dropdown-toggle"
-            href="http://localhost3000.com"
-            id="navbarDropdownMenuLink"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            key="account"
-          >
+        <UncontrolledDropdown nav className="nav-item dropdown">
+          <DropdownToggle nav caret className="nav-link">
             Login
-          </a>
-          <div
-            className="dropdown-menu"
-            aria-labelledby="navbarDropdownMenuLink"
-            key="account-div"
-          >
-            <span className="btn btn-social-icon btn-google">
+          </DropdownToggle>
+          <DropdownMenu className="dropdown-menu">
+            <span style={{ display: "block", textAlign: "center" }}>
               <GoogleLoginButton />
             </span>
-            <NavLink
-              to="/login"
-              className="dropdown-item"
-              key="log-in"
-              activeClassName="active"
-              exact
-            >
-              Site Log in
-            </NavLink>
-            <NavLink
-              to="/register"
-              className="dropdown-item"
-              key="sign-up"
-              activeClassName="active"
-              exact
-            >
-              Register
-            </NavLink>
-          </div>
-        </li>
+            <DropdownItem className="inverse-dropdown">
+              <NavLink
+                tag={Link}
+                to="/login"
+                key="log-in"
+                activeClassName="active"
+                exact
+              >
+                Site Log in
+              </NavLink>
+            </DropdownItem>
+            <DropdownItem className="inverse-dropdown">
+              <NavLink
+                tag={Link}
+                to="/register"
+                key="sign-up"
+                activeClassName="active"
+                exact
+              >
+                Register
+              </NavLink>
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
       ];
     }
   }
 
   render() {
     return (
-      <nav className="navbar navbar-inverse bg-inverse navbar-toggleable-sm">
-        <div className="container">
-          <button
-            className="navbar-toggler collapsed"
-            type="button"
-            onClick={this._onToggleNav}
-            data-toggle="collapse"
-            data-target="#navbarResponsive"
-            aria-controls="navbarResponsive"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse " id="navbarResponsive">
-            <ul className="navbar-nav mr-auto">
-              <li key="auth-app" className="nav-item">
-                <NavLink
-                  to="/"
-                  className="nav-link"
-                  activeClassName="active"
-                  exact
-                >
+      <div>
+        <Navbar
+          color="faded"
+          className="navbar navbar-toggleable-md navbar-inverse bg-inverse"
+          expand="md"
+        >
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav navbar style={{ margin: "auto" }}>
+              <NavItem>
+                <NavLink tag={Link} to="/" activeClassName="active" exact>
                   Home
                 </NavLink>
-              </li>
-              <li key="about-app" className="nav-item">
+              </NavItem>
+
+              <NavItem>
                 <NavLink
+                  tag={Link}
                   to="/about"
-                  className="nav-link"
                   activeClassName="active"
                   exact
+                  onClick={() => this.toggle()}
                 >
                   About
                 </NavLink>
-              </li>
-              <li key="contact-app" className="nav-item">
+              </NavItem>
+              <NavItem>
                 <NavLink
+                  tag={Link}
                   to="/contact"
-                  className="nav-link "
                   activeClassName="active"
                   exact
                 >
                   Contact
                 </NavLink>
-              </li>
-              <li key="browse-posts" className="nav-item">
-                <NavLink
-                  to="/browse"
-                  className="nav-link"
-                  activeClassName="active"
-                  exact
-                >
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to="/browse" activeClassName="active" exact>
                   Browse
                 </NavLink>
-              </li>
+              </NavItem>
               {this.userIsNotAuthenticated()}
               {this.userIsAuthenticatedEmail()}
               {this.userIsAuthenticatedGoogle()}
-            </ul>
-            <ul className="navbar-nav ml-auto">
-              <li key="search-app" className="nav-item mt-2">
+
+              <NavItem className="mt-2 ml-3">
                 <SearchModal
                   className="modal-scrollbar"
                   buttonLabel="Search..."
                 />
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </div>
     );
   }
 }
@@ -187,4 +185,4 @@ PropTypes.NavBar = {
   authenticated: PropTypes.bool
 };
 
-export default Navbar;
+export default NavBar;

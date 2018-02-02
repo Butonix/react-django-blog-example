@@ -29,7 +29,8 @@ class GoogleLogoutButton extends Component {
     return (
       <GoogleLogout
         buttonText=" Logout"
-        className="btn btn-danger"
+        className="btn btn-danger btn-sm mt-2"
+        style={{ width: "100%" }}
         onLogoutSuccess={signOut}
       />
     );

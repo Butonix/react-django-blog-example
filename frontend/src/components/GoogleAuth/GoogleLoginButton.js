@@ -22,6 +22,7 @@ const GoogleLoginButton = props => {
       onSuccess={responseGoogleSuccess}
       onFailure={responseGoogleFailure}
       className="btn btn-danger"
+      style={{ width: "100%" }}
       prompt="select_account"
       redirectUri="http://localhost:3000/secret/"
     />
