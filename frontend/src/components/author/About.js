@@ -5,8 +5,8 @@ import MyPhoto from "./me.png";
 const About = () => {
   return (
     <div className="container mt-4">
-      <span className="row">
-        <span className="col-md-4 text-center">
+      <div className="row">
+        <div className="col-md-4 text-center">
           <img
             src={MyPhoto}
             alt="avatar_failed"
@@ -16,8 +16,8 @@ const About = () => {
             }}
             className="mt-2 img-fluid"
           />
-        </span>
-        <span className="col-md-6">
+        </div>
+        <div className="col-md-6">
           <h1 className="cover-heading">Borislav Hadzhiev</h1>
           <p className="lead">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -28,8 +28,8 @@ const About = () => {
             cupidatat non proident, sunt in culpa qui officia deserunt mollit
             anim id est laborum.
           </p>
-        </span>
-      </span>
+        </div>
+      </div>
     </div>
   );
 };

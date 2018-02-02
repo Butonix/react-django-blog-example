@@ -19,6 +19,7 @@ import Register from "./containers/authentication/RegisterContainer";
 import Login from "./containers/authentication/LoginContainer";
 import ChangePassword from "./containers/authentication/ChangePasswordContainer";
 import NavBar from "./containers/NavBarContainer";
+import Footer from "./components/reusableComponents/Footer";
 import Http404Page from "./components/reusableComponents/Http404Page";
 import {
   PrivateRoute,
@@ -28,24 +29,27 @@ import {
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <div>
-        <NavBar />
-        <ScrollToTop>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/signout" render={() => <Redirect to="/" />} />
-            <AuthenticatedRoute exact path="/register" component={Register} />
-            <AuthenticatedRoute exact path="/login" component={Login} />
-            <PrivateRoute path="/changepassword" component={ChangePassword} />
-            <Route exact path="/profile" component={EditProfile} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/contact" component={Contact} />
-            <Route exact path="/browse" component={AutocompletePost} />
-            <Route path="/posts/*" component={FilterPosts} />
-            <Route exact path="/:slug" component={PostDetail} />
-            <Route path="*" component={Http404Page} />
-          </Switch>
-        </ScrollToTop>
+      <div style={{ position: "relative", minHeight: "100vh" }}>
+        <div style={{ paddingBottom: "60px" }}>
+          <NavBar />
+          <ScrollToTop>
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route exact path="/signout" render={() => <Redirect to="/" />} />
+              <AuthenticatedRoute exact path="/register" component={Register} />
+              <AuthenticatedRoute exact path="/login" component={Login} />
+              <PrivateRoute path="/changepassword" component={ChangePassword} />
+              <Route exact path="/profile" component={EditProfile} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/contact" component={Contact} />
+              <Route exact path="/browse" component={AutocompletePost} />
+              <Route path="/posts/*" component={FilterPosts} />
+              <Route exact path="/:slug" component={PostDetail} />
+              <Route path="*" component={Http404Page} />
+            </Switch>
+          </ScrollToTop>
+        </div>
+        <Footer />
       </div>
     </ConnectedRouter>
   </Provider>,
