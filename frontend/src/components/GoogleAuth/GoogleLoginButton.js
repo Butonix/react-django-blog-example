@@ -8,7 +8,6 @@ const GoogleLoginButton = props => {
       localStorage.setItem("goog_avatar_url", response.profileObj.imageUrl);
       localStorage.setItem("goog_name", response.profileObj.name);
       localStorage.setItem("goog_email", response.profileObj.email);
-      localStorage.setItem("goog_avatar", response.profileObj.imageUrl);
     }
     props.convertGoogleToken(response.Zi.access_token);
   };

@@ -56,6 +56,7 @@ class CommentDetail extends Component {
                       this.props.user_avatar
                     }`}
                     alt="avatarxz"
+                    style={{ maxWidth: "80px", maxHeight: "80px" }}
                   />
                 )}
               </div>
