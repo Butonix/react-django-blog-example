@@ -10,7 +10,7 @@ const styles = theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    flexDirection: "column"
+    flexDirection: "row"
   },
   textField: {
     marginLeft: "auto",

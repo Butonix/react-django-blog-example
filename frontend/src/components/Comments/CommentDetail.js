@@ -60,7 +60,15 @@ class CommentDetail extends Component {
                 </div>
               </div>
               <div className="post-description">
-                <p>{this.props.text}</p>
+                <p
+                  style={{
+                    display: "flex",
+                    whiteSpace: "normal",
+                    wordBreak: "break-word"
+                  }}
+                >
+                  {this.props.text}
+                </p>
               </div>
               <button
                 onClick={() =>
