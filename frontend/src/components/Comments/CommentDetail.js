@@ -37,7 +37,7 @@ class CommentDetail extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="comments col-md-9" id="comments">
+          <div className="comments col-md-11" id="comments">
             <div className="comment">
               <div className="comment-avatar col-md-1 col-sm-2 text-center pr-1">
                 <img
@@ -46,7 +46,7 @@ class CommentDetail extends Component {
                   alt="avatarxz"
                 />
               </div>
-              <div className="comment-content col-md-11 col-sm-10">
+              <div className="comment-content col-md-12 col-sm-10">
                 <span>
                   <b>{this.props.user} </b>
                 </span>

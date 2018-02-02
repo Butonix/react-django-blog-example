@@ -87,19 +87,6 @@ class EditForm extends PureComponent {
           .then(() => this.props.fetchCommentsForPost(this.props.postId));
       }
 
-      // if (this.props.toggleEditForm) {
-      //   this.props
-      //     .createCommentReply(this.props.commentId, this.state.text)
-      //     .then(() => this.props.toggleTextForm())
-      //     .then(() => this.props.fetchComments());
-      // }
-      // if (this.props.toggleTextFormReply) {
-      //   this.props
-      //     .createCommentReply(this.props.commentId, this.state.text)
-      //     .then(() => this.props.toggleTextFormReply())
-      //     .then(() => this.props.fetchComments());
-      // }
-      //now clear form.
       this.setState({
         text: "",
         textError: ""

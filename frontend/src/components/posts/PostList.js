@@ -19,7 +19,7 @@ const PostList = ({
     category.charAt(0).toUpperCase() + category.slice(1);
   const createMarkup = content => ({ __html: content });
   return (
-    <div className="container-fluid">
+    <div>
       <div className="card mb-4">
         <img
           className="card-img-top img-fluid"

@@ -4,7 +4,7 @@ import MyPhoto from "./me.png";
 
 const About = () => {
   return (
-    <div className="container">
+    <div className="container mt-4">
       <span className="row">
         <span className="col-md-4 text-center">
           <img

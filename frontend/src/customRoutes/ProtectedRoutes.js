@@ -30,7 +30,7 @@ const AuthenticatedRoute = ({ component: Component }, ...rest) => (
     {...rest}
     render={props => {
       return checkAuth() ? (
-        <Redirect to={{ pathname: "/secret" }} />
+        <Redirect to={{ pathname: "/" }} />
       ) : (
         <Component {...props} />
       );

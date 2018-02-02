@@ -61,7 +61,7 @@ class PostDetail extends Component {
 
             <hr />
             <div className="row">
-              <div className="col-md-8">
+              <div className="col-md-12">
                 {err ? (
                   <div className="alert alert-danger" role="alert">
                     <strong>{err.message}</strong>
@@ -114,10 +114,6 @@ class PostDetail extends Component {
                     <hr />
                   </span>
                 )}
-              </div>
-              <div className="col-md-4">
-                <PostArchiveHtmlStyled />
-                <CategoryHtmlStyled />
               </div>
             </div>
           </div>

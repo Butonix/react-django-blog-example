@@ -23,24 +23,35 @@ class Navbar extends Component {
   userIsAuthenticatedEmail() {
     if (this.props.authenticated) {
       return [
-        <li
-          key="signout"
-          onClick={() => this.props.logoutAction()}
-          className="nav-item"
-        >
-          <NavLink to="/signout" className="nav-link">
-            Log out
-          </NavLink>
-        </li>,
-        <li key="change-password" className="nav-item">
-          <NavLink to="/changepassword" className="nav-link">
-            Change Password
-          </NavLink>
-        </li>,
-        <li key="edit-profile" className="nav-item">
-          <NavLink to="/profile" className="nav-link">
-            Profile
-          </NavLink>
+        <li className="nav-item dropdown" key="dropdown-li">
+          <a
+            className="nav-link dropdown-toggle"
+            href="http://localhost3000.com"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            key="account-email"
+          >
+            Account
+          </a>
+          <div
+            className="dropdown-menu"
+            aria-labelledby="navbarDropdownMenuLink"
+            key="account-div"
+          >
+            <span key="signout" onClick={() => this.props.logoutAction()}>
+              <NavLink to="/signout" className="dropdown-item">
+                Log out
+              </NavLink>
+            </span>
+            <NavLink to="/changepassword" className="dropdown-item">
+              Change Password
+            </NavLink>
+            <NavLink to="/profile" className="dropdown-item">
+              Profile
+            </NavLink>
+          </div>
         </li>
       ];
     }
@@ -88,23 +99,6 @@ class Navbar extends Component {
               Register
             </NavLink>
           </div>
-        </li>
-      ];
-    }
-  }
-
-  userIsAuthenticated() {
-    if (this.props.authenticated || this.props.goog_auth.isAuthenticated) {
-      return [
-        <li key="secret" className="nav-item">
-          <NavLink
-            to="/secret"
-            className="nav-link"
-            activeClassName="active"
-            exact
-          >
-            Secret
-          </NavLink>
         </li>
       ];
     }
@@ -168,7 +162,6 @@ class Navbar extends Component {
                 </NavLink>
               </li>
               {this.userIsNotAuthenticated()}
-              {this.userIsAuthenticated()}
               {this.userIsAuthenticatedEmail()}
               {this.userIsAuthenticatedGoogle()}
             </ul>

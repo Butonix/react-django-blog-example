@@ -25,9 +25,6 @@ import {
   AuthenticatedRoute
 } from "./customRoutes/ProtectedRoutes";
 
-//testing purposes
-import DogList from "./containers/Secret/DogListContainer.js";
-
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
@@ -36,7 +33,6 @@ ReactDOM.render(
         <ScrollToTop>
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <PrivateRoute exact path="/secret" component={DogList} />
             <Route exact path="/signout" render={() => <Redirect to="/" />} />
             <AuthenticatedRoute exact path="/register" component={Register} />
             <AuthenticatedRoute exact path="/login" component={Login} />

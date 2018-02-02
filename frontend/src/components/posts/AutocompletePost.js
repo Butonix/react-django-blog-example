@@ -25,6 +25,7 @@ const styles = {
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "2em",
+    marginTop: "3em",
     width: "60%"
   }
 };
@@ -54,10 +55,11 @@ class PostAutocomplete extends React.Component {
           selectedItem
         }) => (
           <div className="text-center mt-4">
-            <h3>
-              Search for posts based on language, title, or publication
-              date(mm-dd, i.e. 01-25)
-            </h3>
+            <h3>Browse the blog for posts</h3>
+            <h5 className="mt-4">
+              based on programming language, title, or publication date (mm-dd,
+              i.e. 01-25)
+            </h5>
             <TextField
               {...getInputProps()}
               placeholder="Enter your query"

@@ -44,7 +44,7 @@ class CommentReply extends Component {
                   alt="avatarxz"
                 />
               </div>
-              <div className="comment-content col-md-11 col-sm-10">
+              <div className="comment-content col-md-12 col-sm-12">
                 <span>
                   <b>{this.props.user} </b>
                 </span>

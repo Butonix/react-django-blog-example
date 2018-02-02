@@ -5,7 +5,7 @@ const url = "http://127.0.0.1:8000";
 function authenticateAction(userData, history, dispatch) {
   localStorage.setItem("token", userData.token);
   localStorage.setItem("username", userData.user.username);
-  history.push("/secret");
+  history.push("/");
   return dispatch({ type: types.AUTHENTICATED });
 }
 
