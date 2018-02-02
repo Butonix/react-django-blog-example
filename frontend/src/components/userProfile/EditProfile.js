@@ -104,13 +104,14 @@ class EditProfile extends Component {
       <span className={classes.container}>
         <span style={{ textAlign: "center", marginTop: "2em" }}>
           <h3>Edit your Profile</h3>
-          {this.state.user_image && (
-            <img
-              src={this.state.user_image}
-              alt="avatar"
-              className={classes.avatar}
-            />
-          )}
+          {this.state.user_image &&
+            typeof this.state.user_image !== "object" && (
+              <img
+                src={this.state.user_image}
+                alt="avatar"
+                className={classes.avatar}
+              />
+            )}
           {this.state.err && (
             <div className="alert alert-danger" role="alert">
               <strong>{this.state.err}</strong>

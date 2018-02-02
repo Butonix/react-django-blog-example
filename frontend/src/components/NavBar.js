@@ -11,7 +11,6 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -39,7 +38,7 @@ class NavBar extends Component {
   userIsAuthenticatedGoogle() {
     if (this.props.goog_auth.isAuthenticated) {
       return [
-        <NavItem>
+        <NavItem key="goog-logout">
           <GoogleLogoutButton
             className="nav-link"
             history={this.props.history}

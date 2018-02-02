@@ -33,7 +33,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     def _user_avatar(self,obj):
         try:
-            user = self.context['request'].user
+            user = obj.user
             return str(user.profile.user_image)
         except AttributeError:
             return ""

@@ -6,6 +6,8 @@ import Form from "./Form";
 import EditForm from "./EditForm";
 import CommentReply from "../../containers/Comments/CommentReplyContainer";
 
+import Avatar from "react-avatar";
+
 class CommentDetail extends Component {
   constructor(props) {
     super(props);
@@ -33,18 +35,29 @@ class CommentDetail extends Component {
   }
 
   render() {
-    console.log("COMMENT DETAIL PROPS", this.props);
     return (
       <div className="container">
         <div className="row">
           <div className="comments col-md-11" id="comments">
             <div className="comment">
               <div className="comment-avatar col-md-1 col-sm-2 text-center pr-1">
-                <img
-                  className="mx-auto rounded-circle img-fluid"
-                  src={`http://127.0.0.1:8000/media/${this.props.user_avatar}`}
-                  alt="avatarxz"
-                />
+                {this.props.user_avatar === "/profile_images/pr_image.png" ||
+                this.props.user_avatar === "" ? (
+                  <Avatar
+                    className="mx-auto rounded-circle img-fluid"
+                    name={this.props.user}
+                    round
+                    size={60}
+                  />
+                ) : (
+                  <img
+                    className="mx-auto rounded-circle img-fluid"
+                    src={`http://127.0.0.1:8000/media/${
+                      this.props.user_avatar
+                    }`}
+                    alt="avatarxz"
+                  />
+                )}
               </div>
               <div className="comment-content col-md-12 col-sm-10">
                 <span>

@@ -13,7 +13,8 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     flexWrap: "wrap",
-    textAlign: "center"
+    textAlign: "center",
+    marginTop: "2em"
   },
   textField: {
     marginLeft: "auto",
@@ -47,7 +48,9 @@ class InnerLoginForm extends Component {
 
     return (
       <span className={classes.container}>
-        <h3 style={{ textAlign: "center" }}>Login Form</h3>
+        <h3 style={{ textAlign: "center" }}>
+          Login with your email address below
+        </h3>
         <form onSubmit={handleSubmit}>
           <TextField
             name="email"

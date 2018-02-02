@@ -3,6 +3,8 @@ import moment from "moment";
 import Form from "./Form";
 import EditForm from "./EditForm";
 
+import Avatar from "react-avatar";
+
 class CommentReply extends Component {
   constructor(props) {
     super(props);
@@ -38,10 +40,11 @@ class CommentReply extends Component {
           <div id="comments">
             <div className="comment">
               <div className="comment-avatar col-md-1 col-sm-2 text-center pr-1">
-                <img
+                <Avatar
                   className="mx-auto rounded-circle img-fluid"
-                  src="https://www.nzonscreen.com/assets/images/content/placeholders/profile.jpg.120x120-4559722d43a7e6983ef108e03151f845ffdb918cbbea3502d89caa3fdd29d89d.jpg"
-                  alt="avatarxz"
+                  name={this.props.user}
+                  round
+                  size={60}
                 />
               </div>
               <div className="comment-content col-md-12 col-sm-12">
