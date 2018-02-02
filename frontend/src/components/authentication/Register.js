@@ -158,7 +158,6 @@ const EnhancedForm = withFormik({
     { username, email, password1, password2 },
     { props, setSubmitting, setErrors }
   ) => {
-    console.log("submitting RegistrationF");
     props
       .registerAction({ username, email, password1, password2 })
       .then(resp => {
@@ -169,10 +168,8 @@ const EnhancedForm = withFormik({
           resp.email ||
           resp.non_field_errors
         ) {
-          console.log(resp);
           setErrors(resp);
         } else {
-          console.log(resp);
           return props.history.push("/");
         }
       });

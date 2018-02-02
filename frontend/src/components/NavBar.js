@@ -122,7 +122,6 @@ class NavBar extends Component {
   }
 
   render() {
-    console.log("NAVBAR PROPS___", this.props);
     return (
       <div>
         <Navbar

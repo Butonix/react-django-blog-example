@@ -19,7 +19,6 @@ function refreshAuthToken({ dispatch, getState }) {
         const currentTime = Math.round(new Date().getTime() / 1000);
         const timeLeft = tokenExpiration - currentTime;
         const emailLoginToken = localStorage.getItem("token");
-        console.log("seconds remaining: ===", timeLeft);
         if (tokenExpiration && timeLeft <= 0) {
           dispatch(push("/"));
           return dispatch(unauthenticateAction(dispatch));
@@ -48,10 +47,8 @@ function refreshAuthToken({ dispatch, getState }) {
         // get the current unix epoch time in seconds
         const currentTimeGoog = Math.round(new Date().getTime() / 1000);
         const timeLeftGoog = googTokenExpirationTime - currentTimeGoog;
-        console.log("token time left =======>", timeLeftGoog);
         // check if the token is expired, if so log the user out
         if (googTokenExpirationTime && timeLeftGoog <= 0) {
-          console.log("TOKEN IS EXPIRED");
           localStorage.removeItem("goog_access_token_conv");
           localStorage.removeItem("goog_refresh_token_conv");
           localStorage.removeItem("goog_access_token_expires_in");

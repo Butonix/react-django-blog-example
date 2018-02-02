@@ -117,13 +117,10 @@ const EnhancedForm = withFormik({
       .required("Password is required")
   }),
   handleSubmit: ({ email, password }, { props, setSubmitting, setErrors }) => {
-    console.log("submitting LoginF");
     props.loginAction({ email, password }).then(response => {
       if (response.non_field_errors) {
-        console.log(response);
         setErrors({ password: response.non_field_errors[0] });
       } else {
-        console.log(response);
         props.authenticateAction(response, props.history, props.dispatch);
       }
     });
