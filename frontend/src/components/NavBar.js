@@ -51,7 +51,11 @@ class NavBar extends Component {
   userIsAuthenticatedEmail() {
     if (this.props.authenticated) {
       return [
-        <UncontrolledDropdown nav className="nav-item dropdown">
+        <UncontrolledDropdown
+          nav
+          className="nav-item dropdown"
+          key="email-auth"
+        >
           <DropdownToggle nav caret className="nav-link">
             Account
           </DropdownToggle>
@@ -82,7 +86,7 @@ class NavBar extends Component {
   userIsNotAuthenticated() {
     if (!this.props.authenticated && !this.props.goog_auth.isAuthenticated) {
       return [
-        <UncontrolledDropdown nav className="nav-item dropdown">
+        <UncontrolledDropdown nav className="nav-item dropdown" key="not-auth">
           <DropdownToggle nav caret className="nav-link">
             Login
           </DropdownToggle>
@@ -119,6 +123,7 @@ class NavBar extends Component {
   }
 
   render() {
+    console.log("NAVBAR PROPS___", this.props);
     return (
       <div>
         <Navbar
@@ -136,13 +141,7 @@ class NavBar extends Component {
               </NavItem>
 
               <NavItem>
-                <NavLink
-                  tag={Link}
-                  to="/about"
-                  activeClassName="active"
-                  exact
-                  onClick={() => this.toggle()}
-                >
+                <NavLink tag={Link} to="/about" activeClassName="active" exact>
                   About
                 </NavLink>
               </NavItem>

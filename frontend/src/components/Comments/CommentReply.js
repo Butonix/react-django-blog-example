@@ -58,7 +58,8 @@ class CommentReply extends Component {
                       display: "flex",
                       whiteSpace: "normal",
                       wordBreak: "break-word",
-                      textAlign: "justify"
+                      textAlign: "justify",
+                      marginTop: "5px"
                     }}
                   >
                     {this.props.text}

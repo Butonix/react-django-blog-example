@@ -54,7 +54,7 @@ class PostAutocomplete extends React.Component {
           highlightedIndex,
           selectedItem
         }) => (
-          <div className="text-center mt-4">
+          <div className="text-center" style={{ marginTop: "2em" }}>
             <h3>Browse the blog for posts</h3>
             <h5 className="mt-4">
               based on programming language, title, or publication date (mm-dd,

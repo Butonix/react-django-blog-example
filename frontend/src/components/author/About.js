@@ -4,7 +4,7 @@ import MyPhoto from "./me.png";
 
 const About = () => {
   return (
-    <div className="container mt-4">
+    <div className="container" style={{ marginTop: "2em" }}>
       <div className="row">
         <div className="col-md-4 text-center">
           <img

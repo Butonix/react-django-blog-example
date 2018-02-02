@@ -30,8 +30,8 @@ class GoogleLogoutButton extends Component {
       <GoogleLogout
         buttonText=" Logout"
         className="btn btn-danger btn-sm mt-2"
-        style={{ width: "100%" }}
         onLogoutSuccess={signOut}
+        style={{ marginLeft: "15px", marginRight: "10px" }}
       />
     );
   }
