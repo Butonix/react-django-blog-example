@@ -63,7 +63,7 @@ ReactDOM.render(
           >
             <i
               className="fas fa-arrow-circle-up fa-3x"
-              style={{ opacity: "0.7" }}
+              style={{ opacity: "0.5" }}
             />
           </ScrollToTop>
         </div>
