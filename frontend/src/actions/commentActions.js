@@ -1,3 +1,4 @@
+import * as types from "../types/actionTypes";
 const url = "http://127.0.0.1:8000";
 
 //Method called for each action to determine headers sent
@@ -20,14 +21,14 @@ export const determineHeaders = () => {
 
 // COMMENT LIST ACTIONS
 const isFetchingCommentsForPost = () => ({
-  type: "IS_FETCHING_COMMENTS_FOR_POST"
+  type: types.IS_FETCHING_COMMENTS_FOR_POST
 });
 const fetchCommentsForPostSuccess = commentArr => ({
-  type: "FETCH_COMMENTS_FOR_POST_SUCCESS",
+  type: types.FETCH_COMMENTS_FOR_POST_SUCCESS,
   commentArr
 });
 const fetchCommentsForPostFailure = err => ({
-  type: "FETCH_COMMENTS_FOR_POST_FAILURE",
+  type: types.FETCH_COMMENTS_FOR_POST_FAILURE,
   err
 });
 
@@ -62,7 +63,7 @@ function fetchCommentsForPost(postId) {
 }
 
 const createCommentFailure = err => ({
-  type: "CREATE_COMMENT_FAILURE",
+  type: types.CREATE_COMMENT_FAILURE,
   err
 });
 

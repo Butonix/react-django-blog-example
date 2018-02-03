@@ -1,11 +1,15 @@
+import * as types from "../types/actionTypes";
 const url = "http://127.0.0.1:8000";
 
-const isChangingPassword = () => ({ type: "IS_CHANGING_PASSWORD" });
+const isChangingPassword = () => ({ type: types.IS_CHANGING_PASSWORD });
 const changePasswordSuccess = resp => ({
-  type: "CHANGE_PASSWORD_SUCCESS",
+  type: types.CHANGE_PASSWORD_SUCCESS,
   resp
 });
-const changePasswordFailure = err => ({ type: "CHANGE_PASSWORD_FAILURE", err });
+const changePasswordFailure = err => ({
+  type: types.CHANGE_PASSWORD_FAILURE,
+  err
+});
 
 function changePassword(pwDetails) {
   return async function(dispatch) {
