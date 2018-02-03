@@ -8,26 +8,7 @@ import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
 
-const styles = theme => ({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    flexWrap: "wrap",
-    textAlign: "center"
-  },
-  textField: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: "2em",
-    width: "60%"
-  },
-  button: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: "6em",
-    width: "10%"
-  }
-});
+import { styles } from "./authentication/customStylesMui";
 
 class ContactForm extends Component {
   onloadCallback = () => null;
@@ -80,9 +61,7 @@ class ContactForm extends Component {
 
     return (
       <span className={classes.container}>
-        <h3 style={{ textAlign: "center", marginTop: "1em" }}>
-          Contact me by filling the form
-        </h3>
+        <h3 style={{ textAlign: "center" }}>Contact me by filling the form</h3>
         {this.props.contact_form.err ? (
           <div className="alert alert-danger" role="alert">
             <strong>{contact_form.err.message}</strong>

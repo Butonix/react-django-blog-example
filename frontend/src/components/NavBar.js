@@ -161,7 +161,6 @@ class NavBar extends Component {
               {this.userIsNotAuthenticated()}
               {this.userIsAuthenticatedEmail()}
               {this.userIsAuthenticatedGoogle()}
-
               <NavItem className="mt-2 ml-3">
                 <SearchModal
                   className="modal-scrollbar"
