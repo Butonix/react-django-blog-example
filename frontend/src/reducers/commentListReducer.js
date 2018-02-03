@@ -1,3 +1,5 @@
+import * as types from "../types/actionTypes";
+
 const initialState = {
   isFetchingComments: false,
   commentArr: [],
@@ -6,19 +8,19 @@ const initialState = {
 
 function commentListReducer(state = initialState, action) {
   switch (action.type) {
-    case "IS_FETCHING_COMMENTS_FOR_POST":
+    case types.IS_FETCHING_COMMENTS_FOR_POST:
       return { ...state, err: null, isFetchingComments: true };
-    case "FETCH_COMMENTS_FOR_POST_SUCCESS":
+    case types.FETCH_COMMENTS_FOR_POST_SUCCESS:
       return {
         ...state,
         commentArr: action.commentArr,
         isFetchingComments: false
       };
-    case "FETCH_COMMENTS_FOR_POST_FAILURE":
+    case types.FETCH_COMMENTS_FOR_POST_FAILURE:
       return { ...state, err: action.err, isFetchingComments: false };
-    case "CREATE_COMMENT_FAILURE":
+    case types.CREATE_COMMENT_FAILURE:
       return { ...state, err: action.err, isFetchingComments: false };
-    case "GOOGLE_LOGOUT":
+    case types.GOOGLE_LOGOUT:
       let commentArray = state.commentArr.map(commentObj =>
         Object.assign({}, commentObj, { current_user: "" })
       );

@@ -1,3 +1,5 @@
+import * as types from "../types/actionTypes";
+
 const initialState = {
   isChangingPassword: false,
   err: null,
@@ -6,15 +8,15 @@ const initialState = {
 
 function changePasswordReducer(state = initialState, action) {
   switch (action.type) {
-    case "IS_CHANGING_PASSWORD":
+    case types.IS_CHANGING_PASSWORD:
       return { ...state, isChangingPassword: true, err: null };
-    case "CHANGE_PASSWORD_SUCCESS":
+    case types.CHANGE_PASSWORD_SUCCESS:
       return {
         ...state,
         isChangingPassword: false,
         resp_message: action.resp.detail
       };
-    case "CHANGE_PASSWORD_FAILURE":
+    case types.CHANGE_PASSWORD_FAILURE:
       return {
         ...state,
         isChangingPassword: false,
