@@ -45,7 +45,6 @@ class Form extends PureComponent {
     e.preventDefault();
     let err = this.validate();
     if (!err) {
-      console.log("POSTING to server");
       if (!this.props.createCommentReply) {
         this.props
           .createCommentForPost(this.props.postId, this.state.text)
@@ -93,8 +92,6 @@ class Form extends PureComponent {
         text: "",
         textError: ""
       });
-    } else {
-      console.log("There is an error in your form.");
     }
   }
 

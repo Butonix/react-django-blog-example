@@ -21,7 +21,6 @@ class EditForm extends PureComponent {
       this.textInput.focus();
     }
     if (prevProps.prevText !== this.props.prevText) {
-      console.log("update state because new prevText");
       this.setState({ text: this.props.prevText });
     }
   }
@@ -51,7 +50,6 @@ class EditForm extends PureComponent {
     e.preventDefault();
     let err = this.validate();
     if (!err) {
-      console.log("POSTING to server");
       if (!this.props.editCommentReply) {
         this.props
           .editCommentForPost(
@@ -77,8 +75,6 @@ class EditForm extends PureComponent {
         text: "",
         textError: ""
       });
-    } else {
-      console.log("There is an error in your form.");
     }
   }
 
