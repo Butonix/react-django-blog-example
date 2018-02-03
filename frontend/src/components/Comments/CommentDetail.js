@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
 
-import "./detail-styles.css";
 import Form from "./Form";
 import EditForm from "./EditForm";
 import CommentReply from "../../containers/Comments/CommentReplyContainer";

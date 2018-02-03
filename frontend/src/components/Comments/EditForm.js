@@ -4,21 +4,7 @@ import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
 
-const styles = theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-    flexDirection: "row"
-  },
-  textField: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    width: "100%"
-  },
-  button: {
-    margin: "auto"
-  }
-});
+import { styles } from "./customStylesMui";
 
 class EditForm extends PureComponent {
   state = {
