@@ -15,7 +15,7 @@ const styles = {
   media: {
     height: 200,
     "&:hover": {
-      opacity: 0.8,
+      opacity: 0.6,
       transition: ".5s ease",
       backfaceVisibility: "hidden",
       cursor: "pointer"
