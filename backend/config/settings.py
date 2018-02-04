@@ -43,11 +43,10 @@ INSTALLED_APPS = [
     # Own-apps
     'post',
     'newsletter',
-    'category',
     'user_profile',
     'contact_form',
     'comment',
-    'authenticated_test_endpoint'
+    'category'
 ]
 
 MIDDLEWARE = [
