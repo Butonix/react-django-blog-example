@@ -54,7 +54,7 @@ ReactDOM.render(
             style={{
               position: "absolute",
               bottom: 70,
-              right: 30,
+              right: 10,
               cursor: "pointer",
               transitionDuration: "0.2s",
               transitionTimingFunction: "linear",
