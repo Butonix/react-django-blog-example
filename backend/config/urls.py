@@ -16,7 +16,8 @@ urlpatterns = [
     url(r'^sauth/', include('rest_framework_social_oauth2.urls')),
     #^auth/ is django rest auth login
     url(r'^auth/', include('rest_auth.urls')),
-    url(r"^newsletter/", include('newsletter.urls')),
+    #Personal apps
+    url(r"^", include('newsletter.urls')),
     url(r"^category/", include('category.urls')),
     url(r"^profile/", include('user_profile.urls')),
     url(r"^contact/", include('contact_form.urls')),

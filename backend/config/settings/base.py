@@ -4,24 +4,17 @@ from dotenv import load_dotenv
 from os.path import join, dirname
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#Added one more os.path.dirname because settings is 1 more level nested.
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))))
 
-dotenv_path = join(dirname(__file__), '.env')
+
+dotenv_path = join(dirname(__file__), '../.env')
 load_dotenv(dotenv_path)
-
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-# Application definition
-
 INSTALLED_APPS = [
+    # Base
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -29,6 +22,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+
+    # Requirements
     # django-rest-auth
     'rest_auth',
     'django.contrib.sites',
@@ -40,7 +35,8 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework_social_oauth2',
     'corsheaders',
-    # Own-apps
+
+    # Personal
     'post',
     'newsletter',
     'user_profile',
@@ -49,10 +45,13 @@ INSTALLED_APPS = [
     'category'
 ]
 
+ALLOWED_HOSTS = ['testserver', 'localhost',
+                 '127.0.0.1', 'google.com', 'google']
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -61,6 +60,30 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+WSGI_APPLICATION = 'config.wsgi.application'
+
+AUTH_PASSWORD_VALIDATORS = [
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+]
+
+# Make JWT Auth the default authentication mechanism for Django
+# Basic Authentication is only suitable for testing.
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # django-rest-auth
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        # django-rest-social-oauth2
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',
+    )
+}
 
 TEMPLATES = [
     {
@@ -80,88 +103,24 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
-# Password validation
-# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.11/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
-
-"""
-    Enables django-rest-auth to use JWT instead of regular tokens.
-
-"""
+"""Enables django-rest-auth to use JWT instead of regular tokens."""
 REST_USE_JWT = True
-
 SITE_ID = 1
+
 # configure the JWTs to expire after 1 hour, and allow users to refresh near-expiration tokens
 # HEADER PREFIX FOR JWT_AUTH is Authorization: `JWT YOUR_TOKEN`
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
     'JWT_ALLOW_REFRESH': True,
 }
-
-# Make JWT Auth the default authentication mechanism for Django
-# Basic Authentication is only suitable for testing.
-REST_FRAMEWORK = {
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        # django-rest-auth
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        # django-rest-social-oauth2
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-        'rest_framework_social_oauth2.authentication.SocialAuthentication',
-    )
-}
-
 
 # Used for the Email login at http://127.0.0.1:8000/auth/login/
 AUTHENTICATION_BACKENDS = (
@@ -170,28 +129,17 @@ AUTHENTICATION_BACKENDS = (
     'rest_framework_social_oauth2.backends.DjangoOAuth2', # `django-social-oauth2` specific methods, such as facebook/google login
     'social_core.backends.google.GoogleOAuth2',  # for Google authentication
     #'social_core.backends.facebook.FacebookOAuth2',  # for Facebook authentication
-
 )
 
 
-
-
-"""
-    Cors Header issues settings
-"""
-
-ALLOWED_HOSTS = ['testserver', 'localhost',
-                 '127.0.0.1', 'google.com', 'google']
+"""Cors Header issues settings"""
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
     'localhost:3001'
 )
 
-
-"""
-    DJANGO ALL AUTH SETTINGS FOR EMAIL LOGIN
-"""
+"""DJANGO ALL AUTH SETTINGS FOR EMAIL LOGIN"""
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # temporary fix of a package issue
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
@@ -206,14 +154,12 @@ OLD_PASSWORD_FIELD_ENABLED = True
 GR_CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'
 GR_CAPTCHA_SECRET_KEY = os.environ.get('GR_CAPTCHA_SECRET_KEY')
 
-
 """
     Google Authentication settings
 """
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get(
     "SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
-
 
 """
     DJANGO OAUTH TOOLKIT EXPIRATION SECONDS  - DEFAULT IS 36000 WHICH IS 10 hours
@@ -222,10 +168,3 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get(
 OAUTH2_PROVIDER = {
     'ACCESS_TOKEN_EXPIRE_SECONDS': 36000,
 }
-
-
-#USER UPLOAD FILES
-#where django stores user uploads
-MEDIA_ROOT = os.path.join(BASE_DIR, 'user_uploads')
-#public url for user uploads
-MEDIA_URL = '/media/'
