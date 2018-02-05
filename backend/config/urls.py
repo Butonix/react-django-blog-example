@@ -1,8 +1,7 @@
+from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
-from django.conf import settings
 from django.contrib import admin
-
 
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework.schemas import get_schema_view
@@ -18,14 +17,24 @@ urlpatterns = [
     url(r'^auth/', include('rest_auth.urls')),
     #Personal apps
     url(r"^", include('newsletter.urls')),
-    url(r"^category/", include('category.urls')),
-    url(r"^profile/", include('user_profile.urls')),
-    url(r"^contact/", include('contact_form.urls')),
-    url(r"^posts/", include('post.urls', namespace='blog')),
+    url(r"^", include('category.urls')),
+    url(r"^", include('user_profile.urls')),
+    url(r"^", include('contact_form.urls')),
+    url(r"^", include('post.urls', namespace='blog')),
 ]
 
 #Browsable API login
 urlpatterns += [
     url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     #url(r'^', include('django.contrib.auth.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
