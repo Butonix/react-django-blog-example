@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'user_profile',
     'contact_form',
     'comment',
-    'category'
 ]
 
 ALLOWED_HOSTS = ['testserver', 'localhost',

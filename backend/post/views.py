@@ -25,13 +25,13 @@ class PostList(generics.ListAPIView):
                 Q(title__icontains=query_param) |
                 Q(author__username__icontains=query_param) |
                 Q(archive__icontains=query_param) |
-                Q(category__icontains=query_param) 
-            )
+                Q(category__icontains=query_param)
+            ).select_related('author')
             if queryset.count() > 0:
                 return queryset
             else:
-                return Post.objects.all()
-        return Post.objects.all()
+                return Post.objects.all().select_related('author')
+        return Post.objects.all().select_related('author')
 
 # The slug API endpoint is used so I can make a get request
 # based on the url pathname with react router

@@ -23,7 +23,6 @@ class ContactFormCreate(generics.ListCreateAPIView):
 		'response': g_recaptcha_response
 		})
 		if not json.loads(r.content.decode())['success']:
-			print("inside if")
 			return Response(
 				{'captcha_error': 'Please complete the captcha.'},
 				status = status.HTTP_400_BAD_REQUEST

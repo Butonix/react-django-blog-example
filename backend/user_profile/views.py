@@ -7,7 +7,6 @@ from user_profile.serializers import UserProfileSerializer
 
 class PersonalProfile(generics.RetrieveUpdateAPIView):
 	serializer_class = UserProfileSerializer
-	queryset = UserProfile.objects.all()
 
 	def get_object(self):
 		try:
