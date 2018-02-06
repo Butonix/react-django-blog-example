@@ -17,7 +17,6 @@ urlpatterns = [
     url(r'^auth/', include('rest_auth.urls')),
     #Personal apps
     url(r"^", include('newsletter.urls')),
-    url(r"^", include('category.urls')),
     url(r"^", include('user_profile.urls')),
     url(r"^", include('contact_form.urls')),
     url(r"^", include('post.urls', namespace='blog')),

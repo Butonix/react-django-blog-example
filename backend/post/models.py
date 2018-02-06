@@ -9,9 +9,7 @@ class Post(models.Model):
 		on_delete = models.CASCADE,
 		related_name='posts'
 	)
-	category = models.ForeignKey(Category,
-		on_delete = models.CASCADE,
-		related_name='posts')
+	category = models.CharField(max_length=120, default='python')
 	title = models.CharField(max_length = 155)
 	content = models.TextField()
 	content_home_page= models.TextField()
