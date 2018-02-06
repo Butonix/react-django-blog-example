@@ -31,8 +31,11 @@ class CommentList(ListCreateAPIView):
         except Post.DoesNotExist:
             raise Http404
 
-        return Comment.objects.select_related('user__profile','post').prefetch_related(
-        'comment_replies__user').filter(post=post_obj)
+        return Comment.objects.select_related(
+                'user__profile','post'
+                ).prefetch_related(
+                'comment_replies__user'
+                ).filter(post=post_obj)
 
 class CommentDetail(RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = 'comment_pk'
@@ -43,9 +46,11 @@ class CommentDetail(RetrieveUpdateDestroyAPIView):
     def get_object(self):
         try:
             post_obj = Post.objects.get(pk=self.kwargs['pk'])
-            comment_obj = Comment.objects.select_related('user__profile','post').prefetch_related(
-            'comment_replies__user'
-            ).filter(post=post_obj).get(pk=self.kwargs['comment_pk'])
+            comment_obj = Comment.objects.select_related(
+                'user__profile','post'
+                ).prefetch_related(
+                'comment_replies__user'
+                ).get(pk=self.kwargs['comment_pk'])
         except (Post.DoesNotExist, Comment.DoesNotExist) as e:
             raise Http404
         return comment_obj
@@ -69,7 +74,9 @@ class CommentReplyList(ListCreateAPIView):
             comment_obj = Comment.objects.get(pk = self.kwargs['comment_pk'])
         except (Post.DoesNotExist, Comment.DoesNotExist) as e:
             raise Http404
-        return CommentReply.objects.select_related('user').filter(post=post_obj,comment=comment_obj)
+        return CommentReply.objects.select_related(
+            'user'
+            ).filter(post=post_obj,comment=comment_obj)
 
 class CommentReplyDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = CommentReplySerializer
