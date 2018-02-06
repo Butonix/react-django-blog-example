@@ -9,8 +9,6 @@ from rest_framework.response import Response
 
 from django.http import Http404
 
-from collections import OrderedDict, namedtuple
-
 
 class PostList(generics.ListAPIView):
     queryset = Post.objects.all()
