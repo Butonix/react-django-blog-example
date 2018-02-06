@@ -9,12 +9,23 @@ class CommentReplies(serializers.RelatedField):
     def to_representation(self, value):
         return {
         'id': value.id,
-        'post': value.id,
+        #'post': value.id,
         'user': value.user.username,
         'text': value.text,
         'posted_on': value.posted_on,
         'updated_on': value.updated_on
         }
+
+class CommentReplySerializer(serializers.ModelSerializer):
+    #post = serializers.ReadOnlyField(source='post.title')
+    user = serializers.ReadOnlyField(source='user.username')
+    #comment = serializers.ReadOnlyField(source='comment.id')
+
+    class Meta:
+        model= CommentReply
+        fields = ('id',   'user', 'text',  'posted_on',
+        'updated_on')
+
 
 #Methods defined inside ModelSerializer have access to their own context
 #You can access context with self.context['request'].user
@@ -33,8 +44,8 @@ class CommentSerializer(serializers.ModelSerializer):
 
     def _user_avatar(self,obj):
         try:
-            user = obj.user
-            return str(user.profile.user_image)
+            user_img = obj.user.profile.user_image
+            return str(user_img)
         except AttributeError:
             return ""
 
@@ -42,13 +53,3 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ('id','post', 'user', 'text', 'posted_on', 'updated_on',
         'comment_replies', 'current_user', 'user_avatar')
-
-class CommentReplySerializer(serializers.ModelSerializer):
-    post = serializers.ReadOnlyField(source='post.title')
-    user = serializers.ReadOnlyField(source='user.username')
-    comment = serializers.ReadOnlyField(source='comment.id')
-
-    class Meta:
-        model= CommentReply
-        fields = ('id', 'post', 'comment', 'user', 'text',  'posted_on',
-        'updated_on')
