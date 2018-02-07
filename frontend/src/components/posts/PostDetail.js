@@ -9,14 +9,14 @@ import CommentList from "../../containers/Comments/CommentListContainer.js";
 
 class PostDetail extends Component {
   componentDidMount() {
-    return this.props.fetchPostSlug(this.props.match.params.slug);
+    let { match, fetchPostSlug } = this.props;
+    return fetchPostSlug(match.params.slug);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      prevProps.post.snippet.result.slug !== this.props.post.snippet.result.slug
-    ) {
-      this.props.history.push(`/${this.props.post.snippet.result.slug}`);
+    let { post, history } = this.props;
+    if (prevProps.post.snippet.result.slug !== post.snippet.result.slug) {
+      history.push(`/${post.snippet.result.slug}`);
     }
   }
 
