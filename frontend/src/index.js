@@ -27,6 +27,8 @@ import {
   AuthenticatedRoute
 } from "./customRoutes/ProtectedRoutes";
 
+import "./index.css";
+
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
@@ -52,17 +54,17 @@ ReactDOM.render(
           <ScrollToTop
             showUnder={160}
             style={{
-              position: "absolute",
+              position: "fixed",
               bottom: 70,
               right: 10,
               cursor: "pointer",
-              transitionDuration: "0.2s",
+              transitionDuration: "0.7s",
               transitionTimingFunction: "linear",
               transitionDelay: "0s"
             }}
           >
             <i
-              className="fas fa-arrow-circle-up fa-3x"
+              className="upscroller fas fa-arrow-circle-up fa-3x"
               style={{ opacity: "0.5" }}
             />
           </ScrollToTop>

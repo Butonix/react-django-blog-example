@@ -28,6 +28,8 @@
   display: block;
 }
 
+/* Styles for the Pagination in Post Detail view */
+
 .pagination-right :hover {
   color: #000;
   cursor: pointer;
@@ -63,7 +65,19 @@
   }
 }
 
-/* modal */
+/* Media class for the ScrollToTop Component to disappear
+  at a certain screen size
+*/
+
+@media only screen and (max-width: 650px) {
+  .upscroller {
+    display: none;
+  }
+}
+
+/* modal class to prevent it hiding the left scrollbar
+  and shifting the content of the page
+*/
 .modal-scrollbar {
   modal-open {
     overflow-y: auto;
