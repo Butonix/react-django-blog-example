@@ -7,6 +7,7 @@ app_name='blog'
 
 urlpatterns = [
     url(r"^posts/$", views.PostList.as_view(), name='post-list'),
+    url(r"^posts/paginated/$", views.PostListPaginated.as_view(), name='post-list-paginated'),
     url(r"^posts/(?P<pk>[0-9]+)/$",
         views.PostDetailPk.as_view(), name="post-detail-pk"),
     url(r"^posts/(?P<pk>[0-9]+)/comments/$",

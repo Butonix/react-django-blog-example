@@ -7,11 +7,14 @@ const isFetching = () => ({ type: types.FETCHING_POSTS });
 const receivePosts = posts => ({ type: types.FETCH_POSTS_SUCCESS, posts });
 const fetchPostsFailed = err => ({ type: types.FETCH_POSTS_FAILURE, err });
 
-function fetchPosts() {
+function fetchPosts(paginationPage) {
   return async function(dispatch) {
     dispatch(isFetching());
     try {
-      let response = await fetch(`${url}/posts/`);
+      paginationPage = (await paginationPage) || 1;
+      let response = await fetch(
+        `${url}/posts/paginated/?page=${paginationPage}`
+      );
       let responseJson = await response.json();
       return dispatch(receivePosts(responseJson));
     } catch (err) {

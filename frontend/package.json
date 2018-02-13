@@ -7,6 +7,7 @@
     "formik": "^0.10.5",
     "history": "^4.7.2",
     "jwt-decode": "^2.2.0",
+    "lodash.throttle": "^4.1.1",
     "material-ui": "^1.0.0-beta.30",
     "moment": "^2.20.1",
     "query-string": "^5.0.1",
@@ -25,7 +26,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "url-search-params": "^0.10.0",
-    "yup": "^0.24.0"
+    "yup": "^0.24.1"
   },
   "scripts": {
     "start": "react-scripts start",

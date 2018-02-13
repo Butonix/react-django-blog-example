@@ -1,14 +1,27 @@
 from post.models import Post
 from post.serializers import PostSerializer
 from django.db.models import Q
+from django.http import Http404
+
 
 
 from rest_framework import generics
-
 from rest_framework.response import Response
 
-from django.http import Http404
+from rest_framework.pagination import PageNumberPagination
 
+class StandardPostPagination(PageNumberPagination):
+    page_size = 2
+    #page_size_query_param = 'page_size'
+    max_page_size = 1000
+
+
+class PostListPaginated(generics.ListAPIView):
+    serializer_class = PostSerializer
+    pagination_class =  StandardPostPagination
+
+    def get_queryset(self):
+        return Post.objects.all().select_related('author')
 
 class PostList(generics.ListAPIView):
     queryset = Post.objects.all()
