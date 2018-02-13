@@ -13,25 +13,29 @@ class HomePage extends Component {
     return this.props.fetchPosts();
   }
   componentWillUnmount() {
-    console.log("COMPONENT UNMOUNTED");
     window.removeEventListener("scroll", this.onScroll, false);
     return this.props.clearPosts();
   }
 
+  /*
+  window.innerHeight = height in pixels of the browser window viewport
+  window.scrollY = number of pixels that the document is currently scrolled vertically
+  document.body.offsetHeight = the height of the element including padding,borders (largest in Px)
+  */
   onScroll = () => {
+    console.log("WINDOW INNERHEIGHT", window.innerHeight);
+    console.log("WINDOW SCROLLY", window.scrollY);
+    console.log("DOCUMENT B OFFSET", document.body.offsetHeight);
+    let { snippets, isFetching } = this.props.posts;
     if (
       window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 &&
-      this.props.posts.snippets.results.length &&
-      !this.props.posts.isFetching
+      snippets.results.length &&
+      !isFetching
     ) {
-      if (
-        this.props.posts.snippets.next !== null &&
-        this.props.posts.snippets.results.length <=
-          this.props.posts.snippets.count
-      ) {
-        const indexOfQuery = this.props.posts.snippets.next.indexOf("?");
+      if (snippets.next !== null && snippets.results.length <= snippets.count) {
+        const indexOfQuery = snippets.next.indexOf("?");
         const queryParsed = queryString.parse(
-          this.props.posts.snippets.next.substring(indexOfQuery)
+          snippets.next.substring(indexOfQuery)
         ).page;
         let currentPosition =
           document.documentElement.scrollTop || document.body.scrollTop;
@@ -47,7 +51,6 @@ class HomePage extends Component {
 
   render() {
     let { isFetching, err, snippets } = this.props.posts;
-    console.log(document.documentElement.scrollTop || document.body.scrollTop);
     return (
       <div className="container">
         <h1 className="my-4">Recent Posts</h1>
