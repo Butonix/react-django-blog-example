@@ -7,15 +7,15 @@ import NewsLetter from "../../containers/posts/NewsLetterContainer";
 import PostArchiveHtmlStyled from "../../components/reusableComponents/PostArchiveHtmlStyled";
 import CategoryHtmlStyled from "../../components/reusableComponents/CategoryHtmlStyled";
 
-import throttle from "lodash.throttle";
-
 class HomePage extends Component {
   componentDidMount() {
-    window.addEventListener("scroll", throttle(this.onScroll, 16), false);
+    window.addEventListener("scroll", this.onScroll, false);
     return this.props.fetchPosts();
   }
   componentWillUnmount() {
+    console.log("COMPONENT UNMOUNTED");
     window.removeEventListener("scroll", this.onScroll, false);
+    return this.props.clearPosts();
   }
 
   onScroll = () => {
@@ -24,28 +24,30 @@ class HomePage extends Component {
       this.props.posts.snippets.results.length &&
       !this.props.posts.isFetching
     ) {
-      if (this.props.posts.snippets.next !== null) {
+      if (
+        this.props.posts.snippets.next !== null &&
+        this.props.posts.snippets.results.length <=
+          this.props.posts.snippets.count
+      ) {
         const indexOfQuery = this.props.posts.snippets.next.indexOf("?");
         const queryParsed = queryString.parse(
           this.props.posts.snippets.next.substring(indexOfQuery)
         ).page;
-        this.props.fetchPosts(queryParsed);
+        let currentPosition =
+          document.documentElement.scrollTop || document.body.scrollTop;
+        this.props
+          .fetchPosts(queryParsed)
+          .then(
+            () =>
+              (document.documentElement.scrollTop = document.body.scrollTop = currentPosition)
+          );
       }
     }
   };
-  // loadMorePosts = () => {
-  //   if (this.props.posts.snippets.next !== null) {
-  //     const indexOfQuery = this.props.posts.snippets.next.indexOf("?");
-  //     const queryParsed = queryString.parse(
-  //       this.props.posts.snippets.next.substring(indexOfQuery)
-  //     ).page;
-  //     this.props.fetchPosts(queryParsed);
-  //   }
-  // };
 
   render() {
     let { isFetching, err, snippets } = this.props.posts;
-
+    console.log(document.documentElement.scrollTop || document.body.scrollTop);
     return (
       <div className="container">
         <h1 className="my-4">Recent Posts</h1>

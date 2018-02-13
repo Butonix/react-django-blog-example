@@ -32,7 +32,9 @@ import "./index.css";
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <div style={{ position: "relative", minHeight: "100vh" }}>
+      <div
+        style={{ position: "relative", minHeight: "100vh", overflowY: "auto" }}
+      >
         <div style={{ paddingBottom: "95px" }}>
           <NavBar />
           <ScrollToTopRoute>

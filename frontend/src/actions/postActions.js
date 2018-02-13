@@ -23,6 +23,8 @@ function fetchPosts(paginationPage) {
   };
 }
 
+const clearPosts = () => ({ type: types.CLEAR_POSTS });
+
 /* DETAIL ACTIONS */
 
 const isFetchingDetail = () => ({ type: types.FETCHING_POST });
@@ -61,4 +63,4 @@ function fetchPostPk(pk) {
   };
 }
 
-export { fetchPosts, fetchPostSlug, fetchPostPk };
+export { fetchPosts, clearPosts, fetchPostSlug, fetchPostPk };

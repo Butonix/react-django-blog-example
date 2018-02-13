@@ -25,6 +25,8 @@ function postListReducer(state = initialState, action) {
         },
         err: null
       };
+    case types.CLEAR_POSTS:
+      return initialState;
     case types.FETCH_POSTS_FAILURE:
       return { ...state, isFetching: false, err: action.err };
     default:
