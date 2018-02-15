@@ -3,8 +3,6 @@ from post.serializers import PostSerializer
 from django.db.models import Q
 from django.http import Http404
 
-
-
 from rest_framework import generics
 from rest_framework.response import Response
 
@@ -13,7 +11,6 @@ from rest_framework.pagination import PageNumberPagination
 class StandardPostPagination(PageNumberPagination):
     page_size = 4
     max_page_size = 500
-
 
 class PostListPaginated(generics.ListAPIView):
     serializer_class = PostSerializer
@@ -43,9 +40,9 @@ class PostList(generics.ListAPIView):
                 return Post.objects.all().select_related('author')
         return Post.objects.all().select_related('author')
 
+
 # The slug API endpoint is used so I can make a get request
 # based on the url pathname with react router
-
 class PostDetailSlug(generics.RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
