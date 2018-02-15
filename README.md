@@ -13,4 +13,5 @@
 - [x] A browse tab with react downshift rendering the available posts based according to user input
 - [x] react middleware for refresh on JWT for the email logged in users and regular tokens for the Google authenticated users
 - [x] profile and password update component for the email logged in users 
+- [x] infinite scrolling 
 
