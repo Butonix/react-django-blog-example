@@ -23,9 +23,6 @@ class HomePage extends Component {
   document.body.offsetHeight = the height of the element including padding,borders (largest in Px)
   */
   onScroll = () => {
-    console.log("WINDOW INNERHEIGHT", window.innerHeight);
-    console.log("WINDOW SCROLLY", window.scrollY);
-    console.log("DOCUMENT B OFFSET", document.body.offsetHeight);
     let { snippets, isFetching } = this.props.posts;
     if (
       window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 &&
