@@ -71,9 +71,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Make JWT Auth the default authentication mechanism for Django
 # Basic Authentication is only suitable for testing.
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ),
+    'DEFAULT_PERMISSION_CLASSES': (),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # django-rest-auth
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
