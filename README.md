@@ -14,4 +14,4 @@
 - [x] react middleware for refresh on JWT for the email logged in users and regular tokens for the Google authenticated users
 - [x] profile and password update component for the email logged in users 
 - [x] infinite scrolling 
-
+- [ ] deployment on AWS
