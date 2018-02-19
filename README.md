@@ -1,5 +1,7 @@
 ## A React + Redux blog that consumes a django web api(drf-blog repo)
 
+#### Demo of the code in this repo: https://www.borislavnfa.com/   / Server is deployed with a free account on Heroku (might sleep for 5 seconds initially ) /
+
 ### Functionality:
 - [x] Blog Post component
 - [x] Newsletter component
@@ -14,4 +16,9 @@
 - [x] react middleware for refresh on JWT for the email logged in users and regular tokens for the Google authenticated users
 - [x] profile and password update component for the email logged in users 
 - [x] infinite scrolling 
-- [ ] deployment on AWS
+- [x] deploy frontend on Amazon in an S3 bucket
+- [x] deploy backend on Heroku
+- [ ] fix styling 
+- [ ] clean up the front and backend code
+- [ ] host static files on amazon and not on heroku 
+- [ ] implement email functionality 
