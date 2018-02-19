@@ -1,7 +1,5 @@
 ## A React + Redux blog that consumes a django web api(drf-blog repo)
 
-#### Demo of the code in this repo: https://www.borislavnfa.com/   / Server is deployed with a free account on Heroku (might sleep for 5 seconds initially ) /
-
 ### Functionality:
 - [x] Blog Post component
 - [x] Newsletter component
