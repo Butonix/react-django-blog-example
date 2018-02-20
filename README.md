@@ -15,9 +15,4 @@
 * [x] react middleware for refresh on JWT for the email logged in users and regular tokens for the Google authenticated users
 * [x] profile and password update component for the email logged in users
 * [x] infinite scrolling
-* [x] deploy frontend on Amazon in an S3 bucket
-* [x] deploy backend on Heroku
-* [ ] fix styling
-* [ ] clean up the front and backend code
-* [ ] host static files on amazon and not on heroku
-* [ ] implement email functionality
+* [ ] deployment on AWS
