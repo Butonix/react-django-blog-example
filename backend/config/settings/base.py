@@ -3,15 +3,21 @@ import datetime
 from dotenv import load_dotenv
 from os.path import join, dirname
 
+from decouple import config
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 #Added one more os.path.dirname because settings is 1 more level nested.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))))
 
+ALLOWED_HOSTS = ['testserver', 'localhost',
+                 '127.0.0.1', 'google.com', 'google', 'desolate-bastion-14166.herokuapp.com',
+                 'www.borislavnfa.com', 'borislavnfa.com',
+                 r'https://borislavnfa.com']
 
 dotenv_path = join(dirname(__file__), '../.env')
 load_dotenv(dotenv_path)
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = config("SECRET_KEY")
 
 INSTALLED_APPS = [
     # Base
@@ -44,8 +50,7 @@ INSTALLED_APPS = [
     'comment',
 ]
 
-ALLOWED_HOSTS = ['testserver', 'localhost',
-                 '127.0.0.1', 'google.com', 'google']
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -133,7 +138,13 @@ AUTHENTICATION_BACKENDS = (
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
-    'localhost:3001'
+    'localhost:3001',
+    'react-front.s3-website-us-east-1.amazonaws.com',
+    'www.borislavnfa.com',
+    r'https://borislavnfa.com',
+    'borislavnfa.com',
+    r'https://borislavnfa.com/'
+
 )
 
 """DJANGO ALL AUTH SETTINGS FOR EMAIL LOGIN"""
@@ -149,13 +160,13 @@ OLD_PASSWORD_FIELD_ENABLED = True
     GOOGLE RECAPTCHA SETTINGS
 """
 GR_CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'
-GR_CAPTCHA_SECRET_KEY = os.environ.get('GR_CAPTCHA_SECRET_KEY')
+GR_CAPTCHA_SECRET_KEY = config('GR_CAPTCHA_SECRET_KEY')
 
 """
     Google Authentication settings
 """
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get(
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config(
     "SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
 
 """

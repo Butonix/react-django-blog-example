@@ -1,6 +1,7 @@
 import * as types from "../types/actionTypes";
+import { currentIp } from "./currentIp";
 
-const url = "http://127.0.0.1:8000";
+const url = currentIp;
 
 const isFetchingProfileData = () => ({ type: types.FETCHING_PROFILE_DATA });
 const fetchProfileDataSuccess = userData => ({

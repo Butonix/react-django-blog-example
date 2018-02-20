@@ -1,0 +1,11 @@
+venv
+venvNew
+*.pyc
+staticfiles
+.env
+db.sqlite3
+requirements/
+user_uploads/
+
+config/settings/development.py
+config/settings/local.py

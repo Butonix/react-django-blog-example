@@ -1,5 +1,7 @@
 import * as types from "../types/actionTypes";
-const url = "http://127.0.0.1:8000";
+import { currentIp } from "./currentIp";
+
+const url = currentIp;
 
 //Method called for each action to determine headers sent
 export const determineHeaders = () => {

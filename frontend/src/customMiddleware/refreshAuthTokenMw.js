@@ -4,12 +4,12 @@ import jwtDecode from "jwt-decode";
 // Imports for google login
 import URLSearchParams from "url-search-params";
 import { push } from "react-router-redux";
+import { convertGoogTokenSuccess } from "../actions/googleAuthActions";
 import {
   django_client_id,
   django_client_secret,
-  url,
-  convertGoogTokenSuccess
-} from "../actions/googleAuthActions";
+  currentIp
+} from "../actions/currentIp";
 
 function refreshAuthToken({ dispatch, getState }) {
   return next => action => {
@@ -24,7 +24,7 @@ function refreshAuthToken({ dispatch, getState }) {
           return dispatch(unauthenticateAction(dispatch));
         }
         if (tokenExpiration && timeLeft <= 1800) {
-          return fetch(`${url}/refresh-token/`, {
+          return fetch(`${currentIp}/refresh-token/`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -68,7 +68,7 @@ function refreshAuthToken({ dispatch, getState }) {
             "refresh_token",
             localStorage.getItem("goog_refresh_token_conv")
           );
-          fetch(`${url}/sauth/token/`, {
+          fetch(`${currentIp}/sauth/token/`, {
             method: "POST",
             headers: {
               Accept: "application/json",

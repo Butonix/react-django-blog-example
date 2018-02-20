@@ -1,5 +1,7 @@
 import * as types from "../types/actionTypes";
-const url = "http://127.0.0.1:8000";
+import { currentIp } from "./currentIp";
+
+const url = currentIp;
 
 const isChangingPassword = () => ({ type: types.IS_CHANGING_PASSWORD });
 const changePasswordSuccess = resp => ({

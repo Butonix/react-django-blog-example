@@ -1,21 +1,20 @@
 import URLSearchParams from "url-search-params";
 import * as types from "../types/actionTypes";
+import { currentIp, django_client_id, django_client_secret } from "./currentIp";
 
-export const url = "http://127.0.0.1:8000";
+const url = currentIp;
 
 /*These are the django client ID and SECRET
   from the OauthToolkit Application registered in your django admin
 */
-export const django_client_id = "zctuBZc5TnBAJE9X1tu4MT3afKOph8ixkdp2gqyk";
-export const django_client_secret =
-  "Z9l7541YZY6ZpZ4W2XOxQ9WoVuiHWswmIpFOaql4WU6nsV1oC5bkX9kmyBgu6eiVU8kKfLEQlQJNRnm2kvMGDeI17DKb8rwU00SNqO7dhFbiaWkKwWhOIqFuYp6siiGu";
+export const dj_client_id = django_client_id;
+export const dj_client_secret = django_client_secret;
 
 const isAuthenticating = () => ({
   type: types.GOOG_IS_AUTHENTICATING
 });
 
 function convertGoogTokenSuccess(json) {
-  console.log("CONVERTGGG", json);
   localStorage.setItem("goog_access_token_conv", json.access_token);
   let expiryDate = Math.round(new Date().getTime() / 1000) + json.expires_in;
   localStorage.setItem("goog_access_token_expires_in", expiryDate);
@@ -50,8 +49,8 @@ function convertGoogleToken(access_token) {
     dispatch(isAuthenticating());
     const searchParams = new URLSearchParams();
     searchParams.set("grant_type", "convert_token");
-    searchParams.set("client_id", django_client_id);
-    searchParams.set("client_secret", django_client_secret);
+    searchParams.set("client_id", dj_client_id);
+    searchParams.set("client_secret", dj_client_secret);
     searchParams.set("backend", "google-oauth2");
     searchParams.set("token", access_token);
     try {
