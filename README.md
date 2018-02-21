@@ -21,3 +21,4 @@
 * [ ] clean up the front and backend code
 * [ ] host static files on amazon and not on heroku
 * [ ] implement email functionality
+* [ ] documentation with swagger
