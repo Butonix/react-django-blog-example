@@ -21,12 +21,23 @@ class InnerResetPasswordForm extends Component {
       handleBlur,
       handleSubmit,
       handleReset,
-      classes
+      classes,
+      request_password_reset
     } = this.props;
 
     return (
       <span className={classes.container}>
-        <h3 style={{ textAlign: "center" }}>
+        {request_password_reset.message && (
+          <div className="alert alert-success" role="alert">
+            <strong>{request_password_reset.message.detail}</strong>
+          </div>
+        )}
+        {request_password_reset.err && (
+          <div className="alert alert-danger" role="alert">
+            <strong>{request_password_reset.err.message}</strong>
+          </div>
+        )}
+        <h3 style={{ textAlign: "center" }} className="mt-3 mb-4">
           Reset your password by entering your Email address
         </h3>
         <form onSubmit={handleSubmit}>
@@ -42,6 +53,7 @@ class InnerResetPasswordForm extends Component {
             label="Email Address"
             className={classes.textField}
           />
+          <br />
           <Button
             raised
             className={classes.button}
@@ -51,11 +63,6 @@ class InnerResetPasswordForm extends Component {
             Submit
           </Button>
         </form>
-        <span>Do not have an account?</span>{" "}
-        <Link to="/register">Register</Link>
-        <hr />
-        <span>Forgot your Password?</span>{" "}
-        <Link to="/reset">Reset Password</Link>
       </span>
     );
   }
@@ -70,17 +77,11 @@ const EnhancedForm = withFormik({
       .email("Invalid Email Address")
       .required("Email is required")
   }),
-  // handleSubmit: ({ email, password }, { props, setSubmitting, setErrors }) => {
-  //   props.loginAction({ email, password }).then(response => {
-  //     if (response.non_field_errors) {
-  //       setErrors({ password: response.non_field_errors[0] });
-  //     } else {
-  //       props.authenticateAction(response, props.history, props.dispatch);
-  //     }
-  //   });
-  //   setSubmitting(false);
-  // },
+  handleSubmit: ({ email }, { props, setSubmitting, setErrors, resetForm }) => {
+    props.requestPasswordReset(email).then(() => resetForm());
+    setSubmitting(false);
+  },
   displayName: "ResetForm" //hlps with react devtools
 })(InnerResetPasswordForm);
 
-export const ResetPassword = withStyles(styles)(EnhancedForm);
+export const RequestPasswordReset = withStyles(styles)(EnhancedForm);

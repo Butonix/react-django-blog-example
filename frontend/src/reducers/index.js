@@ -12,10 +12,13 @@ import googleInfoReducer from "./googleAuthReducer";
 import commentListReducer from "./commentListReducer";
 import changePasswordReducer from "./changePasswordReducer";
 import verifyEmailReducer from "./verifyEmailReducer";
+import requestPasswordResetReducer from "./requestPasswordResetReducer";
+
 const rootReducer = combineReducers({
   router: routerReducer,
   auth: authReducer,
   verify_email: verifyEmailReducer,
+  request_password_reset: requestPasswordResetReducer,
   posts: postListReducer,
   post: postDetailReducer,
   newsletter: newsletterReducer,

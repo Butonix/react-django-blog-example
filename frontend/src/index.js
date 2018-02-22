@@ -18,6 +18,7 @@ import ScrollToTopRoute from "./components/reusableComponents/ScrollToTopRoute";
 import ScrollToTop from "react-scroll-up";
 import Register from "./containers/authentication/RegisterContainer";
 import VerifyEmail from "./containers/authentication/VerifyEmailContainer";
+import RequestPasswordReset from "./containers/authentication/RequestPasswordResetContainer";
 import Login from "./containers/authentication/LoginContainer";
 import ChangePassword from "./containers/authentication/ChangePasswordContainer";
 import NavBar from "./containers/NavBarContainer";
@@ -45,6 +46,7 @@ ReactDOM.render(
               <AuthenticatedRoute exact path="/register" component={Register} />
               <AuthenticatedRoute exact path="/login" component={Login} />
               <PrivateRoute path="/changepassword" component={ChangePassword} />
+              <Route exact path="/reset" component={RequestPasswordReset} />
               <Route exact path="/profile" component={EditProfile} />
               <Route exact path="/about" component={About} />
               <Route exact path="/contact" component={Contact} />

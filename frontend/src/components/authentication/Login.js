@@ -77,7 +77,7 @@ class InnerLoginForm extends Component {
         </form>
         <span>Do not have an account?</span>{" "}
         <Link to="/register">Register</Link>
-        <hr />
+        <br />
         <span>Forgot your Password?</span>{" "}
         <Link to="/reset">Reset Password</Link>
       </span>

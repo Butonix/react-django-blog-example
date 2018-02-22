@@ -24,7 +24,9 @@ function verifyRegistrationEmail(verificationKey) {
       });
 
       if (!response.ok) {
-        throw new Error("Incorrect key.");
+        throw new Error(
+          "Invalid link, please try again or contact an administrator."
+        );
       }
       let responseJson = await response.json();
       return dispatch(verifyRegistrationEmailSuccess(responseJson));
