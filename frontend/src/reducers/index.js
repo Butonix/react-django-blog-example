@@ -13,7 +13,7 @@ import commentListReducer from "./commentListReducer";
 import changePasswordReducer from "./changePasswordReducer";
 import verifyEmailReducer from "./verifyEmailReducer";
 import requestPasswordResetReducer from "./requestPasswordResetReducer";
-
+import passwordResetConfirmReducer from "./passwordResetConfirmReducer";
 const rootReducer = combineReducers({
   router: routerReducer,
   auth: authReducer,
@@ -27,7 +27,8 @@ const rootReducer = combineReducers({
   posts_filtered: filterPostsReducer,
   goog_auth: googleInfoReducer,
   comments: commentListReducer,
-  change_password: changePasswordReducer
+  change_password: changePasswordReducer,
+  password_reset_confirm: passwordResetConfirmReducer
 });
 
 export default rootReducer;

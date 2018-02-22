@@ -24,6 +24,16 @@ function fetchPosts(paginationPage) {
   };
 }
 
+function verifyRegistrationMessage() {
+  return async function(dispatch) {
+    return await dispatch({ type: types.VERIFY_REGISTRATION_MESSAGE });
+  };
+}
+//
+// const verifyRegistrationMessage = () => ({
+//   type: types.VERIFY_REGISTRATION_MESSAGE
+// });
+
 const clearPosts = () => ({ type: types.CLEAR_POSTS });
 
 /* DETAIL ACTIONS */
@@ -64,4 +74,10 @@ function fetchPostPk(pk) {
   };
 }
 
-export { fetchPosts, clearPosts, fetchPostSlug, fetchPostPk };
+export {
+  fetchPosts,
+  clearPosts,
+  verifyRegistrationMessage,
+  fetchPostSlug,
+  fetchPostPk
+};

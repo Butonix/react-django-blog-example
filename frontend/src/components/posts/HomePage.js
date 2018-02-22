@@ -48,8 +48,14 @@ class HomePage extends Component {
 
   render() {
     let { isFetching, err, snippets } = this.props.posts;
+    let { message } = this.props.auth;
     return (
       <div className="container">
+        {message && (
+          <div className="alert alert-info mt-4" role="alert">
+            <strong>{message}</strong>
+          </div>
+        )}
         <h1 className="my-4">Recent Posts</h1>
         <hr />
         {isFetching ? (

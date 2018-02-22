@@ -4,7 +4,8 @@ import { fetchPosts, clearPosts } from "../../actions/postActions";
 import HomePage from "../../components/posts/HomePage";
 
 const mapStateToProps = state => ({
-  posts: state.posts
+  posts: state.posts,
+  auth: state.auth
 });
 const mapDispatchToProps = dispatch => {
   return {

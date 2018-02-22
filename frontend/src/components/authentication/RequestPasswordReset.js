@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withFormik } from "formik";
 import Yup from "yup";
-import { Link } from "react-router-dom";
 
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
@@ -15,12 +14,10 @@ class InnerResetPasswordForm extends Component {
       values,
       touched,
       errors,
-      dirty,
       isSubmitting,
       handleChange,
       handleBlur,
       handleSubmit,
-      handleReset,
       classes,
       request_password_reset
     } = this.props;
@@ -78,8 +75,10 @@ const EnhancedForm = withFormik({
       .required("Email is required")
   }),
   handleSubmit: ({ email }, { props, setSubmitting, setErrors, resetForm }) => {
-    props.requestPasswordReset(email).then(() => resetForm());
-    setSubmitting(false);
+    props.requestPasswordReset(email).then(() => {
+      resetForm();
+      return setSubmitting(false);
+    });
   },
   displayName: "ResetForm" //hlps with react devtools
 })(InnerResetPasswordForm);

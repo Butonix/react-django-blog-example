@@ -149,7 +149,9 @@ const EnhancedForm = withFormik({
         ) {
           setErrors(resp);
         } else {
-          return props.history.push("/");
+          return props
+            .verifyRegistrationMessage()
+            .then(() => props.history.push("/"));
         }
       });
     setSubmitting(false);
