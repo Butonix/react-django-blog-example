@@ -147,7 +147,6 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 """DJANGO ALL AUTH SETTINGS FOR EMAIL LOGIN"""
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # temporary fix of a package issue
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 #ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
@@ -175,3 +174,19 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config(
 OAUTH2_PROVIDER = {
     'ACCESS_TOKEN_EXPIRE_SECONDS': 36000,
 }
+
+
+#SWAGGER DOCUMENTATION SETTINGS
+SWAGGER_SETTINGS = {
+    'LOGIN_URL': 'rest_framework:login',
+    'LOGOUT_URL': 'rest_framework:logout',
+}
+
+"""
+    Email settings
+"""
+EMAIL_USE_TLS = True
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')

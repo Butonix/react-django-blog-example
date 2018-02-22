@@ -16,11 +16,11 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^schema/$', get_schema_view()),
     url(r'^refresh-token/$', refresh_jwt_token),
+    #^auth/ is django rest auth login
+    url(r'^auth/', include('rest_auth.urls')),
     url(r'^registration/', include('rest_auth.registration.urls')),
     #^sauth/ is social login -django-rest-framework-social-oauth2
     url(r'^sauth/', include('rest_framework_social_oauth2.urls')),
-    #^auth/ is django rest auth login
-    url(r'^auth/', include('rest_auth.urls')),
     #Personal apps
     url(r"^", include('newsletter.urls')),
     url(r"^", include('user_profile.urls')),
@@ -31,7 +31,8 @@ urlpatterns = [
 #Browsable API login
 urlpatterns += [
     url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
-    #url(r'^', include('django.contrib.auth.urls')),
+    #Used for Django Rest Auth email RESET!
+    url(r'^', include('django.contrib.auth.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
