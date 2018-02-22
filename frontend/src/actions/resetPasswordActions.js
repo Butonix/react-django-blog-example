@@ -12,15 +12,15 @@ const verifyRegistrationEmailFailure = err => ({
   err
 });
 
-function verifyRegistrationEmail(verificationKey) {
+function resetPasswordAction(email) {
   return async function(dispatch) {
     try {
-      let response = await fetch(`${url}/registration/verify-email/`, {
+      let response = await fetch(`${url}/auth/password/reset/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ key: `${verificationKey}` })
+        body: JSON.stringify({ email: `${verificationKey}` })
       });
 
       if (!response.ok) {

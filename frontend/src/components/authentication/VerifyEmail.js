@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { currentIp } from "../../actions/currentIp";
 
 class VerifyEmail extends Component {
   componentDidMount() {

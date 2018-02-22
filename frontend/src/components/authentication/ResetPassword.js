@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withFormik } from "formik";
 import Yup from "yup";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
@@ -10,7 +9,7 @@ import Button from "material-ui/Button";
 
 import { styles } from "./customStylesMui";
 
-class InnerLoginForm extends Component {
+class InnerResetPasswordForm extends Component {
   render() {
     const {
       values,
@@ -28,7 +27,7 @@ class InnerLoginForm extends Component {
     return (
       <span className={classes.container}>
         <h3 style={{ textAlign: "center" }}>
-          Login with your email address below
+          Reset your password by entering your Email address
         </h3>
         <form onSubmit={handleSubmit}>
           <TextField
@@ -43,29 +42,6 @@ class InnerLoginForm extends Component {
             label="Email Address"
             className={classes.textField}
           />
-
-          <TextField
-            name="password"
-            placeholder="Enter your password"
-            type="password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.password && touched.password}
-            helperText={errors.password && touched.password && errors.password}
-            label="Password"
-            className={classes.textField}
-          />
-          <br />
-          <Button
-            raised
-            className={classes.button}
-            type="button"
-            onClick={handleReset}
-            disabled={!dirty || isSubmitting}
-          >
-            Reset
-          </Button>
           <Button
             raised
             className={classes.button}
@@ -87,34 +63,24 @@ class InnerLoginForm extends Component {
 
 const EnhancedForm = withFormik({
   mapPropsToValues: () => ({
-    email: "",
-    password: ""
+    email: ""
   }),
   validationSchema: Yup.object().shape({
     email: Yup.string()
       .email("Invalid Email Address")
-      .required("Email is required"),
-    password: Yup.string()
-      .min(6, "The password must be at least 6 characters")
-      .required("Password is required")
+      .required("Email is required")
   }),
-  handleSubmit: ({ email, password }, { props, setSubmitting, setErrors }) => {
-    props.loginAction({ email, password }).then(response => {
-      if (response.non_field_errors) {
-        setErrors({ password: response.non_field_errors[0] });
-      } else {
-        props.authenticateAction(response, props.history, props.dispatch);
-      }
-    });
-    setSubmitting(false);
-  },
-  displayName: "LoginForm" //hlps with react devtools
-})(InnerLoginForm);
+  // handleSubmit: ({ email, password }, { props, setSubmitting, setErrors }) => {
+  //   props.loginAction({ email, password }).then(response => {
+  //     if (response.non_field_errors) {
+  //       setErrors({ password: response.non_field_errors[0] });
+  //     } else {
+  //       props.authenticateAction(response, props.history, props.dispatch);
+  //     }
+  //   });
+  //   setSubmitting(false);
+  // },
+  displayName: "ResetForm" //hlps with react devtools
+})(InnerResetPasswordForm);
 
-export const Login = withStyles(styles)(EnhancedForm);
-
-Login.propTypes = {
-  history: PropTypes.object.isRequired,
-  loginAction: PropTypes.func.isRequired,
-  authenticateAction: PropTypes.func.isRequired
-};
+export const ResetPassword = withStyles(styles)(EnhancedForm);
