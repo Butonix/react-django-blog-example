@@ -11,10 +11,11 @@ import filterPostsReducer from "./filterPostsReducer";
 import googleInfoReducer from "./googleAuthReducer";
 import commentListReducer from "./commentListReducer";
 import changePasswordReducer from "./changePasswordReducer";
-
+import verifyEmailReducer from "./verifyEmailReducer";
 const rootReducer = combineReducers({
   router: routerReducer,
   auth: authReducer,
+  verify_email: verifyEmailReducer,
   posts: postListReducer,
   post: postDetailReducer,
   newsletter: newsletterReducer,

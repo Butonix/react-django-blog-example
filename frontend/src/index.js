@@ -17,6 +17,7 @@ import Contact from "./containers/ContactContainer";
 import ScrollToTopRoute from "./components/reusableComponents/ScrollToTopRoute";
 import ScrollToTop from "react-scroll-up";
 import Register from "./containers/authentication/RegisterContainer";
+import VerifyEmail from "./containers/authentication/VerifyEmailContainer";
 import Login from "./containers/authentication/LoginContainer";
 import ChangePassword from "./containers/authentication/ChangePasswordContainer";
 import NavBar from "./containers/NavBarContainer";
@@ -48,6 +49,7 @@ ReactDOM.render(
               <Route exact path="/about" component={About} />
               <Route exact path="/contact" component={Contact} />
               <Route exact path="/browse" component={AutocompletePost} />
+              <Route exact path="/verify-email/:key" component={VerifyEmail} />
               <Route path="/posts/*" component={FilterPosts} />
               <Route exact path="/:slug" component={PostDetail} />
               <Route path="*" component={Http404Page} />

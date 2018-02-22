@@ -49,8 +49,6 @@ INSTALLED_APPS = [
     'comment',
 ]
 
-
-
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
