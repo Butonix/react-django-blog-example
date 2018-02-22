@@ -89,7 +89,7 @@ REST_FRAMEWORK = {
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -149,7 +149,7 @@ CORS_ORIGIN_WHITELIST = (
 """DJANGO ALL AUTH SETTINGS FOR EMAIL LOGIN"""
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-#ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 #for auth/password/change/ django-rest api endpoint
@@ -190,3 +190,8 @@ EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+#Custom ADAPTER for django ALL AUTH to adjust the email verification link
+# thus frontend/verify-email/key and not backend/verify-email/key
+ACCOUNT_ADAPTER = 'config.adapter.DefaultAccountAdapterCustom'
+URL_FRONT = 'https://www.borislavnfa.com/'
