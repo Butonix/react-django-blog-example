@@ -2,11 +2,7 @@ from .base import *
 
 import dj_database_url
 
-DEBUG = True
-
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
+DEBUG = False
 
 # DATABASES = {
 #     'default': {

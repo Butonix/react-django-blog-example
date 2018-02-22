@@ -98,6 +98,7 @@ class PostDetail extends Component {
                       className="img-fluid rounded"
                       src={result.image_home_page}
                       alt=""
+                      style={{ width: "100%" }}
                     />
 
                     <hr />

@@ -15,9 +15,3 @@ from config.environment import SETTINGS_MODULE
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", SETTINGS_MODULE)
 
 application = get_wsgi_application()
-
-from os.path import join, dirname
-from dotenv import load_dotenv
-
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)

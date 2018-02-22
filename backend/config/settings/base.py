@@ -1,6 +1,6 @@
 import os
 import datetime
-from dotenv import load_dotenv
+
 from os.path import join, dirname
 
 from decouple import config
@@ -14,8 +14,6 @@ ALLOWED_HOSTS = ['testserver', 'localhost',
                  'www.borislavnfa.com', 'borislavnfa.com',
                  r'https://borislavnfa.com']
 
-dotenv_path = join(dirname(__file__), '../.env')
-load_dotenv(dotenv_path)
 
 SECRET_KEY = config("SECRET_KEY")
 
@@ -28,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_swagger',
 
     # Requirements
     # django-rest-auth
