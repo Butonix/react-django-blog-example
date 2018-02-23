@@ -2,11 +2,10 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.urls import path, include
 
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_swagger.views import get_swagger_view
-
-from django.urls import path, include
 
 from config.views import django_rest_auth_null, VerifyEmailView
 

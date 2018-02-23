@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import PropTypes from "prop-types";
 import LoadingSpinner from "../reusableComponents/LoadingSpinner";
 
 // COMMENTS
@@ -121,15 +120,5 @@ class PostDetail extends Component {
     );
   }
 }
-
-PostDetail.propTypes = {
-  fetchPostSlug: PropTypes.func.isRequired,
-  fetchPostPk: PropTypes.func.isRequired,
-  post: PropTypes.shape({
-    isFetching: PropTypes.bool.isRequired,
-    err: PropTypes.objectOf(PropTypes.string),
-    snippet: PropTypes.object.isRequired
-  }).isRequired
-};
 
 export default PostDetail;

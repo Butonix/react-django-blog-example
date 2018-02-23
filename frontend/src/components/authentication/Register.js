@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withFormik } from "formik";
 import Yup from "yup";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
@@ -160,10 +159,3 @@ const EnhancedForm = withFormik({
 })(InnerRegistrationForm);
 
 export const Register = withStyles(styles)(EnhancedForm);
-
-Register.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }),
-  registerAction: PropTypes.func.isRequired
-};

@@ -217,10 +217,4 @@ class NavBar extends Component {
   }
 }
 
-PropTypes.NavBar = {
-  logoutAction: PropTypes.func.isRequired,
-  fetchPosts: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool
-};
-
 export default NavBar;

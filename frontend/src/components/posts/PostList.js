@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import moment from "moment";
 
 const PostList = ({
@@ -62,17 +61,6 @@ const PostList = ({
       </div>
     </div>
   );
-};
-
-PostList.propTypes = {
-  author: PropTypes.string.isRequired,
-  content_home_page: PropTypes.string.isRequired,
-  image_home_page: PropTypes.string.isRequired,
-  posted_on: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  updated_on: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired
 };
 
 export default PostList;

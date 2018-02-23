@@ -8,10 +8,6 @@ from .serializers import CommentSerializer, CommentReplySerializer
 from .permissions import IsOwnerOrReadOnly
 from post.models import Post
 
-
-from django.db.models import Prefetch
-
-
 class CommentList(ListCreateAPIView):
     serializer_class = CommentSerializer
     permission_classes = (IsAuthenticatedOrReadOnly, )

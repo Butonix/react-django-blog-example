@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withFormik } from "formik";
 import Yup from "yup";
-import PropTypes from "prop-types";
 import Recaptcha from "react-recaptcha";
 
 import { withStyles } from "material-ui/styles";
@@ -206,13 +205,3 @@ const EnhancedForm = withFormik({
 })(ContactForm);
 
 export const Contact = withStyles(styles)(EnhancedForm);
-
-Contact.propTypes = {
-  submitContactForm: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  contact_form: PropTypes.shape({
-    err: PropTypes.objectOf(PropTypes.string),
-    isSubmitting: PropTypes.bool.isRequired,
-    message: PropTypes.string
-  }).isRequired
-};

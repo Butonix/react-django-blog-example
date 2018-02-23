@@ -7,7 +7,6 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-
 @api_view()
 def django_rest_auth_null(request):
     return Response(status=status.HTTP_400_BAD_REQUEST)

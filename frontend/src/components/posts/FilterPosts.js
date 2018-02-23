@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 import PostList from "./PostList";
 import LoadingSpinner from "../reusableComponents/LoadingSpinner";
@@ -56,20 +55,5 @@ class FilterPosts extends Component {
     );
   }
 }
-
-FilterPosts.propTypes = {
-  filterPosts: PropTypes.func.isRequired,
-  posts_filtered: PropTypes.shape({
-    isFiltering: PropTypes.bool.isRequired,
-    err: PropTypes.objectOf(PropTypes.string),
-    posts: PropTypes.array.isRequired
-  }),
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
-  location: PropTypes.shape({
-    search: PropTypes.string.isRequired
-  }).isRequired
-};
 
 export default FilterPosts;

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withFormik } from "formik";
 import Yup from "yup";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
@@ -112,9 +111,3 @@ const EnhancedForm = withFormik({
 })(InnerLoginForm);
 
 export const Login = withStyles(styles)(EnhancedForm);
-
-Login.propTypes = {
-  history: PropTypes.object.isRequired,
-  loginAction: PropTypes.func.isRequired,
-  authenticateAction: PropTypes.func.isRequired
-};
