@@ -8,6 +8,8 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
 
+from django.core.mail import send_mail
+
 class ContactFormCreate(generics.ListCreateAPIView):
 	queryset = ContactForm.objects.all()
 	serializer_class = ContactFormSerializer
@@ -27,6 +29,10 @@ class ContactFormCreate(generics.ListCreateAPIView):
 				{'captcha_error': 'Please complete the captcha.'},
 				status = status.HTTP_400_BAD_REQUEST
 			)
+
+		#SEND THE EMAIL TO THE OWNER OF THE WEBSITE
+		send_mail('Website User - ' + request.data['first_name'] + " " + request.data['last_name'],
+		 request.data['message'], request.data['email'], [settings.WEBSITE_OWNER_EMAIL], fail_silently=True)
 
 		serializer = self.get_serializer(data=request.data)
 		serializer.is_valid(raise_exception=True)
