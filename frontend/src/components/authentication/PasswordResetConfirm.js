@@ -96,7 +96,7 @@ const EnhancedForm = withFormik({
   }),
   handleSubmit: (
     { password1, password2 },
-    { props, setSubmitting, setErrors }
+    { props, setSubmitting, setErrors, resetForm }
   ) => {
     props
       .passwordResetConfirm(
@@ -109,9 +109,10 @@ const EnhancedForm = withFormik({
         if (resp.password1 || resp.password2 || resp.non_field_errors) {
           setErrors(resp);
         } else {
-          return;
+          resetForm();
         }
       });
+
     setSubmitting(false);
   },
   displayName: "PasswordResetConfirm" //hlps with react devtools

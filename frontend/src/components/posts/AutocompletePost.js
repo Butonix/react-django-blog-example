@@ -65,6 +65,7 @@ class PostAutocomplete extends React.Component {
               placeholder="Enter your query"
               label="Filter for posts"
               className={classes.textField}
+              autoFocus={true}
             />
             {isOpen ? (
               <div className="container">
