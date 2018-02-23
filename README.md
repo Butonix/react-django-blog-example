@@ -17,8 +17,6 @@
 * [x] infinite scrolling
 * [x] deploy frontend on Amazon in an S3 bucket
 * [x] deploy backend on Heroku
-* [ ] fix styling
 * [ ] clean up the front and backend code
-* [ ] host static files on amazon and not on heroku
-* [ ] implement email functionality
+* [x] implement email functionality
 * [x] documentation with swagger
