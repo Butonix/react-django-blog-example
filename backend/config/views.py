@@ -5,7 +5,6 @@ from rest_framework import status
 from rest_framework.decorators import api_view, APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
 
 @api_view()
 def django_rest_auth_null(request):
