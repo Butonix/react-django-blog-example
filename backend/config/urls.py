@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_swagger.views import get_swagger_view
@@ -20,8 +20,8 @@ urlpatterns = [
     url(r'^auth/', include('rest_auth.urls')),
 
     #email confirmation rest auth
-    path('registration/verify-email/', VerifyEmailView.as_view(), name='rest_verify_email'),
-    path('registration/account-email-verification-sent/', django_rest_auth_null, name='account_email_verification_sent'),
+    url('registration/verify-email/', VerifyEmailView.as_view(), name='rest_verify_email'),
+    url('registration/account-email-verification-sent/', django_rest_auth_null, name='account_email_verification_sent'),
     path('password-reset/confirm/<str:uidb64>)/<str:token>/', django_rest_auth_null, name='password_reset_confirm'),
     url(r'^registration/', include('rest_auth.registration.urls')),
 
