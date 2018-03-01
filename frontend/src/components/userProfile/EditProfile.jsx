@@ -74,6 +74,7 @@ class EditProfile extends Component {
     if (typeof this.state.user_image === "object") {
       data.append("user_image", this.state.user_image);
     }
+
     this.props
       .updateProfileData(data)
       .then(resp => {
@@ -112,7 +113,6 @@ class EditProfile extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log("STATE IMPORT ", this.state);
     return (
       <span className={classes.container}>
         <span style={{ textAlign: "center", marginTop: "2em" }}>
