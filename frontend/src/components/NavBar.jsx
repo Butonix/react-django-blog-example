@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { NavLink as Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 import "../index.css";
 import SearchModal from "./reusableComponents/SearchModal";

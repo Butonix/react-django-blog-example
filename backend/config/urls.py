@@ -21,7 +21,7 @@ urlpatterns = [
     #email confirmation rest auth
     url(r'^registration/verify-email/$', VerifyEmailView.as_view(), name='rest_verify_email'),
     url(r'^registration/account-email-verification-sent/$', django_rest_auth_null, name='account_email_verification_sent'),
-    url(r'^password-reset/confirm/(?P<uidb64>.*)/(?P<token>.*)/$', django_rest_auth_null, name='password_reset_confirm')
+    url(r'^password-reset/confirm/(?P<uidb64>.*)/(?P<token>.*)/$', django_rest_auth_null, name='password_reset_confirm'),
     url(r'^registration/', include('rest_auth.registration.urls')),
 
     #^sauth/ is social login -django-rest-framework-social-oauth2
