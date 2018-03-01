@@ -7,8 +7,12 @@ import LoadingSpinner from "../reusableComponents/LoadingSpinner";
 import CommentList from "../../containers/Comments/CommentListContainer.js";
 
 class PostDetail extends Component {
+  state = {
+    dynamic_image: ""
+  };
   componentDidMount() {
     let { match, fetchPostSlug } = this.props;
+
     return fetchPostSlug(match.params.slug);
   }
 
@@ -16,6 +20,14 @@ class PostDetail extends Component {
     let { post, history } = this.props;
     if (prevProps.post.snippet.result.slug !== post.snippet.result.slug) {
       history.push(`/${post.snippet.result.slug}`);
+      if (post.snippet.result.image_home_page) {
+        import(`./postDetailImages/${
+          post.snippet.result.image_home_page
+        }`).then(module => {
+          console.log("MODULE >>>> ", module);
+          return this.setState({ dynamic_image: module });
+        });
+      }
     }
   }
 
@@ -95,7 +107,7 @@ class PostDetail extends Component {
 
                     <img
                       className="img-fluid rounded"
-                      src={result.image_home_page}
+                      src={this.state.dynamic_image}
                       alt=""
                       style={{ width: "100%" }}
                     />

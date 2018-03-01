@@ -38,9 +38,12 @@ class HomePage extends Component {
           document.documentElement.scrollTop || document.body.scrollTop;
         this.props
           .fetchPosts(queryParsed)
-          .then(
-            () =>
-              (document.documentElement.scrollTop = document.body.scrollTop = currentPosition)
+          .then(() =>
+            setTimeout(
+              () =>
+                (document.documentElement.scrollTop = document.body.scrollTop = currentPosition),
+              0.3
+            )
           );
       }
     }
