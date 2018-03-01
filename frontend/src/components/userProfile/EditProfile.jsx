@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ImageCompressor from "image-compressor.js";
 
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
@@ -42,6 +43,7 @@ class EditProfile extends Component {
       full_name: "",
       err: ""
     };
+    this.handleImageChange = this.handleImageChange.bind(this);
   }
 
   componentDidMount() {
@@ -91,13 +93,23 @@ class EditProfile extends Component {
       });
   };
 
-  handleImageChange = e => {
+  handleImageChange(e) {
     e.preventDefault();
     let file = e.target.files[0];
-    return this.setState({
-      user_image: file
+    if (!file) {
+      return;
+    }
+    var imageCompress = new ImageCompressor();
+    imageCompress.compress(file).then(result => {
+      let convertBlobToFile = new File([result], result.name, {
+        type: result.type,
+        lastModified: result.lastModified
+      });
+      this.setState({ user_image: convertBlobToFile });
     });
-  };
+    return;
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -148,10 +160,10 @@ class EditProfile extends Component {
           />
           <br />
           <input
+            type="file"
             accept="image/*"
             className={classes.input}
             id="raised-button-file"
-            type="file"
             onChange={e => this.handleImageChange(e)}
           />
           <label htmlFor="raised-button-file">

@@ -4,7 +4,6 @@ import { GoogleLogin } from "react-google-login";
 class GoogleLoginButton extends Component {
   render() {
     const responseGoogleSuccess = response => {
-      console.log(response);
       if (response.profileObj) {
         localStorage.setItem("goog_avatar_url", response.profileObj.imageUrl);
         localStorage.setItem("goog_name", response.profileObj.name);

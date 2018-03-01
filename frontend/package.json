@@ -6,6 +6,7 @@
     "downshift": "^1.27.0",
     "formik": "^0.10.5",
     "history": "^4.7.2",
+    "image-compressor.js": "^1.1.1",
     "jwt-decode": "^2.2.0",
     "material-ui": "^1.0.0-beta.30",
     "moment": "^2.20.1",
