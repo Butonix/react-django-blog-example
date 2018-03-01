@@ -112,6 +112,7 @@ class EditProfile extends Component {
 
   render() {
     const { classes } = this.props;
+    console.log("STATE IMPORT ", this.state);
     return (
       <span className={classes.container}>
         <span style={{ textAlign: "center", marginTop: "2em" }}>
