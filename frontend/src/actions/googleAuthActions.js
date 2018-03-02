@@ -2,6 +2,8 @@ import URLSearchParams from "url-search-params";
 import * as types from "../types/actionTypes";
 import { currentIp, django_client_id, django_client_secret } from "./currentIp";
 
+import { push } from "react-router-redux";
+
 const url = currentIp;
 
 /*These are the django client ID and SECRET
@@ -14,11 +16,13 @@ const isAuthenticating = () => ({
   type: types.GOOG_IS_AUTHENTICATING
 });
 
-function convertGoogTokenSuccess(json) {
+function convertGoogTokenSuccess(json, dispatch) {
   localStorage.setItem("goog_access_token_conv", json.access_token);
   let expiryDate = Math.round(new Date().getTime() / 1000) + json.expires_in;
   localStorage.setItem("goog_access_token_expires_in", expiryDate);
   localStorage.setItem("goog_refresh_token_conv", json.refresh_token);
+
+  dispatch(push("/"));
   return {
     type: types.CONVERT_GOOG_TOKEN_SUCCESS,
     goog_token: json
@@ -66,7 +70,7 @@ function convertGoogleToken(access_token) {
         throw new Error("An Error has occured, please try again.");
       }
       let responseJson = await response.json();
-      return dispatch(convertGoogTokenSuccess(responseJson));
+      return dispatch(convertGoogTokenSuccess(responseJson, dispatch));
     } catch (err) {
       return dispatch(convertGoogTokenFailure(err));
     }

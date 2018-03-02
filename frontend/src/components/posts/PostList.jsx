@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
+//import demoImage from "./11.png";
+
 class PostList extends Component {
   state = {
     dynamic_images: ""
   };
   componentDidMount() {
-    import(`./postDetailImages/${this.props.image_home_page}`).then(module =>
+    import(`./${this.props.image_home_page}`).then(module =>
       this.setState({ dynamic_images: module })
     );
   }
@@ -30,13 +32,11 @@ class PostList extends Component {
     return (
       <div>
         <div className="card mb-4">
-          {this.state.dynamic_images && (
-            <img
-              className="card-img-top img-fluid"
-              src={this.state.dynamic_images}
-              alt="home page avatar"
-            />
-          )}
+          <img
+            className="card-img-top img-fluid"
+            src={this.state.dynamic_images}
+            alt="home page avatar"
+          />
           <div className="card-body px-3 py-3 text-justify">
             <h2 className="card-title">{title}</h2>
             <p
