@@ -9,7 +9,8 @@ import {
 const mapStateToProps = state => ({
   comments: state.comments,
   isAuthenticatedGoogle: state.goog_auth.isAuthenticated,
-  isAuthenticatedEmail: state.auth.authenticated
+  isAuthenticatedEmail: state.auth.authenticated,
+  isFetchingPost: state.post.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({

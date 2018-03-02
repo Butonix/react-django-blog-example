@@ -9,7 +9,7 @@ const initialState = {
 function commentListReducer(state = initialState, action) {
   switch (action.type) {
     case types.IS_FETCHING_COMMENTS_FOR_POST:
-      return { ...state, err: null, isFetchingComments: true };
+      return { ...state, err: null, isFetchingComments: true, commentArr: [] };
     case types.FETCH_COMMENTS_FOR_POST_SUCCESS:
       return {
         ...state,
