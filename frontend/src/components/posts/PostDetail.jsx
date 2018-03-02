@@ -12,7 +12,6 @@ class PostDetail extends Component {
   };
   componentDidMount() {
     let { match, fetchPostSlug } = this.props;
-
     return fetchPostSlug(match.params.slug);
   }
 
@@ -20,14 +19,14 @@ class PostDetail extends Component {
     let { post, history } = this.props;
     if (prevProps.post.snippet.result.slug !== post.snippet.result.slug) {
       history.push(`/${post.snippet.result.slug}`);
-      if (post.snippet.result.image_home_page) {
-        import(`./postDetailImages/${
-          post.snippet.result.image_home_page
-        }`).then(module => {
-          console.log("MODULE >>>> ", module);
-          return this.setState({ dynamic_image: module });
-        });
-      }
+      // if (post.snippet.result.image_home_page) {
+      //   import(`./postDetailImages/${
+      //     post.snippet.result.image_home_page
+      //   }`).then(module => {
+      //     console.log("MODULE >>>> ", module);
+      //     return this.setState({ dynamic_image: module });
+      //   });
+      // }
     }
   }
 
@@ -44,7 +43,9 @@ class PostDetail extends Component {
     return (
       <div className="container mt-4">
         {isFetching ? (
-          <LoadingSpinner />
+          <div className="mt-4 text-center">
+            <LoadingSpinner />
+          </div>
         ) : (
           <div>
             <h1>{result.title}</h1>
@@ -127,7 +128,7 @@ class PostDetail extends Component {
             </div>
           </div>
         )}
-        {!err && <CommentList postId={result.id} />}
+        {!err && !isFetching && <CommentList postId={result.id} />}
       </div>
     );
   }
