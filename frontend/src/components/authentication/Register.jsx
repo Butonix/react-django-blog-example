@@ -107,7 +107,10 @@ class InnerRegistrationForm extends Component {
           </Button>
         </form>
         <span>Already have an account?</span>
-        <Link to="/login"> Login</Link>
+        <Link to="/login" className={classes.links}>
+          {" "}
+          Login
+        </Link>
       </span>
     );
   }

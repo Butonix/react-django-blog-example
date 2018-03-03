@@ -18,5 +18,8 @@ export const styles = theme => ({
     marginTop: "30px",
     marginBottom: "3em",
     width: "10%"
+  },
+  links: {
+    alignSelf: "center"
   }
 });

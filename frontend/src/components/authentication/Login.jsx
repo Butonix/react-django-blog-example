@@ -75,10 +75,14 @@ class InnerLoginForm extends Component {
           </Button>
         </form>
         <span>Do not have an account?</span>{" "}
-        <Link to="/register">Register</Link>
+        <Link to="/register" className={classes.links}>
+          Register
+        </Link>
         <br />
         <span>Forgot your Password?</span>{" "}
-        <Link to="/reset">Reset Password</Link>
+        <Link to="/reset" className={classes.links}>
+          Reset Password
+        </Link>
       </span>
     );
   }
