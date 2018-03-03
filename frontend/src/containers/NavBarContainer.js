@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 
 import NavBar from "../components/NavBar";
 import { logoutAction } from "../actions/authActions";
-import { fetchPosts } from "../actions/postActions";
 
 function mapStateToProps(state) {
   return {
@@ -14,8 +13,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    logoutAction: () => dispatch(logoutAction()),
-    fetchPosts: () => dispatch(fetchPosts())
+    logoutAction: () => dispatch(logoutAction())
   };
 }
 
