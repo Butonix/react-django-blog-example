@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import LoadingSpinner from "../reusableComponents/LoadingSpinner";
 import CommentList from "../../containers/Comments/CommentListContainer.js";
 
 import AngleLeft from "../icons/arrow-left.png";

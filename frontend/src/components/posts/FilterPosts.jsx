@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import PostList from "./PostList";
-import LoadingSpinner from "../reusableComponents/LoadingSpinner";
 import PostArchiveHtmlStyled from "../../components/reusableComponents/PostArchiveHtmlStyled";
 import CategoryHtmlStyled from "../../components/reusableComponents/CategoryHtmlStyled";
 
@@ -33,7 +32,7 @@ class FilterPosts extends Component {
         <h1 className="my-4">Filtered Posts</h1>
         <hr />
         {isFiltering ? (
-          <LoadingSpinner />
+          <div className="loading" />
         ) : (
           <div className="row">
             <div className="col-md-8">
