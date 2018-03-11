@@ -4,6 +4,9 @@ import moment from "moment";
 import Form from "./Form";
 import EditForm from "./EditForm";
 import CommentReply from "../../containers/Comments/CommentReplyContainer";
+import EditIcon from "../icons/edit.png";
+import DeleteIcon from "../icons/delete.png";
+import ReplyIcon from "../icons/reply.png";
 
 import Avatar from "react-avatar";
 
@@ -92,8 +95,7 @@ class CommentDetail extends Component {
                     })
                   }
                 >
-                  <i className="fa fa-reply" aria-hidden="true" title="Reply" />{" "}
-                  Reply
+                  <img src={ReplyIcon} className="mb-1" alt="rep icn" /> Reply
                 </button>
                 <span
                   style={{
@@ -110,7 +112,7 @@ class CommentDetail extends Component {
                     className="btn btn-link"
                     onClick={() => this.toggleEditForm()}
                   >
-                    <i className="fas fa-edit" aria-hidden="true" /> Edit
+                    <img src={EditIcon} className="mb-1" alt="edit icn" /> Edit
                   </button>
                   <button
                     style={{ cursor: "pointer" }}
@@ -122,7 +124,8 @@ class CommentDetail extends Component {
                       )
                     }
                   >
-                    <i className="fa fa-trash" aria-hidden="true" /> Delete
+                    <img src={DeleteIcon} className="mb-1" alt="delete icn" />{" "}
+                    Delete
                   </button>
                 </span>
                 <span
