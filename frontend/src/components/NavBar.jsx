@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { NavLink as Link } from "react-router-dom";
 
-import "../index.css";
 import SearchModal from "./reusableComponents/SearchModal";
 import GoogleLoginButton from "../containers/GoogleAuth/GoogleLoginButtonContainer";
 import GoogleLogoutButton from "../containers/GoogleAuth/GoogleLogoutButtonContainer";

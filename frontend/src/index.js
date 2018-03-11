@@ -32,8 +32,6 @@ import {
 
 import "./index.css";
 
-console.log(process.env.NODE_ENV);
-
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>

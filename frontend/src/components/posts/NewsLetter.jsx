@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 
-import LoadingSpinner from "../reusableComponents/LoadingSpinner";
-
 class NewsLetter extends Component {
   render() {
     let { err, isSubscribing, message } = this.props.newsletter;
     return (
       <span>
-        {isSubscribing && <LoadingSpinner />}
+        {isSubscribing && <div className="loading" />}
         {err && (
           <div className="alert alert-danger" role="alert">
             <strong>{err.message}</strong>
