@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import LoadingSpinner from "../reusableComponents/LoadingSpinner";
-
 import CommentList from "../../containers/Comments/CommentListContainer.js";
 
 import AngleLeft from "../icons/arrow-left.png";
@@ -33,12 +32,10 @@ class PostDetail extends Component {
     return (
       <div className="container mt-4">
         {isFetching ? (
-          <div className="mt-4 text-center">
-            <LoadingSpinner />
-          </div>
+          <div className="loading" />
         ) : (
           <div>
-            <h1>{result.title}</h1>
+            <h1 className="text-center">{result.title}</h1>
 
             {result.id >= 2 && (
               <span
@@ -60,7 +57,7 @@ class PostDetail extends Component {
 
             <hr />
             <div className="row">
-              <div className="col-md-12">
+              <div className="col-md-10">
                 {err ? (
                   <div className="alert alert-danger" role="alert">
                     <strong>{err.message}</strong>

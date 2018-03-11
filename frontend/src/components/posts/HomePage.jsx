@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import queryString from "query-string";
 
 import PostList from "./PostList";
-import LoadingSpinner from "../reusableComponents/LoadingSpinner";
 import NewsLetter from "../../containers/posts/NewsLetterContainer";
 import PostArchiveHtmlStyled from "../../components/reusableComponents/PostArchiveHtmlStyled";
 import CategoryHtmlStyled from "../../components/reusableComponents/CategoryHtmlStyled";
@@ -62,7 +61,7 @@ class HomePage extends Component {
         <h1 className="my-4">Recent Posts</h1>
         <hr />
         {isFetching ? (
-          <LoadingSpinner />
+          <div className="loading" />
         ) : (
           <div className="row">
             <div className="col-md-8">
