@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import LoadingSpinner from "../reusableComponents/LoadingSpinner";
 
-// COMMENTS
 import CommentList from "../../containers/Comments/CommentListContainer.js";
 
+import AngleLeft from "../icons/arrow-left.png";
+import AngleRight from "../icons/arrow-right.png";
+
 class PostDetail extends Component {
-  state = {
-    dynamic_image: ""
-  };
   componentDidMount() {
     let { match, fetchPostSlug } = this.props;
     return fetchPostSlug(match.params.slug);
@@ -19,14 +18,6 @@ class PostDetail extends Component {
     let { post, history } = this.props;
     if (prevProps.post.snippet.result.slug !== post.snippet.result.slug) {
       history.push(`/${post.snippet.result.slug}`);
-      // if (post.snippet.result.image_home_page) {
-      //   import(`./postDetailImages/${
-      //     post.snippet.result.image_home_page
-      //   }`).then(module => {
-      //     console.log("MODULE >>>> ", module);
-      //     return this.setState({ dynamic_image: module });
-      //   });
-      // }
     }
   }
 
@@ -34,7 +25,6 @@ class PostDetail extends Component {
   render() {
     let { err, isFetching } = this.props.post;
     let { result, total_post_count } = this.props.post.snippet;
-
     let updated_date = new Date(result.updated_on);
     let posted_date = new Date(result.posted_on);
     let category_upper_case =
@@ -55,7 +45,7 @@ class PostDetail extends Component {
                 className="pagination-left"
                 onClick={() => this.props.fetchPostPk(result.id - 1)}
               >
-                <i className="fas fa-angle-left fa-5x" aria-hidden="true" />
+                <img src={AngleLeft} alt="left-arr-failed" />
               </span>
             )}
 
@@ -64,7 +54,7 @@ class PostDetail extends Component {
                 className="pagination-right"
                 onClick={() => this.props.fetchPostPk(result.id + 1)}
               >
-                <i className="fas fa-angle-right fa-5x" aria-hidden="true" />
+                <img src={AngleRight} alt="right-arr-failed" />
               </span>
             )}
 
@@ -106,12 +96,7 @@ class PostDetail extends Component {
 
                     <hr />
 
-                    <img
-                      className="img-fluid rounded"
-                      src={this.state.dynamic_image}
-                      alt=""
-                      style={{ width: "100%" }}
-                    />
+                    {/* Image here */}
 
                     <hr />
                     {/* CONTENT HERE */}
