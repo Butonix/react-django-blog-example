@@ -56,7 +56,7 @@ class PostDetail extends Component {
 
             <hr />
             <div className="row">
-              <div className="col-md-10">
+              <div className="col-md-10 offset-md-1">
                 {err ? (
                   <div className="alert alert-danger" role="alert">
                     <strong>{err.message}</strong>
@@ -93,7 +93,12 @@ class PostDetail extends Component {
                     <hr />
 
                     {/* Image here */}
-
+                    <img
+                      src={result.image_home_page}
+                      alt="failed to load"
+                      className="img-fluid rounded"
+                      style={{ width: "100%" }}
+                    />
                     <hr />
                     {/* CONTENT HERE */}
                     <span
