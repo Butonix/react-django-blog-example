@@ -36,7 +36,6 @@ class ContactForm extends Component {
   onloadCallback = () => null;
   verifyCallback = response => {
     this.g_recaptcha_response = response;
-    console.log(response);
   };
   handleSubmitAndCaptcha(
     event,

@@ -16,7 +16,6 @@
     "react-async-script-loader": "^0.3.0",
     "react-avatar": "^2.5.1",
     "react-dom": "^16.2.0",
-    "react-google-login": "^3.0.4",
     "react-recaptcha": "^2.3.5",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
