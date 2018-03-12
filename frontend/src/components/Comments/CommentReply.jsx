@@ -69,18 +69,32 @@ class CommentReply extends Component {
                   </p>
                   <div className="stats" />
                 </div>
-                <button
-                  style={{ cursor: "pointer" }}
-                  className="btn btn-link"
-                  onClick={() =>
-                    this.setState({
-                      toggleTextFormReply: !this.state.toggleTextFormReply
-                    })
-                  }
+                <span
+                  style={{
+                    display:
+                      this.props.isAuthenticatedGoogle ||
+                      this.props.isAuthenticatedEmail
+                        ? "inline-block"
+                        : "none"
+                  }}
                 >
-                  <i className="fa fa-reply" aria-hidden="true" title="Reply" />{" "}
-                  Reply
-                </button>
+                  <button
+                    style={{ cursor: "pointer" }}
+                    className="btn btn-link"
+                    onClick={() =>
+                      this.setState({
+                        toggleTextFormReply: !this.state.toggleTextFormReply
+                      })
+                    }
+                  >
+                    <i
+                      className="fa fa-reply"
+                      aria-hidden="true"
+                      title="Reply"
+                    />{" "}
+                    Reply
+                  </button>
+                </span>
                 <span
                   style={{
                     display:

@@ -86,17 +86,27 @@ class CommentDetail extends Component {
                     {this.props.text}
                   </p>
                 </div>
-                <button
-                  style={{ cursor: "pointer" }}
-                  className="btn btn-link"
-                  onClick={() =>
-                    this.setState({
-                      toggleTextForm: !this.state.toggleTextForm
-                    })
-                  }
+                <span
+                  style={{
+                    display:
+                      this.props.isAuthenticatedGoogle ||
+                      this.props.isAuthenticatedEmail
+                        ? "inline-block"
+                        : "none"
+                  }}
                 >
-                  <img src={ReplyIcon} className="mb-1" alt="rep icn" /> Reply
-                </button>
+                  <button
+                    style={{ cursor: "pointer" }}
+                    className="btn btn-link"
+                    onClick={() =>
+                      this.setState({
+                        toggleTextForm: !this.state.toggleTextForm
+                      })
+                    }
+                  >
+                    <img src={ReplyIcon} className="mb-1" alt="rep icn" /> Reply
+                  </button>
+                </span>
                 <span
                   style={{
                     display:

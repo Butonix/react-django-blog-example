@@ -32,6 +32,7 @@ class GoogleLoginButton extends Component {
   componentDidMount() {
     const { isScriptLoaded, isScriptLoadSucceed } = this.props;
     if (isScriptLoaded && isScriptLoadSucceed) {
+      console.log("COMPONENT DID MOUNT");
       this.initGoogButton();
     }
   }
@@ -39,10 +40,20 @@ class GoogleLoginButton extends Component {
   componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
     if (isScriptLoaded && !this.props.isScriptLoaded) {
       if (isScriptLoadSucceed) {
+        console.log("COMPONENT WILL RECEIVE PROPS>>>>>>");
         this.initGoogButton();
       }
     }
   }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.isScriptLoaded && !this.props.isScriptLoaded) {
+  //     if (this.props.isScriptLoadSucceed) {
+  //       console.log("COMPONENT DID UPDATEW>>>>>");
+  //       this.initGoogButton();
+  //     }
+  //   }
+  // }
   responseGoogleSuccess(response) {
     if (response.w3) {
       localStorage.setItem("goog_avatar_url", response.w3.Paa.imageUrl);
