@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
@@ -111,7 +110,4 @@ class EditForm extends PureComponent {
   }
 }
 
-EditForm.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 export default withStyles(styles)(EditForm);

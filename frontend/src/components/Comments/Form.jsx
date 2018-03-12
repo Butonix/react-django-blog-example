@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
@@ -98,7 +97,6 @@ class Form extends PureComponent {
 
   render() {
     const { classes } = this.props;
-    console.log("FORM PROPS,", this.props);
     return (
       <form className={classes.container}>
         <TextField
@@ -137,7 +135,4 @@ class Form extends PureComponent {
   }
 }
 
-Form.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 export default withStyles(styles)(Form);

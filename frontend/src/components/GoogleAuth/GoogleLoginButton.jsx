@@ -46,14 +46,6 @@ class GoogleLoginButton extends Component {
     }
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevProps.isScriptLoaded && !this.props.isScriptLoaded) {
-  //     if (this.props.isScriptLoadSucceed) {
-  //       console.log("COMPONENT DID UPDATEW>>>>>");
-  //       this.initGoogButton();
-  //     }
-  //   }
-  // }
   responseGoogleSuccess(response) {
     if (response.w3) {
       localStorage.setItem("goog_avatar_url", response.w3.Paa.imageUrl);
@@ -70,7 +62,6 @@ class GoogleLoginButton extends Component {
   }
 
   render() {
-    console.log("GOOG BUTTON PROPS", this.props);
     return <div id="my-signin2" />;
   }
 }
