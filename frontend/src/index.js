@@ -77,7 +77,7 @@ ReactDOM.render(
             }}
           >
             <span className="upscroller">
-              <img src={UpScroller} />
+              <img src={UpScroller} alt="upscroller-failed-load" />
             </span>
           </ScrollToTop>
         </div>
