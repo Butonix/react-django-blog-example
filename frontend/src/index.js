@@ -31,6 +31,7 @@ import {
 } from "./customRoutes/ProtectedRoutes";
 
 import "./index.css";
+import UpScroller from "./components/icons/upscroller1.png";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -75,10 +76,9 @@ ReactDOM.render(
               transitionDelay: "0s"
             }}
           >
-            <i
-              className="upscroller fas fa-arrow-circle-up fa-3x"
-              style={{ opacity: "0.5" }}
-            />
+            <span className="upscroller">
+              <img src={UpScroller} />
+            </span>
           </ScrollToTop>
         </div>
         <Footer />
