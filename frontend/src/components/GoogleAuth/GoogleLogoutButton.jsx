@@ -46,17 +46,24 @@ class GoogleLogoutButton extends Component {
         .then(() => this.props.history.push("/"));
     };
     return (
-      <GoogleLogout
-        buttonText=" Logout"
+      // <GoogleLogout
+      //   buttonText=" Logout"
+      //   className="btn btn-danger btn-sm mt-2"
+      //   onLogoutSuccess={signOut}
+      //   style={{ marginLeft: "15px", marginRight: "10px" }}
+      // />
+      <button
         className="btn btn-danger btn-sm mt-2"
-        onLogoutSuccess={signOut}
         style={{ marginLeft: "15px", marginRight: "10px" }}
-      />
+        onClick={signOut}
+      >
+        Logout
+      </button>
     );
   }
 }
-
-//export default GoogleLogoutButton;
+//
+// export default GoogleLogoutButton;
 
 export default scriptLoader(["https://apis.google.com/js/client:platform.js"])(
   GoogleLogoutButton

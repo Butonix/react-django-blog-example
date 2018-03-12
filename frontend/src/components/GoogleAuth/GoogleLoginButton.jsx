@@ -8,19 +8,8 @@ class GoogleLoginButton extends Component {
     super(props);
     this.responseGoogleSuccess = this.responseGoogleSuccess.bind(this);
   }
-  // initGoogButton = () => {
-  //   console.log("INITIALIZE THIS");
-  //   return window.gapi.load("auth2", () => {
-  //     this.auth2 = window.gapi.auth2.init({
-  //       client_id:
-  //         "254472747355-6umtrkcedqn00tg7ec17l705ftttam0r.apps.googleusercontent.com",
-  //       cookiepolicy: "single_host_origin"
-  //     });
-  //   });
-  // };
 
   initGoogButton = () => {
-    console.log("rendering google signin button");
     window.gapi.signin2.render("my-signin2", {
       scope: "email",
       width: 180,
@@ -33,14 +22,17 @@ class GoogleLoginButton extends Component {
     });
 
     window.gapi.load("auth2", function() {
-      window.gapi.auth2.init();
+      window.gapi.auth2.init({
+        client_id:
+          "254472747355-6umtrkcedqn00tg7ec17l705ftttam0r.apps.googleusercontent.com",
+        cookiepolicy: "single_host_origin"
+      });
     });
   };
 
   componentDidMount() {
     const { isScriptLoaded, isScriptLoadSucceed } = this.props;
     if (isScriptLoaded && isScriptLoadSucceed) {
-      console.log("COMP DID MOUNT_______");
       this.initGoogButton();
     }
   }
@@ -49,13 +41,11 @@ class GoogleLoginButton extends Component {
     if (isScriptLoaded && !this.props.isScriptLoaded) {
       // load finished
       if (isScriptLoadSucceed) {
-        console.log("COMP WILL REC PROPS>>>>>>");
         this.initGoogButton();
-      } else this.props.onError();
+      }
     }
   }
   responseGoogleSuccess(response) {
-    console.log("RESPONSE GOOOG SUCCESS_______", response);
     if (response.w3) {
       localStorage.setItem("goog_avatar_url", response.w3.Paa.imageUrl);
       localStorage.setItem("goog_name", response.w3.ig.name);
@@ -71,18 +61,6 @@ class GoogleLoginButton extends Component {
     return <div id="my-signin2" />;
   }
 }
-// <GoogleLogin
-//   clientId="254472747355-6umtrkcedqn00tg7ec17l705ftttam0r.apps.googleusercontent.com"
-//   buttonText="Google"
-//   onSuccess={responseGoogleSuccess}
-//   onFailure={responseGoogleFailure}
-//   className="btn btn-danger"
-//   style={{ width: "100%" }}
-//   prompt="select_account"
-//   redirectUri="http://localhost:3000/secret/"
-// />
-
-//export default GoogleLoginButton;
 
 export default scriptLoader(["https://apis.google.com/js/client:platform.js"])(
   GoogleLoginButton

@@ -18,7 +18,7 @@ class ContactForm extends Component {
     if (isScriptLoaded && !this.props.isScriptLoaded) {
       if (isScriptLoadSucceed) {
         this.initRecaptcha();
-      } else this.props.onError();
+      }
     }
   }
 
