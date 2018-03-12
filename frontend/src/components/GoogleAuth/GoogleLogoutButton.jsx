@@ -22,7 +22,7 @@ class GoogleLogoutButton extends Component {
     if (isScriptLoaded && !this.props.isScriptLoaded) {
       if (isScriptLoadSucceed) {
         this.initGoogButton();
-      } else this.props.onError();
+      }
     }
   }
 
@@ -32,7 +32,6 @@ class GoogleLogoutButton extends Component {
       auth2
         .signOut()
         .then(() => {
-          console.log("User signed out.");
           localStorage.removeItem("goog_avatar_url");
           localStorage.removeItem("goog_name");
           localStorage.removeItem("goog_email");

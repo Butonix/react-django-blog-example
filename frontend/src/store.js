@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import logger from "redux-logger";
 import createHistory from "history/createBrowserHistory";
 import { routerMiddleware } from "react-router-redux";
 
@@ -14,7 +13,7 @@ const reduxRouterMiddleware = routerMiddleware(history);
 export const store = createStore(
   rootReducer,
   composeWithDevTools(
-    applyMiddleware(reduxRouterMiddleware, refreshAuthToken, thunk, logger)
+    applyMiddleware(reduxRouterMiddleware, refreshAuthToken, thunk)
   )
 );
 

@@ -38,7 +38,6 @@
   "devDependencies": {
     "file-loader": "^1.1.6",
     "prettier": "1.9.2",
-    "redux-devtools-extension": "^2.13.2",
-    "redux-logger": "^3.0.6"
+    "redux-devtools-extension": "^2.13.2"
   }
 }

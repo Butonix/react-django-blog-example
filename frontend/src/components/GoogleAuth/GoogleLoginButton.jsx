@@ -32,7 +32,6 @@ class GoogleLoginButton extends Component {
   componentDidMount() {
     const { isScriptLoaded, isScriptLoadSucceed } = this.props;
     if (isScriptLoaded && isScriptLoadSucceed) {
-      console.log("COMPONENT DID MOUNT");
       this.initGoogButton();
     }
   }
@@ -40,7 +39,6 @@ class GoogleLoginButton extends Component {
   componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
     if (isScriptLoaded && !this.props.isScriptLoaded) {
       if (isScriptLoadSucceed) {
-        console.log("COMPONENT WILL RECEIVE PROPS>>>>>>");
         this.initGoogButton();
       }
     }

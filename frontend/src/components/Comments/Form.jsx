@@ -113,23 +113,25 @@ class Form extends PureComponent {
           multiline={true}
           rows={4}
         />
-        {this.props.isAuthenticatedGoogle ||
-          (this.props.isAuthenticatedEmail && (
-            <Button
-              raised
-              className={classes.button}
-              onClick={e => this.submit(e)}
-              type="submit"
-              disabled={!!this.state.text ? false : true}
-            >
-              Post
-            </Button>
-          ))}
-        {!this.props.createCommentReply && (
-          <div className={classes.links}>
-            <GoogleLoginButton className={classes.links} />
-          </div>
+        {(this.props.isAuthenticatedGoogle ||
+          this.props.isAuthenticatedEmail) && (
+          <Button
+            raised
+            className={classes.button}
+            onClick={e => this.submit(e)}
+            type="submit"
+            disabled={!!this.state.text ? false : true}
+          >
+            Post
+          </Button>
         )}
+        {!this.props.createCommentReply &&
+          (!this.props.isAuthenticatedGoogle ||
+            this.props.isAuthenticatedEmail) && (
+            <div className={classes.links}>
+              <GoogleLoginButton className={classes.links} />
+            </div>
+          )}
       </form>
     );
   }
