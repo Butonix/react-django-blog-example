@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withFormik } from "formik";
 import Yup from "yup";
 import Recaptcha from "react-recaptcha";
+import scriptLoader from "react-async-script-loader";
 
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
@@ -10,6 +11,28 @@ import Button from "material-ui/Button";
 import { styles } from "./authentication/customStylesMui";
 
 class ContactForm extends Component {
+  state = {
+    showRecaptcha: false
+  };
+  componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
+    if (isScriptLoaded && !this.props.isScriptLoaded) {
+      if (isScriptLoadSucceed) {
+        this.initRecaptcha();
+      } else this.props.onError();
+    }
+  }
+
+  componentDidMount() {
+    const { isScriptLoaded, isScriptLoadSucceed } = this.props;
+    if (isScriptLoaded && isScriptLoadSucceed) {
+      this.initRecaptcha();
+    }
+  }
+
+  initRecaptcha = () => {
+    this.setState({ showRecaptcha: true });
+  };
+
   onloadCallback = () => null;
   verifyCallback = response => {
     this.g_recaptcha_response = response;
@@ -204,4 +227,8 @@ const EnhancedForm = withFormik({
   displayName: "ContactForm" //hlps with react devtools
 })(ContactForm);
 
-export const Contact = withStyles(styles)(EnhancedForm);
+const Contact = withStyles(styles)(EnhancedForm);
+
+export default scriptLoader(["https://www.google.com/recaptcha/api.js"])(
+  Contact
+);
