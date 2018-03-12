@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { GoogleLogin } from "react-google-login";
-
 import scriptLoader from "react-async-script-loader";
 
 class GoogleLoginButton extends Component {
@@ -39,7 +37,6 @@ class GoogleLoginButton extends Component {
 
   componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
     if (isScriptLoaded && !this.props.isScriptLoaded) {
-      // load finished
       if (isScriptLoadSucceed) {
         this.initGoogButton();
       }

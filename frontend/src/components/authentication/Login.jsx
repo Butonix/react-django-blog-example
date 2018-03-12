@@ -8,6 +8,7 @@ import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
 
 import { styles } from "./customStylesMui";
+import GoogleLoginButton from "../../containers/GoogleAuth/GoogleLoginButtonContainer";
 
 class InnerLoginForm extends Component {
   render() {
@@ -74,6 +75,13 @@ class InnerLoginForm extends Component {
             Submit
           </Button>
         </form>
+        <span>Alternatively login with Google</span>
+        <div
+          className={classes.links}
+          style={{ marginTop: "1em", marginBottom: "2em" }}
+        >
+          <GoogleLoginButton />
+        </div>
         <span>Do not have an account?</span>{" "}
         <Link to="/register" className={classes.links}>
           Register

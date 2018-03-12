@@ -110,7 +110,7 @@ class NavBar extends Component {
               style={{ display: "block", textAlign: "center" }}
               onClick={this.toggleNavbarOnClick}
             >
-              <GoogleLoginButton />
+              {/*<GoogleLoginButton /> */}
             </span>
             <DropdownItem className="inverse-dropdown">
               <NavLink

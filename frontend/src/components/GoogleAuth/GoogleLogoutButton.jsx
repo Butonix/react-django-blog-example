@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { GoogleLogout } from "react-google-login";
-
 import scriptLoader from "react-async-script-loader";
 
 class GoogleLogoutButton extends Component {
@@ -17,15 +15,12 @@ class GoogleLogoutButton extends Component {
   componentDidMount() {
     const { isScriptLoaded, isScriptLoadSucceed } = this.props;
     if (isScriptLoaded && isScriptLoadSucceed) {
-      console.log("COMP DID MOUNT_______");
       this.initGoogButton();
     }
   }
   componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
     if (isScriptLoaded && !this.props.isScriptLoaded) {
-      // load finished
       if (isScriptLoadSucceed) {
-        console.log("COMP WILL REC PROPS>>>>>>");
         this.initGoogButton();
       } else this.props.onError();
     }
@@ -46,12 +41,6 @@ class GoogleLogoutButton extends Component {
         .then(() => this.props.history.push("/"));
     };
     return (
-      // <GoogleLogout
-      //   buttonText=" Logout"
-      //   className="btn btn-danger btn-sm mt-2"
-      //   onLogoutSuccess={signOut}
-      //   style={{ marginLeft: "15px", marginRight: "10px" }}
-      // />
       <button
         className="btn btn-danger btn-sm mt-2"
         style={{ marginLeft: "15px", marginRight: "10px" }}
@@ -62,8 +51,6 @@ class GoogleLogoutButton extends Component {
     );
   }
 }
-//
-// export default GoogleLogoutButton;
 
 export default scriptLoader(["https://apis.google.com/js/client:platform.js"])(
   GoogleLogoutButton
