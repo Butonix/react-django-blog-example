@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { GoogleLogout } from "react-google-login";
 
+import scriptLoader from "react-async-script-loader";
+
 class GoogleLogoutButton extends Component {
-  componentDidMount() {
+  initGoogButton() {
     window.gapi.load("auth2", () => {
       this.auth2 = window.gapi.auth2.init({
         client_id:
@@ -10,6 +12,23 @@ class GoogleLogoutButton extends Component {
         cookiepolicy: "single_host_origin"
       });
     });
+  }
+
+  componentDidMount() {
+    const { isScriptLoaded, isScriptLoadSucceed } = this.props;
+    if (isScriptLoaded && isScriptLoadSucceed) {
+      console.log("COMP DID MOUNT_______");
+      this.initGoogButton();
+    }
+  }
+  componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
+    if (isScriptLoaded && !this.props.isScriptLoaded) {
+      // load finished
+      if (isScriptLoadSucceed) {
+        console.log("COMP WILL REC PROPS>>>>>>");
+        this.initGoogButton();
+      } else this.props.onError();
+    }
   }
 
   render() {
@@ -37,4 +56,8 @@ class GoogleLogoutButton extends Component {
   }
 }
 
-export default GoogleLogoutButton;
+//export default GoogleLogoutButton;
+
+export default scriptLoader(["https://apis.google.com/js/client:platform.js"])(
+  GoogleLogoutButton
+);

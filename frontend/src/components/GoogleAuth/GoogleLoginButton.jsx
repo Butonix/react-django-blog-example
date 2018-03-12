@@ -22,7 +22,6 @@ class GoogleLoginButton extends Component {
   initGoogButton = () => {
     console.log("rendering google signin button");
     window.gapi.signin2.render("my-signin2", {
-      //scope: "https://www.googleapis.com/auth/plus.login",
       scope: "email",
       width: 180,
       height: 45,
