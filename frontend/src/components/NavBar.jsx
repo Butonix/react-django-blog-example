@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { NavLink as Link } from "react-router-dom";
 
 import SearchModal from "./reusableComponents/SearchModal";
-import GoogleLoginButton from "../containers/GoogleAuth/GoogleLoginButtonContainer";
 import GoogleLogoutButton from "../containers/GoogleAuth/GoogleLogoutButtonContainer";
 
 import {
@@ -106,12 +105,6 @@ class NavBar extends Component {
             Login
           </DropdownToggle>
           <DropdownMenu className="dropdown-menu">
-            <span
-              style={{ display: "block", textAlign: "center" }}
-              onClick={this.toggleNavbarOnClick}
-            >
-              {/*<GoogleLoginButton /> */}
-            </span>
             <DropdownItem className="inverse-dropdown">
               <NavLink
                 tag={Link}
@@ -121,7 +114,7 @@ class NavBar extends Component {
                 exact
                 onClick={this.toggleNavbarOnClick}
               >
-                Site Log in
+                Log in
               </NavLink>
             </DropdownItem>
             <DropdownItem className="inverse-dropdown">

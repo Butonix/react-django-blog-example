@@ -4,7 +4,8 @@ import GoogleLoginButton from "../../components/GoogleAuth/GoogleLoginButton";
 import { connect } from "react-redux";
 
 const mapDispatchToProps = dispatch => ({
-  convertGoogleToken: access_token => dispatch(convertGoogleToken(access_token))
+  convertGoogleToken: (access_token, currentLocation) =>
+    dispatch(convertGoogleToken(access_token, currentLocation))
 });
 
 export default connect(null, mapDispatchToProps)(GoogleLoginButton);

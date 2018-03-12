@@ -16,13 +16,12 @@ const isAuthenticating = () => ({
   type: types.GOOG_IS_AUTHENTICATING
 });
 
-function convertGoogTokenSuccess(json, dispatch) {
+function convertGoogTokenSuccess(json, dispatch, currentLocation) {
   localStorage.setItem("goog_access_token_conv", json.access_token);
   let expiryDate = Math.round(new Date().getTime() / 1000) + json.expires_in;
   localStorage.setItem("goog_access_token_expires_in", expiryDate);
   localStorage.setItem("goog_refresh_token_conv", json.refresh_token);
-
-  dispatch(push("/"));
+  currentLocation == "/login" && dispatch(push("/"));
   return {
     type: types.CONVERT_GOOG_TOKEN_SUCCESS,
     goog_token: json
@@ -48,7 +47,7 @@ const convertGoogTokenFailure = err => ({
 });
 
 // the API endpoint expects form-urlencoded-data thus search-params
-function convertGoogleToken(access_token) {
+function convertGoogleToken(access_token, currentLocation) {
   return async function(dispatch) {
     dispatch(isAuthenticating());
     const searchParams = new URLSearchParams();
@@ -70,7 +69,9 @@ function convertGoogleToken(access_token) {
         throw new Error("An Error has occured, please try again.");
       }
       let responseJson = await response.json();
-      return dispatch(convertGoogTokenSuccess(responseJson, dispatch));
+      return dispatch(
+        convertGoogTokenSuccess(responseJson, dispatch, currentLocation)
+      );
     } catch (err) {
       return dispatch(convertGoogTokenFailure(err));
     }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import scriptLoader from "react-async-script-loader";
+import { withRouter } from "react-router-dom";
 
 class GoogleLoginButton extends Component {
   constructor(props) {
@@ -48,17 +49,23 @@ class GoogleLoginButton extends Component {
       localStorage.setItem("goog_name", response.w3.ig.name);
       localStorage.setItem("goog_email", response.w3.U3.email);
     }
-    this.props.convertGoogleToken(response.Zi.access_token);
+    this.props.convertGoogleToken(
+      response.Zi.access_token,
+      this.props.location.pathname
+    );
   }
   responseGoogleFailure(response) {
     console.log(response);
   }
 
   render() {
+    console.log("GOOG BUTTON PROPS", this.props);
     return <div id="my-signin2" />;
   }
 }
 
-export default scriptLoader(["https://apis.google.com/js/client:platform.js"])(
-  GoogleLoginButton
+export default withRouter(
+  scriptLoader(["https://apis.google.com/js/client:platform.js"])(
+    GoogleLoginButton
+  )
 );
