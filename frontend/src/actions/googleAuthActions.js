@@ -21,7 +21,7 @@ function convertGoogTokenSuccess(json, dispatch, currentLocation) {
   let expiryDate = Math.round(new Date().getTime() / 1000) + json.expires_in;
   localStorage.setItem("goog_access_token_expires_in", expiryDate);
   localStorage.setItem("goog_refresh_token_conv", json.refresh_token);
-  currentLocation == "/login" && dispatch(push("/"));
+  currentLocation === "/login" && dispatch(push("/"));
   return {
     type: types.CONVERT_GOOG_TOKEN_SUCCESS,
     goog_token: json

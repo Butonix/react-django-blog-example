@@ -2,7 +2,8 @@ export const styles = theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    flexDirection: "row"
+    flexDirection: "column",
+    textAlign: "center"
   },
   textField: {
     marginLeft: "auto",
@@ -11,5 +12,8 @@ export const styles = theme => ({
   },
   button: {
     margin: "auto"
+  },
+  links: {
+    alignSelf: "center"
   }
 });

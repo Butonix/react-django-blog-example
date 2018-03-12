@@ -11,7 +11,8 @@ import { styles } from "./customStylesMui";
 class Form extends PureComponent {
   state = {
     text: "",
-    textError: ""
+    textError: "",
+    showGoogLogin: false
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -124,7 +125,9 @@ class Form extends PureComponent {
             Post
           </Button>
         ) : (
-          <GoogleLoginButton />
+          <div className={classes.links}>
+            <GoogleLoginButton className={classes.links} />
+          </div>
         )}
       </form>
     );
