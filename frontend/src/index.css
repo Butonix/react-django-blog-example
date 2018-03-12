@@ -75,7 +75,7 @@
   at a certain screen size
 */
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 870px) {
   .upscroller {
     display: none;
   }
