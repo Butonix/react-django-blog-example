@@ -35,7 +35,7 @@ class FilterPosts extends Component {
           <div className="loading" />
         ) : (
           <div className="row">
-            <div className="col-md-8">
+            <div className="col-lg-8">
               {err ? (
                 <div className="alert alert-danger" role="alert">
                   <strong>{err.message}</strong>
@@ -44,7 +44,7 @@ class FilterPosts extends Component {
 
               {posts.map(post => <PostList key={post.id} {...post} />)}
             </div>
-            <div className="col-md-4">
+            <div className="col-lg-4">
               <PostArchiveHtmlStyled />
               <CategoryHtmlStyled />
             </div>
