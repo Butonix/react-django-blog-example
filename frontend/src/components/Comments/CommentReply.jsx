@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import moment from "moment";
 import Form from "./Form";
 import EditForm from "./EditForm";
+import EditIcon from "../icons/edit.png";
+import DeleteIcon from "../icons/delete.png";
+import ReplyIcon from "../icons/reply.png";
 
 import Avatar from "react-avatar";
 
@@ -100,11 +103,7 @@ class CommentReply extends Component {
                       })
                     }
                   >
-                    <i
-                      className="fa fa-reply"
-                      aria-hidden="true"
-                      title="Reply"
-                    />{" "}
+                    <img src={ReplyIcon} className="mb-1" alt="rep icn" /> Reply{" "}
                     Reply
                   </button>
                 </span>
@@ -118,7 +117,7 @@ class CommentReply extends Component {
                     className="btn btn-link"
                     onClick={this.toggleEditFormReply}
                   >
-                    <i className="fas fa-edit" aria-hidden="true" /> Edit
+                    <img src={EditIcon} className="mb-1" alt="edit icn" /> Edit
                   </button>
                   <button
                     style={{ cursor: "pointer" }}
@@ -127,7 +126,8 @@ class CommentReply extends Component {
                       this.deleteReplyAndFetch(postId, commentId, id)
                     }
                   >
-                    <i className="fa fa-trash" aria-hidden="true" /> Delete
+                    <img src={DeleteIcon} className="mb-1" alt="delete icn" />{" "}
+                    Delete
                   </button>
                 </span>
               </div>
