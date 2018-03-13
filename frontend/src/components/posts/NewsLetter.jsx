@@ -17,7 +17,9 @@ class NewsLetter extends Component {
           </div>
         )}
         <div className="card my-4">
-          <h5 className="card-header">Subscribe</h5>
+          <label htmlFor="subscription" className="card-header h5">
+            Subscribe
+          </label>
           <div className="card-body">
             <form
               onSubmit={e => {
@@ -27,7 +29,6 @@ class NewsLetter extends Component {
               }}
             >
               <div className="input-group">
-                <label htmlFor="subscription" />
                 <input
                   id="subscription"
                   type="email"
