@@ -27,9 +27,7 @@ class InnerLoginForm extends Component {
 
     return (
       <span className={classes.container}>
-        <h3 style={{ textAlign: "center" }}>
-          Login with your email address below
-        </h3>
+        <h3 style={{ textAlign: "center" }}>Google / Website login</h3>
         <form onSubmit={handleSubmit}>
           <TextField
             name="email"

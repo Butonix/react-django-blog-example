@@ -54,7 +54,7 @@ class PostAutocomplete extends React.Component {
           highlightedIndex,
           selectedItem
         }) => (
-          <div className="text-center" style={{ marginTop: "2em" }}>
+          <div className="container text-center" style={{ marginTop: "2em" }}>
             <h3>Browse the blog for posts</h3>
             <h5 className="mt-4">
               based on programming language, title, or publication date (mm-dd,
@@ -69,7 +69,7 @@ class PostAutocomplete extends React.Component {
             />
             {isOpen ? (
               <div className="container">
-                <div className="row">
+                <div className="row" style={{ marginLeft: 0, marginRight: 0 }}>
                   {posts
                     .filter(
                       i =>
@@ -90,7 +90,7 @@ class PostAutocomplete extends React.Component {
                           index,
                           item
                         })}
-                        className="col-md-4"
+                        className="col-lg-6"
                       >
                         {" "}
                         <Card className={classes.card}>
@@ -106,7 +106,7 @@ class PostAutocomplete extends React.Component {
                               <Link to={`/${item.slug}`}>{item.title}</Link>
                             </Typography>
                             <Typography component="p">
-                              {item.content_home_page}
+                              {`${item.content_home_page.substring(0, 250)}...`}
                             </Typography>
                           </CardContent>
                         </Card>

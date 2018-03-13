@@ -27,7 +27,7 @@ class InnerRegistrationForm extends Component {
     return (
       <span className={classes.container}>
         <h3 style={{ textAlign: "center" }}>
-          Registration with your email address below
+          Register with your email address
         </h3>
         <form onSubmit={handleSubmit}>
           <TextField
