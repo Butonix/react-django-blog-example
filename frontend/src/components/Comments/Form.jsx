@@ -96,6 +96,7 @@ class Form extends PureComponent {
   }
 
   render() {
+    console.log("Form rendered");
     const { classes } = this.props;
     return (
       <form className={classes.container}>

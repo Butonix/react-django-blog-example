@@ -158,16 +158,19 @@ class CommentDetail extends Component {
                     display: this.state.toggleTextForm ? "block" : "none"
                   }}
                 >
-                  <Form
-                    fetchCommentsForPost={this.props.fetchCommentsForPost}
-                    createCommentReply={this.props.createCommentReply}
-                    commentId={this.props.id}
-                    postId={this.props.postId}
-                    toggleTextForm={this.toggleTextForm}
-                    isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
-                    isAuthenticatedEmail={this.props.isAuthenticatedEmail}
-                    textFormState={this.state.toggleTextForm}
-                  />
+                  {this.props.isAuthenticatedEmail ||
+                    (this.props.isAuthenticatedGoogle && (
+                      <Form
+                        fetchCommentsForPost={this.props.fetchCommentsForPost}
+                        createCommentReply={this.props.createCommentReply}
+                        commentId={this.props.id}
+                        postId={this.props.postId}
+                        toggleTextForm={this.toggleTextForm}
+                        isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
+                        isAuthenticatedEmail={this.props.isAuthenticatedEmail}
+                        textFormState={this.state.toggleTextForm}
+                      />
+                    ))}
                 </span>
               </div>
               {this.props.comment_replies &&

@@ -144,19 +144,27 @@ class CommentReply extends Component {
               </span>
               <span
                 style={{
-                  display: this.state.toggleTextFormReply ? "block" : "none"
+                  display:
+                    this.state.toggleTextFormReply &&
+                    (this.props.isAuthenticatedGoogle ||
+                      this.props.isAuthenticatedGoogle)
+                      ? "block"
+                      : "none"
                 }}
               >
-                <Form
-                  fetchCommentsForPost={this.props.fetchCommentsForPost}
-                  createCommentReply={this.props.createCommentReply}
-                  commentId={this.props.commentId}
-                  postId={this.props.postId}
-                  toggleTextFormReply={this.toggleTextFormReply}
-                  isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
-                  isAuthenticatedEmail={this.props.isAuthenticatedEmail}
-                  stateTextFormReply={this.state.toggleTextFormReply}
-                />
+                {(this.props.isAuthenticatedEmail ||
+                  this.props.isAuthenticatedGoogle) && (
+                  <Form
+                    fetchCommentsForPost={this.props.fetchCommentsForPost}
+                    createCommentReply={this.props.createCommentReply}
+                    commentId={this.props.commentId}
+                    postId={this.props.postId}
+                    toggleTextFormReply={this.toggleTextFormReply}
+                    isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
+                    isAuthenticatedEmail={this.props.isAuthenticatedEmail}
+                    stateTextFormReply={this.state.toggleTextFormReply}
+                  />
+                )}
               </span>
             </div>
           </div>
