@@ -16,11 +16,12 @@ class EditForm extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.toggleEditForm || this.props.toggleEditFormReply) {
+    const { toggleEditForm, toggleEditFormReply, prevText } = this.props;
+    if (toggleEditForm || toggleEditFormReply) {
       this.textInput.focus();
     }
-    if (prevProps.prevText !== this.props.prevText) {
-      this.setState({ text: this.props.prevText });
+    if (prevProps.prevText !== prevText) {
+      this.setState({ text: prevText });
     }
   }
 
@@ -46,28 +47,27 @@ class EditForm extends PureComponent {
   }
 
   submit(e) {
+    const {
+      editCommentReply,
+      editCommentForPost,
+      postId,
+      commentId,
+      toggleEditForm,
+      fetchCommentsForPost,
+      commentReplyId,
+      toggleEditFormReply
+    } = this.props;
     e.preventDefault();
     let err = this.validate();
     if (!err) {
-      if (!this.props.editCommentReply) {
-        this.props
-          .editCommentForPost(
-            this.props.postId,
-            this.props.commentId,
-            this.state.text
-          )
-          .then(() => this.props.toggleEditForm())
-          .then(() => this.props.fetchCommentsForPost(this.props.postId));
+      if (!editCommentReply) {
+        editCommentForPost(postId, commentId, this.state.text)
+          .then(() => toggleEditForm())
+          .then(() => fetchCommentsForPost(postId));
       } else {
-        this.props
-          .editCommentReply(
-            this.props.postId,
-            this.props.commentId,
-            this.props.commentReplyId,
-            this.state.text
-          )
-          .then(() => this.props.toggleEditFormReply())
-          .then(() => this.props.fetchCommentsForPost(this.props.postId));
+        editCommentReply(postId, commentId, commentReplyId, this.state.text)
+          .then(() => toggleEditFormReply())
+          .then(() => fetchCommentsForPost(postId));
       }
 
       this.setState({
@@ -79,6 +79,7 @@ class EditForm extends PureComponent {
 
   render() {
     const { classes } = this.props;
+    const { text, textError } = this.state;
     return (
       <form className={classes.container}>
         <TextField
@@ -87,11 +88,11 @@ class EditForm extends PureComponent {
           inputRef={input => (this.textInput = input)}
           label="Comment Text"
           className={classes.textField}
-          value={this.state.text}
+          value={text}
           onChange={e => this.change(e)}
           margin="normal"
-          error={!!this.state.textError}
-          helperText={this.state.textError}
+          error={!!textError}
+          helperText={textError}
           multiline={true}
           rows={4}
         />
@@ -101,7 +102,7 @@ class EditForm extends PureComponent {
           className={classes.button}
           onClick={e => this.submit(e)}
           type="submit"
-          disabled={!!this.state.text ? false : true}
+          disabled={!!text ? false : true}
         >
           Post
         </Button>

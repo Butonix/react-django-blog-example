@@ -42,36 +42,40 @@ class Form extends PureComponent {
   }
 
   submit(e) {
+    const {
+      postId,
+      commentId,
+      fetchCommentsForPost,
+      toggleTextForm,
+      toggleTextFormReply,
+      createCommentReply,
+      createCommentForPost
+    } = this.props;
     e.preventDefault();
     let err = this.validate();
     if (!err) {
-      if (!this.props.createCommentReply) {
-        this.props
-          .createCommentForPost(this.props.postId, this.state.text)
+      if (!createCommentReply) {
+        createCommentForPost(postId, this.state.text)
           .then(resp => {
             if (resp.err) {
               return Promise.reject();
             }
           })
-          .then(() => this.props.fetchCommentsForPost(this.props.postId))
+          .then(() => fetchCommentsForPost(postId))
           .catch(() => {
             return;
           });
       }
-      if (this.props.toggleTextForm) {
+      if (toggleTextForm) {
         this.props
-          .createCommentReply(
-            this.props.postId,
-            this.props.commentId,
-            this.state.text
-          )
+          .createCommentReply(postId, commentId, this.state.text)
           .then(resp => {
             if (resp.err) {
-              this.props.toggleTextForm();
+              toggleTextForm();
               return Promise.reject();
             }
           })
-          .then(() => this.props.toggleTextForm())
+          .then(() => toggleTextForm())
           .then(() => this.props.fetchCommentsForPost(this.props.postId))
           .catch(() => {
             return;
@@ -84,8 +88,8 @@ class Form extends PureComponent {
             this.props.commentId,
             this.state.text
           )
-          .then(() => this.props.toggleTextFormReply())
-          .then(() => this.props.fetchCommentsForPost(this.props.postId));
+          .then(() => toggleTextFormReply())
+          .then(() => fetchCommentsForPost(postId));
       }
       //now clear form.
       this.setState({
@@ -97,7 +101,8 @@ class Form extends PureComponent {
 
   render() {
     console.log("Form rendered");
-    const { classes } = this.props;
+    const { classes, isAuthenticatedEmail, isAuthenticatedGoogle } = this.props;
+    const { text, textError } = this.state;
     return (
       <form className={classes.container}>
         <TextField
@@ -106,29 +111,27 @@ class Form extends PureComponent {
           inputRef={input => (this.textInput = input)}
           label="Comment Text"
           className={classes.textField}
-          value={this.state.text}
+          value={text}
           onChange={e => this.change(e)}
           margin="normal"
-          error={!!this.state.textError}
-          helperText={this.state.textError}
+          error={!!textError}
+          helperText={textError}
           multiline={true}
           rows={4}
         />
-        {(this.props.isAuthenticatedGoogle ||
-          this.props.isAuthenticatedEmail) && (
+        {(isAuthenticatedGoogle || isAuthenticatedEmail) && (
           <Button
             raised
             className={classes.button}
             onClick={e => this.submit(e)}
             type="submit"
-            disabled={!!this.state.text ? false : true}
+            disabled={!!text ? false : true}
           >
             Post
           </Button>
         )}
         {!this.props.createCommentReply &&
-          (!this.props.isAuthenticatedGoogle ||
-            this.props.isAuthenticatedEmail) && (
+          (!isAuthenticatedGoogle || isAuthenticatedEmail) && (
             <div className={classes.links}>
               <GoogleLoginButton className={classes.links} />
             </div>
