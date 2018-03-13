@@ -143,7 +143,7 @@ class NavBar extends Component {
           className="navbar navbar-toggleable-md navbar-inverse bg-inverse"
           expand="md"
         >
-          <NavbarToggler onClick={this.toggle} />
+          <NavbarToggler onClick={this.toggle} name="toggle-navbar" />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav navbar style={{ margin: "auto" }}>
               <NavItem>

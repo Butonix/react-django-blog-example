@@ -27,7 +27,9 @@ class NewsLetter extends Component {
               }}
             >
               <div className="input-group">
+                <label htmlFor="subscription" />
                 <input
+                  id="subscription"
                   type="email"
                   className="form-control"
                   placeholder="Enter E-mail..."
