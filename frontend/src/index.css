@@ -1,13 +1,10 @@
-/* NAVBAR  */
 .active {
   color: #000;
 }
-
 .nav-link {
   margin-left: 15px;
   font-size: 18px;
 }
-
 .inverse-dropdown {
   background-color: #222;
   border-color: #080808;
@@ -27,21 +24,16 @@
   background-color: #000000b3;
   display: block;
 }
-
-/* Styles for the Pagination in Post Detail view */
-
 .pagination-right :hover {
   color: #000;
   cursor: pointer;
   opacity: 0.5;
 }
-
 .pagination-left :hover {
   color: #000;
   cursor: pointer;
   opacity: 0.5;
 }
-
 .pagination-right {
   position: fixed;
   bottom: 40%;
@@ -49,7 +41,6 @@
   z-index: 99999;
   opacity: 0.8;
 }
-
 .pagination-left {
   position: fixed;
   bottom: 40%;
@@ -57,46 +48,30 @@
   z-index: 99999;
   opacity: 0.8;
 }
-
 .upscroller {
   opacity: 0.8;
 }
-
 .upscroller :hover {
   color: #000;
   cursor: pointer;
   opacity: 0.5;
 }
-
 @media only screen and (max-width: 650px) {
   .pagination-left,
   .pagination-right {
     display: none;
   }
 }
-
-/* Media class for the ScrollToTop Component to disappear
-  at a certain screen size
-*/
-
 @media only screen and (max-width: 870px) {
   .upscroller {
     display: none;
   }
 }
-
-/* modal class to prevent it hiding the left scrollbar
-  and shifting the content of the page
-*/
 .modal-scrollbar {
   modal-open {
     overflow-y: auto;
   }
 }
-
-/*  LOADING SPINNER STYLE */
-
-/* Absolute Center Spinner */
 .loading {
   position: fixed;
   z-index: 999;
@@ -109,17 +84,13 @@
   bottom: 0;
   right: 0;
 }
-
-/* :not(:required) hides these rules from IE9 and below */
 .loading:not(:required) {
-  /* hide "loading..." text */
   font: 0/0 a;
   color: transparent;
   text-shadow: none;
   background-color: transparent;
   border: 0;
 }
-
 .loading:not(:required):after {
   content: "";
   display: block;
@@ -144,9 +115,6 @@
     rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0,
     rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
 }
-
-/* Animation */
-
 @-webkit-keyframes spinner {
   0% {
     -webkit-transform: rotate(0deg);
