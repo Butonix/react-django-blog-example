@@ -56,7 +56,7 @@ class PostDetail extends Component {
 
             <hr />
             <div className="row">
-              <div className="col-md-10 offset-md-1">
+              <div className="col-12">
                 {err ? (
                   <div className="alert alert-danger" role="alert">
                     <strong>{err.message}</strong>

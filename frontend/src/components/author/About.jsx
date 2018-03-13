@@ -17,7 +17,7 @@ const About = () => {
             className="mt-2 img-fluid"
           />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-8">
           <h1 className="cover-heading">Borislav Hadzhiev</h1>
           <p className="lead">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

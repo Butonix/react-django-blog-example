@@ -37,12 +37,9 @@ class HomePage extends Component {
           document.documentElement.scrollTop || document.body.scrollTop;
         this.props
           .fetchPosts(queryParsed)
-          .then(() =>
-            setTimeout(
-              () =>
-                (document.documentElement.scrollTop = document.body.scrollTop = currentPosition),
-              0.3
-            )
+          .then(
+            () =>
+              (document.documentElement.scrollTop = document.body.scrollTop = currentPosition)
           );
       }
     }
@@ -64,7 +61,7 @@ class HomePage extends Component {
           <div className="loading" />
         ) : (
           <div className="row">
-            <div className="col-md-8">
+            <div className="col-12 col-sm-12 col-lg-8">
               {err ? (
                 <div className="alert alert-danger" role="alert">
                   <strong>{err.message}</strong>
@@ -75,7 +72,7 @@ class HomePage extends Component {
                 ))
               )}
             </div>
-            <div className="col-md-4">
+            <div className="col-12 col-sm-12 col-lg-4">
               <NewsLetter />
               <PostArchiveHtmlStyled />
               <CategoryHtmlStyled />
