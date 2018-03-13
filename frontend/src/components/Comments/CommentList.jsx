@@ -21,31 +21,35 @@ class CommentList extends Component {
     }
   }
   render() {
+    const {
+      comments,
+      createCommentForPost,
+      fetchCommentsForPost,
+      isAuthenticatedGoogle,
+      isAuthenticatedEmail,
+      postId
+    } = this.props;
     return (
       <div>
-        {this.props.comments.err && (
+        {comments.err && (
           <div className="alert alert-danger" role="alert">
-            {this.props.comments.err.message}
+            {comments.err.message}
           </div>
         )}
         <div className="card my-4">
           <h5 className="card-header">Leave a Comment:</h5>
           <div className="card-body" />
           <Form
-            createCommentForPost={this.props.createCommentForPost}
-            fetchCommentsForPost={this.props.fetchCommentsForPost}
-            postId={this.props.postId}
-            isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
-            isAuthenticatedEmail={this.props.isAuthenticatedEmail}
+            createCommentForPost={createCommentForPost}
+            fetchCommentsForPost={fetchCommentsForPost}
+            postId={postId}
+            isAuthenticatedGoogle={isAuthenticatedGoogle}
+            isAuthenticatedEmail={isAuthenticatedEmail}
           />
         </div>
         <div>
-          {this.props.comments.commentArr.map(comment => (
-            <CommentDetail
-              key={comment.id}
-              {...comment}
-              postId={this.props.postId}
-            />
+          {comments.commentArr.map(comment => (
+            <CommentDetail key={comment.id} {...comment} postId={postId} />
           ))}
         </div>
       </div>

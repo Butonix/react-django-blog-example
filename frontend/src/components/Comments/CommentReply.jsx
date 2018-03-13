@@ -150,11 +150,7 @@ class CommentReply extends Component {
               </span>
               <span
                 style={{
-                  display:
-                    this.state.toggleTextFormReply &&
-                    (isAuthenticatedGoogle || isAuthenticatedGoogle)
-                      ? "block"
-                      : "none"
+                  display: this.state.toggleTextFormReply ? "block" : "none"
                 }}
               >
                 {(isAuthenticatedEmail || isAuthenticatedGoogle) && (
