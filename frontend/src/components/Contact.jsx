@@ -82,7 +82,7 @@ class ContactForm extends Component {
 
     return (
       <span className={classes.container}>
-        <h3 style={{ textAlign: "center" }}>Contact me by filling the form</h3>
+        <h3 style={{ textAlign: "center" }}>Contact me</h3>
         {this.props.contact_form.err ? (
           <div className="alert alert-danger" role="alert">
             <strong>{contact_form.err.message}</strong>
