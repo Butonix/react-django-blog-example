@@ -37,26 +37,39 @@ class CommentDetail extends Component {
   }
 
   render() {
+    const {
+      user_avatar,
+      user,
+      posted_on,
+      text,
+      isAuthenticatedGoogle,
+      isAuthenticatedEmail,
+      current_user,
+      postId,
+      id,
+      fetchCommentsForPost,
+      editCommentForPost,
+      createCommentReply,
+      comment_replies
+    } = this.props;
     return (
       <div className="container">
         <div className="row">
           <div className="comments col-md-11" id="comments">
             <div className="comment">
               <div className="comment-avatar col-md-1 col-sm-2 text-center pr-1">
-                {this.props.user_avatar === "/profile_images/pr_image.png" ||
-                this.props.user_avatar === "" ? (
+                {user_avatar === "/profile_images/pr_image.png" ||
+                user_avatar === "" ? (
                   <Avatar
                     className="mx-auto rounded-circle img-fluid"
-                    name={this.props.user}
+                    name={user}
                     round
                     size={60}
                   />
                 ) : (
                   <img
                     className="mx-auto rounded-circle img-fluid"
-                    src={`http://127.0.0.1:8000/media/${
-                      this.props.user_avatar
-                    }`}
+                    src={`http://127.0.0.1:8000/media/${user_avatar}`}
                     alt="avatarxz"
                     style={{
                       maxWidth: "80px",
@@ -67,11 +80,11 @@ class CommentDetail extends Component {
               </div>
               <div className="comment-content col-md-12 col-sm-10">
                 <span>
-                  <b>{this.props.user} </b>
+                  <b>{user} </b>
                 </span>
                 made a post.
                 <h6 className="text-muted time">
-                  {moment(this.props.posted_on).fromNow()}
+                  {moment(posted_on).fromNow()}
                 </h6>
                 <div className="comment-body">
                   <p
@@ -83,14 +96,13 @@ class CommentDetail extends Component {
                       marginTop: "5px"
                     }}
                   >
-                    {this.props.text}
+                    {text}
                   </p>
                 </div>
                 <span
                   style={{
                     display:
-                      this.props.isAuthenticatedGoogle ||
-                      this.props.isAuthenticatedEmail
+                      isAuthenticatedGoogle || isAuthenticatedEmail
                         ? "inline-block"
                         : "none"
                   }}
@@ -110,9 +122,8 @@ class CommentDetail extends Component {
                 <span
                   style={{
                     display:
-                      this.props.current_user === this.props.user &&
-                      (this.props.isAuthenticatedGoogle ||
-                        this.props.isAuthenticatedEmail)
+                      current_user === user &&
+                      (isAuthenticatedGoogle || isAuthenticatedEmail)
                         ? "inline-block"
                         : "none"
                   }}
@@ -127,12 +138,7 @@ class CommentDetail extends Component {
                   <button
                     style={{ cursor: "pointer" }}
                     className="btn btn-link"
-                    onClick={() =>
-                      this.deleteCommentAndFetch(
-                        this.props.postId,
-                        this.props.id
-                      )
-                    }
+                    onClick={() => this.deleteCommentAndFetch(postId, id)}
                   >
                     <img src={DeleteIcon} className="mb-1" alt="delete icn" />{" "}
                     Delete
@@ -144,11 +150,11 @@ class CommentDetail extends Component {
                   }}
                 >
                   <EditForm
-                    prevText={this.props.text}
-                    fetchCommentsForPost={this.props.fetchCommentsForPost}
-                    editCommentForPost={this.props.editCommentForPost}
-                    commentId={this.props.id}
-                    postId={this.props.postId}
+                    prevText={text}
+                    fetchCommentsForPost={fetchCommentsForPost}
+                    editCommentForPost={editCommentForPost}
+                    commentId={id}
+                    postId={postId}
                     toggleEditForm={this.toggleEditForm}
                     editFormState={this.state.toggleEditForm}
                   />
@@ -158,30 +164,29 @@ class CommentDetail extends Component {
                     display: this.state.toggleTextForm ? "block" : "none"
                   }}
                 >
-                  {this.props.isAuthenticatedEmail ||
-                    (this.props.isAuthenticatedGoogle && (
-                      <Form
-                        fetchCommentsForPost={this.props.fetchCommentsForPost}
-                        createCommentReply={this.props.createCommentReply}
-                        commentId={this.props.id}
-                        postId={this.props.postId}
-                        toggleTextForm={this.toggleTextForm}
-                        isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
-                        isAuthenticatedEmail={this.props.isAuthenticatedEmail}
-                        textFormState={this.state.toggleTextForm}
-                      />
-                    ))}
+                  {(isAuthenticatedEmail || isAuthenticatedGoogle) && (
+                    <Form
+                      fetchCommentsForPost={fetchCommentsForPost}
+                      createCommentReply={createCommentReply}
+                      commentId={id}
+                      postId={postId}
+                      toggleTextForm={this.toggleTextForm}
+                      isAuthenticatedGoogle={isAuthenticatedGoogle}
+                      isAuthenticatedEmail={isAuthenticatedEmail}
+                      textFormState={this.state.toggleTextForm}
+                    />
+                  )}
                 </span>
               </div>
-              {this.props.comment_replies &&
-                this.props.comment_replies.map(reply => {
+              {comment_replies &&
+                comment_replies.map(reply => {
                   return (
                     <CommentReply
                       key={reply.id}
                       {...reply}
-                      commentId={this.props.id}
-                      postId={this.props.postId}
-                      current_user={this.props.current_user}
+                      commentId={id}
+                      postId={postId}
+                      current_user={current_user}
                     />
                   );
                 })}
