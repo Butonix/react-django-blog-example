@@ -55,8 +55,8 @@ class PostDetail extends Component {
             )}
 
             <hr />
-            <div className="row">
-              <div className="col-12">
+            <div className="row justify-content-md-center">
+              <div className="col-12 col-md-10">
                 {err ? (
                   <div className="alert alert-danger" role="alert">
                     <strong>{err.message}</strong>

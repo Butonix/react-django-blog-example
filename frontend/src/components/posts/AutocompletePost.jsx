@@ -69,7 +69,7 @@ class PostAutocomplete extends React.Component {
             />
             {isOpen ? (
               <div className="container">
-                <div className="row" style={{ marginLeft: 0, marginRight: 0 }}>
+                <div className="row justify-content-md-center">
                   {posts
                     .filter(
                       i =>
