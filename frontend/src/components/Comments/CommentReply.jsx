@@ -34,26 +34,40 @@ class CommentReply extends Component {
   }
 
   render() {
+    const {
+      id,
+      user,
+      posted_on,
+      text,
+      isAuthenticatedEmail,
+      isAuthenticatedGoogle,
+      current_user,
+      postId,
+      commentId,
+      fetchCommentsForPost,
+      editCommentReply,
+      createCommentReply
+    } = this.props;
     return (
-      <div className="ml-5" key={this.props.id}>
+      <div className="ml-5" key={id}>
         <div>
           <div id="comments">
             <div className="comment">
               <div className="comment-avatar col-md-1 col-sm-2 text-center pr-1">
                 <Avatar
                   className="mx-auto rounded-circle img-fluid"
-                  name={this.props.user}
+                  name={user}
                   round
                   size={60}
                 />
               </div>
               <div className="comment-content col-md-12 col-sm-12">
                 <span>
-                  <b>{this.props.user} </b>
+                  <b>{user} </b>
                 </span>
                 made a post.
                 <h6 className="text-muted time">
-                  {moment(this.props.posted_on).fromNow()}
+                  {moment(posted_on).fromNow()}
                 </h6>
                 <div className="post-description">
                   <p
@@ -65,15 +79,14 @@ class CommentReply extends Component {
                       marginTop: "5px"
                     }}
                   >
-                    {this.props.text}
+                    {text}
                   </p>
                   <div className="stats" />
                 </div>
                 <span
                   style={{
                     display:
-                      this.props.isAuthenticatedGoogle ||
-                      this.props.isAuthenticatedEmail
+                      isAuthenticatedGoogle || isAuthenticatedEmail
                         ? "inline-block"
                         : "none"
                   }}
@@ -97,10 +110,7 @@ class CommentReply extends Component {
                 </span>
                 <span
                   style={{
-                    display:
-                      this.props.current_user === this.props.user
-                        ? "inline-block"
-                        : "none"
+                    display: current_user === user ? "inline-block" : "none"
                   }}
                 >
                   <button
@@ -114,11 +124,7 @@ class CommentReply extends Component {
                     style={{ cursor: "pointer" }}
                     className="btn btn-link"
                     onClick={() =>
-                      this.deleteReplyAndFetch(
-                        this.props.postId,
-                        this.props.commentId,
-                        this.props.id
-                      )
+                      this.deleteReplyAndFetch(postId, commentId, id)
                     }
                   >
                     <i className="fa fa-trash" aria-hidden="true" /> Delete
@@ -132,12 +138,12 @@ class CommentReply extends Component {
                 }}
               >
                 <EditForm
-                  prevText={this.props.text}
-                  fetchCommentsForPost={this.props.fetchCommentsForPost}
-                  editCommentReply={this.props.editCommentReply}
-                  commentId={this.props.commentId}
-                  postId={this.props.postId}
-                  commentReplyId={this.props.id}
+                  prevText={text}
+                  fetchCommentsForPost={fetchCommentsForPost}
+                  editCommentReply={editCommentReply}
+                  commentId={commentId}
+                  postId={postId}
+                  commentReplyId={id}
                   toggleEditFormReply={this.toggleEditFormReply}
                   stateEditFormReply={this.state.toggleEditFormReply}
                 />
@@ -146,22 +152,20 @@ class CommentReply extends Component {
                 style={{
                   display:
                     this.state.toggleTextFormReply &&
-                    (this.props.isAuthenticatedGoogle ||
-                      this.props.isAuthenticatedGoogle)
+                    (isAuthenticatedGoogle || isAuthenticatedGoogle)
                       ? "block"
                       : "none"
                 }}
               >
-                {(this.props.isAuthenticatedEmail ||
-                  this.props.isAuthenticatedGoogle) && (
+                {(isAuthenticatedEmail || isAuthenticatedGoogle) && (
                   <Form
-                    fetchCommentsForPost={this.props.fetchCommentsForPost}
-                    createCommentReply={this.props.createCommentReply}
-                    commentId={this.props.commentId}
-                    postId={this.props.postId}
+                    fetchCommentsForPost={fetchCommentsForPost}
+                    createCommentReply={createCommentReply}
+                    commentId={commentId}
+                    postId={postId}
                     toggleTextFormReply={this.toggleTextFormReply}
-                    isAuthenticatedGoogle={this.props.isAuthenticatedGoogle}
-                    isAuthenticatedEmail={this.props.isAuthenticatedEmail}
+                    isAuthenticatedGoogle={isAuthenticatedGoogle}
+                    isAuthenticatedEmail={isAuthenticatedEmail}
                     stateTextFormReply={this.state.toggleTextFormReply}
                   />
                 )}
