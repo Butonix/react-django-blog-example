@@ -38,7 +38,7 @@ class NewsLetter extends Component {
                 />
                 <span className="input-group-btn">
                   <button className="btn btn-secondary" type="submit">
-                    Subscribe
+                    <b>Subscribe</b>
                   </button>
                 </span>
               </div>

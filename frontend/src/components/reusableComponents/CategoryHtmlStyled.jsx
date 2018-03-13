@@ -16,7 +16,7 @@ const CategoryHtmlStyled = () => {
                     search: `?q=python`
                   }}
                 >
-                  Python
+                  <b>Python</b>
                 </Link>
               </li>
             </ul>
@@ -30,7 +30,7 @@ const CategoryHtmlStyled = () => {
                     search: `?q=javascript`
                   }}
                 >
-                  Javascript
+                  <b>Javascript</b>
                 </Link>
               </li>
             </ul>

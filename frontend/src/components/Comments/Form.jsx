@@ -100,7 +100,6 @@ class Form extends PureComponent {
   }
 
   render() {
-    console.log("Form rendered");
     const { classes, isAuthenticatedEmail, isAuthenticatedGoogle } = this.props;
     const { text, textError } = this.state;
     return (
