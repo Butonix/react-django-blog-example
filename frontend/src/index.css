@@ -1,11 +1,12 @@
 /* NAVBAR  */
-.active {
-  color: #000;
-}
 
 .nav-link {
   margin-left: 15px;
   font-size: 18px;
+}
+
+.active {
+  color: #000;
 }
 
 .inverse-dropdown {
