@@ -7,7 +7,6 @@ import { history } from "./store";
 
 import { store } from "./store";
 import registerServiceWorker from "./registerServiceWorker";
-import "./index.css";
 
 import App from "./App";
 

@@ -31,11 +31,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "ship-to-s3-gzip":
-      "gzip -r build && aws s3 sync build/ s3://www.borislavnfa.com",
+    "ship-to-s3-gzip": "gzip -r build && aws s3 sync build/ s3://www.borislavnfa.com",
     "test": "react-scripts test --env=jsdom",
-    "ship-to-s3":
-      "npm run build && aws s3 sync build/ s3://www.borislavnfa.com",
+    "ship-to-s3": "npm run build && aws s3 sync build/ s3://www.borislavnfa.com",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
