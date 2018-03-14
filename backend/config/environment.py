@@ -1,6 +1,6 @@
 # ENVIRONMENT = 'local'
 ENVIRONMENT = 'development'
-#ENVIRONMENT = 'production'
+# ENVIRONMENT = 'production'
 
 SETTINGS_MODULE = 'config.settings.local'
 
