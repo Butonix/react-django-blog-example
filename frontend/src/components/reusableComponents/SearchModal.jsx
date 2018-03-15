@@ -32,7 +32,7 @@ class SearchModal extends Component {
       <div>
         <Button className="btn btn-secondary btn-sm " onClick={this.toggle}>
           <i className="fa fa-search" aria-hidden="true" />{" "}
-          {this.props.buttonLabel}
+          <b style={{ fontSize: 16 }}>{this.props.buttonLabel}</b>
         </Button>
         <Modal
           isOpen={this.state.modal}

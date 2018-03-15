@@ -103,8 +103,7 @@ class CommentReply extends Component {
                       })
                     }
                   >
-                    <img src={ReplyIcon} className="mb-1" alt="rep icn" /> Reply{" "}
-                    Reply
+                    <img src={ReplyIcon} className="mb-1" alt="rep icn" /> Reply
                   </button>
                 </span>
                 <span
