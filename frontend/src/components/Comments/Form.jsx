@@ -130,7 +130,7 @@ class Form extends PureComponent {
           </Button>
         )}
         {!this.props.createCommentReply &&
-          (!isAuthenticatedGoogle || isAuthenticatedEmail) && (
+          (!isAuthenticatedGoogle && !isAuthenticatedEmail) && (
             <div className={classes.links}>
               <GoogleLoginButton className={classes.links} />
             </div>
