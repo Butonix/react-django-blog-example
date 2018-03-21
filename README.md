@@ -1,4 +1,4 @@
-## A React + Redux blog that consumes a django web api(drf-blog repo)
+## A React + Redux blog that consumes a django web api
 
 ### Functionality:
 
