@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-
+import Paper from "material-ui/Paper";
 import { styles } from "./customStylesMui";
 
 class InnerRegistrationForm extends Component {
@@ -25,93 +25,99 @@ class InnerRegistrationForm extends Component {
     } = this.props;
 
     return (
-      <span className={classes.container}>
-        <h3 style={{ textAlign: "center" }}>
-          Register with your email address
-        </h3>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            name="username"
-            placeholder="Enter your Username"
-            type="text"
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.username && touched.username}
-            helperText={errors.username && touched.username && errors.username}
-            label="Username"
-            className={classes.textField}
-            required
-          />
-          <TextField
-            name="email"
-            placeholder="Enter your Email"
-            type="text"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.email && touched.email}
-            helperText={errors.email && touched.email && errors.email}
-            label="Email Address"
-            className={classes.textField}
-            required
-          />
-          <TextField
-            name="password1"
-            placeholder="Enter your Password"
-            type="password"
-            value={values.password1}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.password1 && touched.password1}
-            helperText={
-              errors.password1 && touched.password1 && errors.password1
-            }
-            className={classes.textField}
-            label="Password"
-            required
-          />
-          <TextField
-            name="password2"
-            placeholder="Repeat your password"
-            type="password"
-            value={values.password2}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.password2 && touched.password2}
-            helperText={
-              errors.password2 && touched.password2 && errors.password2
-            }
-            className={classes.textField}
-            label="Repeat your Password"
-            required
-          />
+      <div className="container">
+        <span className={classes.container}>
+          <Paper elevation={5} style={{ padding: "2em" }}>
+            <h3 style={{ textAlign: "center" }}>
+              Register with your email address
+            </h3>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                name="username"
+                placeholder="Enter your Username"
+                type="text"
+                value={values.username}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.username && touched.username}
+                helperText={
+                  errors.username && touched.username && errors.username
+                }
+                label="Username"
+                className={classes.textField}
+                required
+              />
+              <TextField
+                name="email"
+                placeholder="Enter your Email"
+                type="text"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.email && touched.email}
+                helperText={errors.email && touched.email && errors.email}
+                label="Email Address"
+                className={classes.textField}
+                required
+              />
+              <TextField
+                name="password1"
+                placeholder="Enter your Password"
+                type="password"
+                value={values.password1}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.password1 && touched.password1}
+                helperText={
+                  errors.password1 && touched.password1 && errors.password1
+                }
+                className={classes.textField}
+                label="Password"
+                required
+              />
+              <TextField
+                name="password2"
+                placeholder="Repeat password"
+                type="password"
+                value={values.password2}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.password2 && touched.password2}
+                helperText={
+                  errors.password2 && touched.password2 && errors.password2
+                }
+                className={classes.textField}
+                label="Repeat Password"
+                required
+              />
 
-          <br />
-          <Button
-            raised
-            className={classes.button}
-            type="button"
-            onClick={handleReset}
-            disabled={!dirty || isSubmitting}
-          >
-            Reset
-          </Button>
-          <Button
-            raised
-            className={classes.button}
-            type="submit"
-            disabled={isSubmitting}
-          >
-            Submit
-          </Button>
-        </form>
-        <span>Already have an account?</span>
-        <Link to="/login" className={classes.links}>
-          {" "}
-          Login
-        </Link>
-      </span>
+              <br />
+              <Button
+                raised
+                className={classes.button}
+                type="button"
+                onClick={handleReset}
+                disabled={!dirty || isSubmitting}
+              >
+                Reset
+              </Button>
+              <Button
+                raised
+                className={classes.button}
+                type="submit"
+                disabled={isSubmitting}
+              >
+                Submit
+              </Button>
+            </form>
+          </Paper>
+          <span className="mt-4">Already have an account?</span>
+          <Link to="/login" className={classes.links}>
+            {" "}
+            Login
+          </Link>
+        </span>
+      </div>
     );
   }
 }
