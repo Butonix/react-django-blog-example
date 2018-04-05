@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CommentDetail from "../../containers/Comments/CommentDetailContainer";
 import Form from "./Form";
+import Paper from "material-ui/Paper";
 
 class CommentList extends Component {
   componentDidMount() {
@@ -36,17 +37,19 @@ class CommentList extends Component {
             {comments.err.message}
           </div>
         )}
-        <div className="card my-4">
-          <h5 className="card-header">Leave a Comment:</h5>
-          <div className="card-body" />
-          <Form
-            createCommentForPost={createCommentForPost}
-            fetchCommentsForPost={fetchCommentsForPost}
-            postId={postId}
-            isAuthenticatedGoogle={isAuthenticatedGoogle}
-            isAuthenticatedEmail={isAuthenticatedEmail}
-          />
-        </div>
+        <Paper elevation={1}>
+          <div className="card my-4">
+            <h5 className="card-header">Leave a Comment:</h5>
+            <div className="card-body" />
+            <Form
+              createCommentForPost={createCommentForPost}
+              fetchCommentsForPost={fetchCommentsForPost}
+              postId={postId}
+              isAuthenticatedGoogle={isAuthenticatedGoogle}
+              isAuthenticatedEmail={isAuthenticatedEmail}
+            />
+          </div>
+        </Paper>
         <div>
           {comments.commentArr.map(comment => (
             <CommentDetail key={comment.id} {...comment} postId={postId} />
