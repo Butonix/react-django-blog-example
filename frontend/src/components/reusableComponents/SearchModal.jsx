@@ -30,7 +30,11 @@ class SearchModal extends Component {
   render() {
     return (
       <div>
-        <Button className="btn btn-secondary btn-sm " onClick={this.toggle}>
+        <Button
+          className="btn btn-secondary btn-sm "
+          onClick={this.toggle}
+          style={{ cursor: "pointer" }}
+        >
           <i className="fa fa-search" aria-hidden="true" />{" "}
           <b style={{ fontSize: 16 }}>{this.props.buttonLabel}</b>
         </Button>

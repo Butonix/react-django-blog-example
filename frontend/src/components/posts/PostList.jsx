@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import Paper from "material-ui/Paper";
+import Button from "material-ui/Button";
 
 const PostList = ({
   author,
@@ -18,7 +20,7 @@ const PostList = ({
     category.charAt(0).toUpperCase() + category.slice(1);
   const createMarkup = content => ({ __html: content });
   return (
-    <div>
+    <Paper elevation={5}>
       <div className="card mb-4">
         <img
           className="card-img-top img-fluid"
@@ -31,8 +33,10 @@ const PostList = ({
             className="card-text"
             dangerouslySetInnerHTML={createMarkup(content_home_page)}
           />
-          <Link to={`/${slug}`} className="btn btn-primary">
-            Read More &rarr;
+          <Link to={`/${slug}`} style={{ textDecoration: "none" }}>
+            <Button raised color="primary">
+              <b>Read More &rarr;</b>
+            </Button>
           </Link>
         </div>
         <div className="card-footer text-muted">
@@ -59,7 +63,7 @@ const PostList = ({
           </span>
         </div>
       </div>
-    </div>
+    </Paper>
   );
 };
 
