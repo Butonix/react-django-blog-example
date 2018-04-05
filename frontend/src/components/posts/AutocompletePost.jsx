@@ -6,6 +6,7 @@ import { withStyles } from "material-ui/styles";
 import Card, { CardContent, CardMedia } from "material-ui/Card";
 import Typography from "material-ui/Typography";
 import TextField from "material-ui/TextField";
+import Paper from "material-ui/Paper";
 
 const styles = {
   card: {
@@ -55,18 +56,20 @@ class PostAutocomplete extends React.Component {
           selectedItem
         }) => (
           <div className="container text-center" style={{ marginTop: "2em" }}>
-            <h3>Browse the blog for posts</h3>
-            <h5 className="mt-4">
-              based on programming language, title, or publication date (mm-dd,
-              i.e. 01-25)
-            </h5>
-            <TextField
-              {...getInputProps()}
-              placeholder="Enter your query"
-              label="Filter for posts"
-              className={classes.textField}
-              autoFocus={true}
-            />
+            <Paper elevation={5} style={{ padding: "2em" }}>
+              <h3>Browse the blog for posts</h3>
+              <h5 className="mt-4">
+                based on programming language, title, or publication date
+                (mm-dd, i.e. 01-25)
+              </h5>
+              <TextField
+                {...getInputProps()}
+                placeholder="Enter your query"
+                label="Filter for posts"
+                className={classes.textField}
+                autoFocus={true}
+              />
+            </Paper>
             {isOpen ? (
               <div className="container">
                 <div className="row justify-content-md-center">
