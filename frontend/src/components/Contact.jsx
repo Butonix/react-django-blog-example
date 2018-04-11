@@ -7,7 +7,6 @@ import scriptLoader from "react-async-script-loader";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-import Paper from "material-ui/Paper";
 import { styles } from "./authentication/customStylesMui";
 
 class ContactForm extends Component {
