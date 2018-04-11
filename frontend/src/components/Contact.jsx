@@ -82,129 +82,127 @@ class ContactForm extends Component {
 
     return (
       <div className="container">
-        <span className={classes.container}>
-          <Paper elevation={5} style={{ padding: "3em" }}>
-            <h3 style={{ textAlign: "center" }}>Contact me</h3>
-            {this.props.contact_form.err ? (
-              <div className="alert alert-danger" role="alert">
-                <strong>{contact_form.err.message}</strong>
-              </div>
-            ) : null}
-            {this.props.contact_form.message ? (
-              <div className="alert alert-success" role="alert">
-                <strong>{contact_form.message}</strong>
-              </div>
-            ) : null}
-            <form onSubmit={e => this.handleSubmitAndCaptcha(e)}>
-              <TextField
-                name="first_name"
-                placeholder="Enter your First Name"
-                type="text"
-                value={values.first_name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.first_name && touched.first_name}
-                helperText={
-                  errors.first_name && touched.first_name && errors.first_name
-                }
-                label="First Name"
-                className={classes.textField}
-                required
-              />
+        <div className={classes.container}>
+          <h3 style={{ textAlign: "center" }}>Contact me</h3>
+          {this.props.contact_form.err ? (
+            <div className="alert alert-danger" role="alert">
+              <strong>{contact_form.err.message}</strong>
+            </div>
+          ) : null}
+          {this.props.contact_form.message ? (
+            <div className="alert alert-success" role="alert">
+              <strong>{contact_form.message}</strong>
+            </div>
+          ) : null}
+          <form onSubmit={e => this.handleSubmitAndCaptcha(e)}>
+            <TextField
+              name="first_name"
+              placeholder="Enter your First Name"
+              type="text"
+              value={values.first_name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.first_name && touched.first_name}
+              helperText={
+                errors.first_name && touched.first_name && errors.first_name
+              }
+              label="First Name"
+              className={classes.textField}
+              required
+            />
 
-              <TextField
-                name="last_name"
-                placeholder="Enter your Last Name"
-                type="text"
-                value={values.last_name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.last_name && touched.last_name}
-                helperText={
-                  errors.last_name && touched.last_name && errors.last_name
-                }
-                label="Last Name"
-                className={classes.textField}
-                required
-              />
-              <TextField
-                name="email"
-                placeholder="Enter your Email"
-                type="text"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.email && touched.email}
-                helperText={errors.email && touched.email && errors.email}
-                label="Email Address"
-                className={classes.textField}
-                required
-              />
-              <TextField
-                name="website"
-                placeholder="Enter your Website"
-                type="url"
-                value={values.website}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.website && touched.website}
-                helperText={errors.website && touched.website && errors.website}
-                label="Your Website"
-                className={classes.textField}
-              />
+            <TextField
+              name="last_name"
+              placeholder="Enter your Last Name"
+              type="text"
+              value={values.last_name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.last_name && touched.last_name}
+              helperText={
+                errors.last_name && touched.last_name && errors.last_name
+              }
+              label="Last Name"
+              className={classes.textField}
+              required
+            />
+            <TextField
+              name="email"
+              placeholder="Enter your Email"
+              type="text"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.email && touched.email}
+              helperText={errors.email && touched.email && errors.email}
+              label="Email Address"
+              className={classes.textField}
+              required
+            />
+            <TextField
+              name="website"
+              placeholder="Enter your Website"
+              type="url"
+              value={values.website}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.website && touched.website}
+              helperText={errors.website && touched.website && errors.website}
+              label="Your Website"
+              className={classes.textField}
+            />
 
-              <TextField
-                name="message"
-                multiline={true}
-                rows={6}
-                value={values.message}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.message && touched.message}
-                helperText={errors.message && touched.message && errors.message}
-                label="Your Message"
-                className={classes.textField}
-                required
+            <TextField
+              name="message"
+              multiline={true}
+              rows={6}
+              value={values.message}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.message && touched.message}
+              helperText={errors.message && touched.message && errors.message}
+              label="Your Message"
+              className={classes.textField}
+              required
+            />
+            <div
+              style={{
+                margin: "0 auto",
+                marginBottom: "1em",
+                textAlign: "center",
+                display: "block",
+                width: "100%",
+                overflow: "hidden"
+              }}
+            >
+              <Recaptcha
+                sitekey="6Le7xT4UAAAAAOuGdLd4TcqpXDRDZMIxvTn0CEYB"
+                render="explicit"
+                theme="dark"
+                onloadCallback={this.onloadCallback}
+                verifyCallback={this.verifyCallback}
+                ref={e => (this.recaptchaInstance = e)}
               />
-              <span
-                style={{
-                  margin: "0 auto",
-
-                  marginBottom: "1em",
-                  textAlign: "center",
-                  display: "block",
-                  width: "304px"
-                }}
-              >
-                <Recaptcha
-                  sitekey="6Le7xT4UAAAAAOuGdLd4TcqpXDRDZMIxvTn0CEYB"
-                  render="explicit"
-                  theme="dark"
-                  onloadCallback={this.onloadCallback}
-                  verifyCallback={this.verifyCallback}
-                  ref={e => (this.recaptchaInstance = e)}
-                />
-              </span>
-              <Button
-                raised
-                className={classes.button}
-                type="button"
-                onClick={handleReset}
-                disabled={!dirty || isSubmitting}
-              >
-                Reset
-              </Button>
-              <Button
-                raised
-                className={classes.button}
-                type="submit"
-                disabled={isSubmitting}
-              >
-                Submit
-              </Button>
-            </form>
-          </Paper>
-        </span>
+            </div>
+            <Button
+              raised
+              className={classes.button}
+              type="button"
+              onClick={handleReset}
+              disabled={!dirty || isSubmitting}
+            >
+              Reset
+            </Button>
+            <Button
+              raised
+              className={classes.button}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              Submit
+            </Button>
+          </form>
+        </div>
       </div>
     );
   }

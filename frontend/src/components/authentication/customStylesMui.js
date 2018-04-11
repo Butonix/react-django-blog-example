@@ -10,7 +10,7 @@ export const styles = theme => ({
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "40px",
-    width: "60%"
+    width: "80%"
   },
   button: {
     marginLeft: "auto",

@@ -35,7 +35,12 @@ class App extends Component {
     }
     return (
       <div
-        style={{ position: "relative", minHeight: "100vh", overflowY: "auto" }}
+        style={{
+          position: "relative",
+          minHeight: "100vh",
+          overflowY: "auto",
+          overflowX: "hidden"
+        }}
       >
         <div style={{ paddingBottom: "95px" }}>
           <NavBar />
