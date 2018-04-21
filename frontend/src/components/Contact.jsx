@@ -164,14 +164,13 @@ class ContactForm extends Component {
               className={classes.textField}
               required
             />
-            <div
+            <span
               style={{
                 margin: "0 auto",
                 marginBottom: "1em",
                 textAlign: "center",
                 display: "block",
-                width: "100%",
-                overflow: "hidden"
+                width: "304px"
               }}
             >
               <Recaptcha
@@ -182,7 +181,7 @@ class ContactForm extends Component {
                 verifyCallback={this.verifyCallback}
                 ref={e => (this.recaptchaInstance = e)}
               />
-            </div>
+            </span>
             <Button
               raised
               className={classes.button}
