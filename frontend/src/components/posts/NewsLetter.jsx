@@ -5,7 +5,7 @@ class NewsLetter extends Component {
   render() {
     let { err, isSubscribing, message } = this.props.newsletter;
     return (
-      <Paper elevation={5}>
+      <Paper elevation={5} style={{ boxShadow: "5px 5px 5px lightgray" }}>
         <span>
           {isSubscribing && <div className="loading" />}
           {err && (

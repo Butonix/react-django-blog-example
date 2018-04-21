@@ -4,7 +4,7 @@ import Paper from "material-ui/Paper";
 
 const PostArchiveHtmlStyled = () => {
   return (
-    <Paper elevation={5}>
+    <Paper elevation={5} style={{ boxShadow: "5px 5px 5px lightgray" }}>
       <div className="card my-4">
         <h5 className="card-header">Archives</h5>
         <div className="card-body">
