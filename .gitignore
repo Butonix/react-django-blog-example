@@ -172,7 +172,6 @@ user_uploads/
 backend/Procfile
 backend/*.txt
 
-static/
 
 frontend/srs/actions/currentIp.js
 
