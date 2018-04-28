@@ -1,4 +1,5 @@
 ## A React + Redux blog that consumes a django web api
+#### A demo is running on https://www.borislavnfa.com/  (It's a free heroku account, thus 10 seconds initial delay).
 
 ### Functionality:
 
